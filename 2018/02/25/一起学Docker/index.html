@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Docker的基本使用">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Docker">
+<meta property="og:url" content="http://yoursite.com/2018/02/25/一起学Docker/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="Docker的基本使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Docker">
+<meta name="twitter:description" content="Docker的基本使用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/25/一起学Docker/">
+
+
+
+
+
+  <title>一起学Docker | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/一起学Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T12:57:44+08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Docker的基本使用</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="简单概念"><a href="#简单概念" class="headerlink" title="简单概念"></a>简单概念</h2><blockquote>
+<p>预备知识：Linux命令</p>
+</blockquote>
+<p><a href="https://www.docker.com/" target="_blank" rel="noopener"> Docker官网链接</a></p>
+<p>What is Docker?</p>
+<blockquote>
+<p>Docker is the company driving the container movement and the only container platform provider to address every application across the hybrid cloud. </p>
+</blockquote>
+<p>类比：</p>
+<blockquote>
+<p>可以当做是一个轻量级的虚拟机，但是也不完全是hi虚拟机。</p>
+</blockquote>
+<h2 id="Mac上安装Docker"><a href="#Mac上安装Docker" class="headerlink" title="Mac上安装Docker"></a>Mac上安装Docker</h2><p><a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener">Docker for mac 下载链接</a><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">安装后启动即可。导航栏上方会出现一个Docker的图标</span><br><span class="line"></span><br><span class="line">命令行中输入 docker <span class="builtin-name">info</span> 查看它的运行状态</span><br></pre></td></tr></table></figure></p>
+<h2 id="Docker-介绍"><a href="#Docker-介绍" class="headerlink" title="Docker 介绍"></a>Docker 介绍</h2><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">Client: </span><br><span class="line">    docker build</span><br><span class="line">    docker pull</span><br><span class="line">    docker run</span><br><span class="line"></span><br><span class="line">DOCKER_HOST:</span><br><span class="line">    Docker daemon</span><br><span class="line">    Containers</span><br><span class="line">    Images</span><br><span class="line"></span><br><span class="line">Registry </span><br><span class="line"></span><br><span class="line">即 </span><br><span class="line"><span class="number">1.</span> 客户端和守护进程进行操作（传递命令）</span><br><span class="line"><span class="number">2.</span> 守护进程去找镜像然后运行容器，并且与远端的镜像操作交互。</span><br><span class="line"></span><br><span class="line">例子：</span><br><span class="line">命令行中输入 docker run centos echo hello docker</span><br><span class="line">该命令相当于 运行一个centos的虚拟机 调用bash输出hello docker</span><br><span class="line"></span><br><span class="line">一开始本地上可能没有镜像</span><br><span class="line"></span><br><span class="line">可以使用docker images查看本地所有的镜像</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -p <span class="number">8080</span>:<span class="number">80</span> -d daocloud.io/nginx</span><br><span class="line">返回的是docker的<span class="keyword">container</span>的id</span><br><span class="line"></span><br><span class="line">这里的-p做端口映射 将<span class="number">80</span>端口映射到本地的<span class="number">8080</span></span><br><span class="line">这里的-d表示允许这个程序直接返回，即把这个<span class="keyword">container</span>作为指挥进程来执行</span><br><span class="line"></span><br><span class="line">docker ps查看docker中正在运行的容器的进程。</span><br><span class="line">docker ps -a 查看docker中所有运行过的<span class="keyword">container</span>。</span><br><span class="line"></span><br><span class="line">使用 docker rm container_id 即可删除历史的<span class="keyword">container</span></span><br><span class="line"></span><br><span class="line">相当于我们现在已经在本地主机的<span class="number">8080</span>端口开启了一个nginx服务。</span><br><span class="line">可以直接访问 localhost:<span class="number">8080</span>访问nginx的首页。</span><br><span class="line"></span><br><span class="line">当然了， 我们也可以修改nginx首页。</span><br><span class="line"></span><br><span class="line">docker cp index.html <span class="number">123</span>adfaasd1213c:<span class="comment">//usr/share/nginx/html</span></span><br><span class="line">即拷贝我们自己的首页到doker中nginx的首页</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">停止该docker的服务</span><br><span class="line">docker stop container_id</span><br><span class="line"></span><br><span class="line">保存对<span class="keyword">container</span>中的修改</span><br><span class="line">docker commit -m <span class="string">'修改了内容'</span> container_id new_image_name</span><br><span class="line"></span><br><span class="line">事实上是产生了一个新的images</span><br><span class="line">使用docker images查看</span><br><span class="line"></span><br><span class="line">删除一个images</span><br><span class="line">docker rmi image_id</span><br><span class="line"></span><br><span class="line">docker pull 从远端获取<span class="keyword">image</span></span><br><span class="line">docker build 创建<span class="keyword">image</span></span><br><span class="line">docker images 列出<span class="keyword">image</span></span><br><span class="line">docker run 列出正在运行的<span class="keyword">container</span></span><br><span class="line">docker ps 列出<span class="keyword">container</span></span><br><span class="line"></span><br><span class="line">docker rm 删除<span class="keyword">container</span></span><br><span class="line">docker rmi 删除<span class="keyword">image</span></span><br><span class="line">docker cp 在host和<span class="keyword">container</span>之间拷贝文件</span><br><span class="line">docker commit 保存改动为新的<span class="keyword">image</span></span><br></pre></td></tr></table></figure>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><blockquote>
+<p>之前我们通过docker commit 来创建docker镜像</p>
+<p>自己动手编写简单的文件来创建docker镜像。</p>
+</blockquote>
+<p>未完待续…</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/23/SpringBoot详解/" rel="next" title="SpringBoot详解">
+                <i class="fa fa-chevron-left"></i> SpringBoot详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/04/开发必会的git操作/" rel="prev" title="开发必会的git操作">
+                开发必会的git操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单概念"><span class="nav-number">1.</span> <span class="nav-text">简单概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac上安装Docker"><span class="nav-number">2.</span> <span class="nav-text">Mac上安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-介绍"><span class="nav-number">3.</span> <span class="nav-text">Docker 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">4.</span> <span class="nav-text">Dockerfile</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

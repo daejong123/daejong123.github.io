@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="front,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="docker:一个开源的应用容器引擎">
+<meta name="keywords" content="front">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/docker/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="docker:一个开源的应用容器引擎">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker">
+<meta name="twitter:description" content="docker:一个开源的应用容器引擎">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/docker/">
+
+
+
+
+
+  <title>Docker | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T15:56:15+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>docker:一个开源的应用容器引擎</p>
+</blockquote>
+<a id="more"></a>
+<p>Docker 是一种“轻量级”容器技术<br>Docker 的名词术语：容器、镜像等</p>
+<p>Dockerfile文件和核心指令： <a href="http://dockone.io/article/5998" target="_blank" rel="noopener">http://dockone.io/article/5998</a></p>
+<p>1.凡是使用过虚拟机的同学，应该都知道，启动虚拟机就像启动一台计算机，初始化过程是相当慢的，我们需要等很久，才能看到登录界面,一旦虚拟机启动以后，就可以与宿主机建立网络连接，确保虚拟机与宿主机之间是互联互通的。不同的虚拟机之间却是相互隔离的，也就是说，彼此并不知道对方的存在，但每个虚拟机占用的都是宿主机的硬件与网络资源。</p>
+<p>2.在宿主机的操作系统上，有一个 Docker 服务在运行（或者称为“Docker 引擎”），在此服务上，我们可开启多个 Docker 容器，而每个 Docker 容器中可运行自己所需的应用程序，Docker 容器之间也是相互隔离的，同样地，都是占用的宿主机的硬件与网络资源。<br>Docker 容器相对于虚拟机而言，除了在技术实现上完全不一样以外，启动速度较虚拟机而言有本质的飞跃，启动一个容器只在眨眼瞬间。不管是虚拟机还是 Docker 容器，它们都是为了隔离应用程序的运行环境，节省我们的硬件资源，为我们开发人员提供福利。</p>
+<p>3.这是一只鲸鱼，它托着许多集装箱。我们可以把宿主机可当做这只鲸鱼，把相互隔离的容器可看成集装箱，每个集装箱中都包含自己的应用程序。这 Logo 简直的太形象了！</p>
+<p>docker info 查看信息<br>docker ps -a 查看容器情况 docker rm cid 删除容器  docker stop cid停止容器<br>docker images 查看本机镜像 docker rmi iid<br>docker run ubuntu:15.10 /bin/echo ‘helo’ 指定要运行的镜像，Docker首先从本地主机上查找镜像是否存在，如果不存在，Docker 就会从镜像仓库 Docker Hub 下载公共镜像。<br>docker run centos 会去下载centos,如果没有命令，则不运行。<br>docker pull centos 载入一个镜像</p>
+<p>docker pull training/webapp  # 载入镜像<br>docker run -d -P training/webapp python app.py<br>-d:让容器在后台运行。<br>-P:将容器内部使用的网络端口映射到我们使用的主机上。<br>-t:在容器内开一个终端<br>-i:可以和容器交互</p>
+<p>docker seach image 从 Docker Hub 网站来搜索镜像</p>
+<p>我们使用命令 docker build ， 从零开始来创建一个新的镜像。为此，我们需要创建一个 Dockerfile 文件，其中包含一组指令来告诉 Docker 如何构建我们的镜像。<br>cat Dockerfile </p>
+<p>FROM    centos:6.7<br>MAINTAINER      Fisher “<a href="mailto:fisher@sudops.com" target="_blank" rel="noopener">fisher@sudops.com</a>“</p>
+<p>RUN     /bin/echo ‘root:123456’ |chpasswd<br>RUN     useradd runoob<br>RUN     /bin/echo ‘runoob:123456’ |chpasswd<br>RUN     /bin/echo -e “LANG=\”en_US.UTF-8\”” &gt;/etc/default/local<br>EXPOSE  22<br>EXPOSE  80<br>CMD     /usr/sbin/sshd -D</p>
+<p>每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的。</p>
+<p>第一条FROM，指定使用哪个镜像源</p>
+<p>RUN 指令告诉docker 在镜像内执行命令，安装了什么。。。</p>
+<p>然后，我们使用 Dockerfile 文件，通过 docker build 命令来构建一个镜像。</p>
+<p>docker build -t runoob/centos:6.7 .<br>-t ：指定要创建的目标镜像名<br>. ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径</p>
+<p>使用docker images 查看创建的镜像已经在列表中存在,<br>我们可以使用新的镜像来创建容器<br>docker run -t -i runoob/centos:6.7  /bin/bash</p>
+<p>-P :是容器内部端口随机映射到主机的高端口。<br>-p : 是容器内部端口绑定到指定的主机端口。</p>
+<p>docker run -p 80:80 –name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx<br>命令说明：</p>
+<p>-p 80:80：将容器的80端口映射到主机的80端口</p>
+<p>–name mynginx：将容器命名为mynginx</p>
+<p>-v $PWD/www:/www：将主机中当前目录下的www挂载到容器的/www</p>
+<p>-v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf：将主机中当前目录下的nginx.conf挂载到容器的/etc/nginx/nginx.conf</p>
+<p>-v $PWD/logs:/wwwlogs：将主机中当前目录下的logs挂载到容器的/wwwlogs</p>
+<p>===============================================================================================================</p>
+<p>创建一个Dockerfile，用来创建镜像。</p>
+<p>通过 Dockerfile 创建一个镜像，替换成你自己的名字。<br>docker build -t nginx .</p>
+<p>通过docker images 查看我们刚刚创建的镜像<br>docker images</p>
+<p>通过docker run 运行容器<br>docker run<br>    -p 80:80  端口映射（宿主机:container）<br>    –name mynginx  创建的容器别名<br>    -v $PWD/www:/www 宿主机文件目录映射到container中的目录<br>    -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf<br>    -d nginx  以守护进程运行(后台运行容器，并返回容器ID)， 使用的镜像名称。</p>
+<p>-i：表示以“交互模式”运行容器<br>-t：表示容器启动后会进入其命令行<br>-v：表示需要将本地哪个目录挂载到容器中，格式：-v &lt;宿主机目录&gt;:&lt;容器目录&gt;</p>
+<p>docker run 参数：<br>-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；<br>-d: 后台运行容器，并返回容器ID；<br>-i: 以交互模式运行容器，通常与 -t 同时使用；<br>-p: 端口映射，格式为：主机(宿主)端口:容器端口<br>-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；<br>–name=”nginx-lb”: 为容器指定一个名称；<br>–dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；<br>–dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致；<br>-h “mars”: 指定容器的hostname；<br>-e username=”ritchie”: 设置环境变量；<br>–env-file=[]: 从指定文件读入环境变量；<br>–cpuset=”0-2” or –cpuset=”0,1,2”: 绑定容器到指定CPU运行；<br>-m :设置容器使用内存最大值；<br>–net=”bridge”: 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；<br>–link=[]: 添加链接到另一个容器；<br>–expose=[]: 开放一个端口或一组端口；</p>
+<p>如：<br>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。<br>docker run -it nginx:latest /bin/bash</p>
+<p>使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。<br>docker run –name mynginx -d nginx:latest</p>
+<p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。<br>docker run -p 80:80 -v /data:/data -d nginx:latest</p>
+<p>Dockerfile制作镜像：<br>1.主要就是基于需要的基础镜像，在该基础镜像中添加自己的配置(如jdk，tomcat等等配置)以及利用该镜像启动容器时自执行命令，暴露端口。成为我们所需要的的镜像。</p>
+<ol start="2">
+<li>docker build -t myImageName .</li>
+<li>docker images查看</li>
+<li>docker run -d -p 8080:8080 myImageName</li>
+</ol>
+<p>将jar包制作成docker镜像<br>1、准备可运行jar包<br>2、建立Dockerfile文件<br>文件内容：<br>FROM java:8<br>ADD api-gateway-microservice-0.1.0.jar app.jar<br>RUN bash -c ‘touch /app.jar’<br>ENTRYPOINT [“java”,”-jar”,”/app.jar”]</p>
+<p>1、FROM<br>格式：FROM <image>或 FROM <image>:<tag><br>定义基础镜像，后面的RUN是在此基础上运行。第一条指令必须为FROM指令，并且，如果在同一个Dockerfile中创建多个镜像时，可以使用多个FROM指令（每个镜像一次）</tag></image></image></p>
+<p>2、ADD<br>格式：ADD  <src>  <dest></dest></src></p>
+<p>定义变量吧。复制指定的<src>到容器的<dest>中，<src>可以是Dockerfile所在的目录的一个相对路径；可以是URL，也可以是tar.gz（自动解压）<br>注意与你的文件名一致</src></dest></src></p>
+<p>3、RUN<br>格式：RUN <command> 或 RUN [“”, “”, “”]<br>每条指令将在当前镜像基础上执行，并提交为新的镜像。（可以用“\”换行）</p>
+<p>例子：<br>比如我们我要运行一个tomcat容器。</p>
+<ol>
+<li>docker search tomcat</li>
+<li>docker pull tomcat</li>
+<li>docker images 查看</li>
+<li>docker run -p 8081:8080 –name tomcat-test tomcat 这样直接前台运行了。(也可以用-d 在后台运行，即作为守护进程)</li>
+<li><p>最后，在宿主机上直接访问 localhost:8081就可以访问了。</p>
+</li>
+<li><p>docker stop cid.</p>
+</li>
+<li>如果想启动一个已经exit的容器， 使用 docker start container_name(或者cid)； 就会以守护进程在后台运行,<br>docker start container_name -i (交互启动，即前台运行,表示以“交互模式”运行容器）</li>
+<li>Docker restart cid</li>
+</ol>
+<p>启动容器时，指定参数启动一个bash交互终端<br>docker run -it imageName /bin/bash</p>
+<p>Hello-world例子</p>
+<ol>
+<li>安装docker ： yum -y install docker-io</li>
+<li>启动docker： service docker start</li>
+<li>查看是否启动成功： docker version </li>
+<li>修改镜像配置(加速)： /etc/docker/daemon.json :  “registry-mirrors”: [“<a href="http://hub-mirror.c.163.com&quot;]" target="_blank" rel="noopener">http://hub-mirror.c.163.com&quot;]</a></li>
+<li>pull镜像hello-world： docker pull hello-world （可以先docker search hello-world）</li>
+<li>根据镜像启动容器： docker run hello-world</li>
+<li>可以看到输出信息<br>Hello from Docker!<br>This message shows that your installation appears to be working correctly.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/front/" rel="tag"># front</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/27/Vue学习/" rel="next" title="Vue学习">
+                <i class="fa fa-chevron-left"></i> Vue学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/26/Dockerfile/" rel="prev" title="Dockerfile">
+                Dockerfile <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

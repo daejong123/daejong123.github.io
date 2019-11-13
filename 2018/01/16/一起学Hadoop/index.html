@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="因为上次面试的公司主要是做大数据风控的, 当然了, 大家也都知道大数据很火, 一直觉得大数据很难, 所以也没怎么去学习, 最近看了几个朋友发的博客, 也让我大概了解了大数据, 正好也有着Java 和 linux等基础. 所以就去学习学习大数据.(毕竟技多不压身嘛).">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Hadoop">
+<meta property="og:url" content="http://yoursite.com/2018/01/16/一起学Hadoop/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="因为上次面试的公司主要是做大数据风控的, 当然了, 大家也都知道大数据很火, 一直觉得大数据很难, 所以也没怎么去学习, 最近看了几个朋友发的博客, 也让我大概了解了大数据, 正好也有着Java 和 linux等基础. 所以就去学习学习大数据.(毕竟技多不压身嘛).">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Hadoop">
+<meta name="twitter:description" content="因为上次面试的公司主要是做大数据风控的, 当然了, 大家也都知道大数据很火, 一直觉得大数据很难, 所以也没怎么去学习, 最近看了几个朋友发的博客, 也让我大概了解了大数据, 正好也有着Java 和 linux等基础. 所以就去学习学习大数据.(毕竟技多不压身嘛).">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/16/一起学Hadoop/">
+
+
+
+
+
+  <title>一起学Hadoop | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/一起学Hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Hadoop</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T12:25:26+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>因为上次面试的公司主要是做大数据风控的, 当然了, 大家也都知道大数据很火, 一直觉得大数据很难, 所以也没怎么去学习, 最近看了几个朋友发的博客, 也让我大概了解了大数据, 正好也有着Java 和 linux等基础. 所以就去学习学习大数据.(毕竟技多不压身嘛).</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h1><blockquote>
+<p>解决海量数据存储和数据分析计算的Apache的开源框架.</p>
+</blockquote>
+<h2 id="重点组件"><a href="#重点组件" class="headerlink" title="重点组件"></a>重点组件</h2><ol>
+<li>HDFS 分布式文件系统<ul>
+<li>NameNode(老大)管理</li>
+<li>DataNode(小弟)存储数据</li>
+</ul>
+</li>
+<li>MAPREDUCE 分布式运算程序开发框架</li>
+<li>HIVE SQL数据仓库工具</li>
+<li>HBASE 基于Hadoop的分布式海量数据库</li>
+<li>Zookeeper 分布式协调服务基础组件–RPC</li>
+<li>YARN 资源调度系统<ul>
+<li>ResourceManager(老大)</li>
+<li>NodeManager</li>
+</ul>
+</li>
+<li>Flume 日志数据采集框架</li>
+<li>Sqoop 数据迁移工具</li>
+</ol>
+<h1 id="Hadoop配置"><a href="#Hadoop配置" class="headerlink" title="Hadoop配置"></a>Hadoop配置</h1><blockquote>
+<p>众所周知 配置是我们在入手一门新的语言最重要的一道门槛, 大部分人都会停留下配置阶段, 因为每个人遇到的配置方面的bug都各不相同, 所以一旦有些配置自己不能解决了, 或者百度, 谷歌啥的也不能解决(其实都是查询的方式不对). 所以好多人就在这个时候放弃了.</p>
+</blockquote>
+<p><strong>所以我的这篇一起学Hadoop博客中最主要还是要具体说下 配置问题</strong></p>
+<ol>
+<li>准备linux环境</li>
+<li>安装JDK</li>
+<li>安装Hadoop(修改etc/hadoop的5个配置文件) 启动hdfs, yarn, 创建用户文件目录, 上传文件至目录, jar等等.</li>
+<li>配置ssh免密登录</li>
+</ol>
+<p>这里我搭建的是伪分布式的环境, 因为正式的环境至少要三台电脑, 伪分布式就是在自己本地上安装linux虚拟机即可.</p>
+<h2 id="准备linux环境就不用多说了吧"><a href="#准备linux环境就不用多说了吧" class="headerlink" title="准备linux环境就不用多说了吧."></a>准备linux环境就不用多说了吧.</h2><blockquote>
+<p>建议下载的linux的最小化版本吧. 就是不带图形化界面的. 有linux基础的操作很简单的. 就是些文件上传, 远程登录, 还是就是一些软件的解压缩, 系统环境变量配置, 添加用户等等.</p>
+</blockquote>
+<blockquote>
+<p>我是用的virtualBox 然后下载linux的centos7的iso镜像. 自行百度, 安装过程很傻瓜式的.</p>
+</blockquote>
+<h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><p>在linux安装JDK方式很多.<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 方式一:</span><br><span class="line">   在本机上到oracle官网下载好jdk的压缩包,然后scp命令或者windows下有ftp的工具可以直接上传.</span><br><span class="line">   然后就在linux上解压缩, 命令就是 **tar -zxvf xxxxjdk1.8.0.tar.gz -C 这里放你想解压到哪个目录的路径**,</span><br><span class="line">   然后就是配置环境变量, 想要配置全局的(对所有用户都有效)就在 /etc/profile文件中配置, 针对具体用户请在 ~/.bash_profile中配置, 里面的语法都是Shell Script, 不懂的可以参考我之前的 一起学Shell Script.</span><br><span class="line">   也就是配置一下JAVA_HOME</span><br><span class="line"></span><br><span class="line">   <span class="attribute">JAVA_HOME</span>=/usr/local/src/jdk1.8.0</span><br><span class="line">   <span class="builtin-name">export</span> JAVA_HOME</span><br><span class="line"></span><br><span class="line">   <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$PATH</span><br><span class="line">   <span class="builtin-name">export</span> PATH</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2. 方式二:</span><br><span class="line">   直接在linux上使用工具下载rpm版本的jdk. 可以不用配置环境变量, 默认将JAVA_HOME配置在<span class="string">/usr/java/default</span></span><br><span class="line">   使用wget下载, 如果没有wget的话, 可以在linux下使用 yum install wget下载, 然后具体的下载命令如下:</span><br><span class="line">   wget <span class="params">--no-check-certificate</span> <span class="params">--no-cookies</span> <span class="params">--header</span> <span class="string">"Cookie: oraclelicense=accept-securebackup-cookie"</span> http:<span class="string">//download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm</span></span><br><span class="line"></span><br><span class="line">   一定要加上<span class="params">--no-check-certificate</span> <span class="params">--no-cookies</span> <span class="params">--header</span> <span class="string">"Cookie: oraclelicense=accept-securebackup-cookie"</span>这个绕过验证, 否则下载不了jdk的.</span><br><span class="line">   下载完成后解压缩: rpm -ivh xxxx.rpm 即可.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装后要注意重新加载环境变量脚本: source /etc/profile</p>
+</blockquote>
+<blockquote>
+<p>然后执行 java -version 如果能够正确打印java的信息, 配置就成功了.</p>
+</blockquote>
+<p>至此 jdk 就算安装完了.</p>
+<h2 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">同样的, 去Apache官网下载, 这里我也使用wget下载<span class="symbol">:</span></span><br><span class="line">wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.tuna.tsinghua.edu.cn/apache</span><span class="regexp">/hadoop/common</span><span class="regexp">/hadoop-2.7.5/hadoop</span><span class="number">-2.7</span>.<span class="number">5</span>.tar.gz</span><br><span class="line">然后用tar解压即可.</span><br><span class="line">然后就是配置Hadoop的环境变量, 注意你hadoop放的目录可能和我不一样(对应修改下即可).</span><br><span class="line">在 /etc/profile下</span><br><span class="line"></span><br><span class="line">HADOOP_NAME=<span class="regexp">/usr/local</span><span class="regexp">/src/hadoop</span>2.<span class="number">7.1</span></span><br><span class="line">export HADOOP_NAME</span><br><span class="line"></span><br><span class="line">PATH=<span class="variable">$HADOOP_NAME</span>/<span class="symbol">bin:</span><span class="variable">$HADOOP_NAME</span>/<span class="symbol">sbin:</span><span class="variable">$PATH</span></span><br><span class="line">export PATH</span><br><span class="line"></span><br><span class="line">source /etc/profile 使配置脚本生效.</span><br><span class="line">然后敲 hadoop 如果能输出相关输出, 则配置成功.</span><br></pre></td></tr></table></figure>
+<p><strong>然后就是伪分布式hadoop环境具体的配置了.</strong><br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 先说下 Hadoop的比较重要的几个目录</span><br><span class="line">&gt; <span class="symbol">sbin:</span> 启动和停止hadoop相关服务的脚本;</span><br><span class="line">&gt; <span class="symbol">bin:</span> 对hadoop相关服务(hdfs, yarn)进行操作的脚本</span><br><span class="line">&gt; <span class="symbol">etc:</span> hadoop的配置文件目录,</span><br><span class="line">&gt; <span class="symbol">share:</span> hadoop的依赖jar包, 以及还有一些hadoop的示例程序, 比如 wordcount. 后面会具体说下.</span><br><span class="line">&gt; <span class="class"><span class="keyword">lib</span>: <span class="title">hadoop</span>本地库,</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>接下来就是具体的配置了, 一共5个配置文件</strong></p>
+<ol>
+<li><p>在 hadoop-evn.sh  </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">大约在25-27行吧, 有一个 <span class="attribute">JAVA_HOME</span>=<span class="variable">$&#123;JAVA_HOME&#125;</span>, 改成绝对路径, <span class="attribute">JAVA_HOME</span>=/usr/local/src/jdk1.8.0即可.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>core-site.xml hadoop核心配置文件:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置hdfs的namenode, 即管理的主机地址, 可以直接填写 localhost, 端口一般配置 9000--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://192.168.1.239:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置datanode保存数据的位置, 该目录必须事先存在. 要创建--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>/root/training/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> `</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意:<br>结束了之后最好修改下datanode保存数据文件的权限</p>
+<p>如果你是在Mac上部署的话， 不改这个权限会报错的(启动不了namenode和datanode)<br>sudo chmod -R a+w /Library/hadoop-2.7.3</p>
+<ol start="3">
+<li><p>hdfs-site.xml 配置hdfs, hadoop的分布式文件系统.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置hdfs的冗余度--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--配置是否进行权限检查--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapred-site.xml 配置mapreduce</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置mapreduce运行的框架,为yarn容器--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>yarn-site.xml 配置yarn</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置resourceManager的地址 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>192.168.1.239<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置nodemanager执行任务的方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">配置文件就算配置好了. 不过启动hadoop之前要格式化下namenode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化namenode</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -<span class="keyword">format</span></span><br><span class="line">日志: xxxx has been successfully <span class="keyword">formatted</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动, (如果之前没配置免密码登录, 启动过程中会要求输出多次密码. 下面我会说下 免密码配置)</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">start-<span class="keyword">all</span>.<span class="keyword">sh</span></span><br><span class="line">  <span class="number">1</span>. 启动yarn 执行计算</span><br><span class="line">  <span class="number">2</span>. 启动hdfs 存储数据</span><br><span class="line"></span><br><span class="line">执行jps 查看是否有: datanode, namenode, resourcemanager, nodemanager等是否启动成功.</span><br><span class="line">到这里, 伪分布环境就搭建好了.</span><br><span class="line"></span><br><span class="line">同样的停止命令: <span class="keyword">stop</span>-<span class="keyword">all</span>.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问方式:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">命令行</span></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">Java</span> <span class="string">API</span></span><br><span class="line"><span class="number">3</span><span class="string">.</span> <span class="string">Web</span> <span class="string">Console</span></span><br><span class="line">  <span class="attr">hdfs:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.239</span><span class="string">:50070</span> <span class="string">这里可以看到hadoop的dfs文件系统的信息.</span></span><br><span class="line">  <span class="attr">yarn:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.239</span><span class="number">.8088</span> <span class="string">这里可以看到hadoop的资源管理器</span> <span class="string">yarn的一些信息.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapreduce下的wordcount程序示例:</p>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">首先</span> <span class="string">cd</span> <span class="string">到hadoop下</span> <span class="string">hadoop-2.7.3/share/hadoop/mapreduce</span> <span class="string">目录中.</span></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">vim</span> <span class="string">hello.txt,</span> <span class="string">linux上没有vim的,</span> <span class="string">可以使用</span> <span class="string">yum</span> <span class="string">install</span> <span class="string">vim</span> <span class="string">即可.</span></span><br><span class="line"><span class="number">3</span><span class="string">.</span> <span class="string">在hello.txt中写上一些:(随便写)</span></span><br><span class="line">   <span class="string">i</span> <span class="string">love</span> <span class="string">nanjing</span></span><br><span class="line">   <span class="string">i</span> <span class="string">love</span> <span class="string">China</span></span><br><span class="line">   <span class="string">i</span> <span class="string">love</span> <span class="string">jiangsu</span></span><br><span class="line">   <span class="string">nanjing</span> <span class="string">is</span> <span class="string">the</span> <span class="string">center</span> <span class="string">city</span> <span class="string">in</span> <span class="string">jianagsu</span> <span class="string">of</span> <span class="string">China</span></span><br><span class="line"><span class="number">4</span><span class="string">.</span> <span class="string">在hadoop的hdfs中创建一个文件夹</span></span><br><span class="line">   <span class="string">命令:</span> <span class="string">hdfs</span> <span class="string">dfs</span> <span class="string">-mkdir</span> <span class="string">-p</span> <span class="string">/data/input</span></span><br><span class="line"><span class="number">5</span><span class="string">.</span> <span class="string">查看文件是否创建成功:</span></span><br><span class="line">   <span class="string">命令:</span> <span class="string">hdfs</span> <span class="string">dfs</span> <span class="string">-ls</span> <span class="string">/data</span></span><br><span class="line">   <span class="string">输出信息:</span></span><br><span class="line">   <span class="string">Found</span> <span class="number">1</span> <span class="string">items</span></span><br><span class="line">   <span class="string">drwxr-xr-x</span>   <span class="bullet">-</span> <span class="string">Daejong</span> <span class="string">supergroup</span>          <span class="number">0</span> <span class="number">2018</span><span class="number">-01</span><span class="number">-16</span> <span class="number">13</span><span class="string">:20</span> <span class="string">/data/input</span></span><br><span class="line">   <span class="string">则创建成功</span></span><br><span class="line"><span class="number">6</span><span class="string">.</span> <span class="string">将hello.txt文件上传到hdfs上;</span></span><br><span class="line">   <span class="string">命令:</span> <span class="string">hdfs</span> <span class="string">dfs</span> <span class="string">-put</span> <span class="string">hello.txt</span></span><br><span class="line">   <span class="string">查看是否上传成功:</span></span><br><span class="line">   <span class="string">命令:hdfs</span> <span class="string">dfs</span> <span class="string">-ls</span> <span class="string">/data/input</span></span><br><span class="line">   <span class="string">输出结果:</span></span><br><span class="line">   <span class="string">Found</span> <span class="number">1</span> <span class="string">items</span></span><br><span class="line">   <span class="string">-rw-r--r--</span>   <span class="number">1</span> <span class="string">Daejong</span> <span class="string">supergroup</span>         <span class="number">92</span> <span class="number">2018</span><span class="number">-01</span><span class="number">-16</span> <span class="number">13</span><span class="string">:26</span> <span class="string">/data/input/hello.txt</span></span><br><span class="line">   <span class="string">则上传成功;</span></span><br><span class="line"><span class="number">7</span><span class="string">.</span> <span class="string">执行wordcount程序(统计每个单词出现的次数)</span></span><br><span class="line">   <span class="string">hadoop</span> <span class="string">jar</span> <span class="string">hadoop-mapreduce-examples-2.7.3.jar</span> <span class="string">wordcount</span> <span class="string">/data/input/hello.txt</span> <span class="string">/data/output</span></span><br><span class="line">   <span class="string">这里执行的是一个可以独立运行的jar,</span> <span class="string">所以执行类型为jar</span></span><br><span class="line">   <span class="string">wordcount是该jar中的一个程序,</span> <span class="string">即统计单词出现的次数</span></span><br><span class="line">   <span class="string">/data/input/hello.txt</span> <span class="string">表示该程序输出的参数,</span> <span class="string">文件路径</span></span><br><span class="line">   <span class="string">/data/output</span> <span class="string">表示执行程序执行后输出结果的目录.</span></span><br><span class="line"></span><br><span class="line">   <span class="string">若</span> <span class="string">输出信息中有:</span> <span class="attr">18/01/16 13:28:53 INFO mapreduce.Job:</span>  <span class="string">map</span> <span class="number">100</span><span class="string">%</span> <span class="string">reduce</span> <span class="number">100</span><span class="string">%</span></span><br><span class="line">   <span class="string">即map</span> <span class="string">完成,</span> <span class="string">reduce</span> <span class="string">完成,</span> <span class="string">表示程序执行成功;</span></span><br><span class="line"><span class="number">8</span><span class="string">.</span> <span class="string">查看输出结果:</span></span><br><span class="line">   <span class="string">命令:</span> <span class="string">hdfs</span> <span class="string">dfs</span> <span class="string">-ls</span> <span class="string">/data/output</span></span><br><span class="line">   <span class="string">输出结果:</span> <span class="string">发现该目录下多了两个文件</span></span><br><span class="line">   <span class="string">Found</span> <span class="number">2</span> <span class="string">items</span></span><br><span class="line">   <span class="string">-rw-r--r--</span>   <span class="number">1</span> <span class="string">Daejong</span> <span class="string">supergroup</span>          <span class="number">0</span> <span class="number">2018</span><span class="number">-01</span><span class="number">-16</span> <span class="number">13</span><span class="string">:28</span> <span class="string">/data/output/_SUCCESS</span></span><br><span class="line">   <span class="string">-rw-r--r--</span>   <span class="number">1</span> <span class="string">Daejong</span> <span class="string">supergroup</span>         <span class="number">87</span> <span class="number">2018</span><span class="number">-01</span><span class="number">-16</span> <span class="number">13</span><span class="string">:28</span> <span class="string">/data/output/part-r-00000</span></span><br><span class="line"></span><br><span class="line">   <span class="string">这里的_SUCCESS是一个标志文件,</span> <span class="string">标志程序执行成功.</span></span><br><span class="line">   <span class="string">这里的part-r-00000是一个文本文件,</span> <span class="string">存放程序运行的结果.</span> <span class="string">我们使用命令查看文件内容:</span></span><br><span class="line">   <span class="string">命令:</span> <span class="string">hdfs</span> <span class="string">dfs</span> <span class="string">-cat</span> <span class="string">/data/output/part-r-00000</span></span><br><span class="line">   <span class="string">输出结果:</span></span><br><span class="line">   <span class="string">China</span>	<span class="number">2</span></span><br><span class="line">   <span class="string">center</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">city</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">i</span>	<span class="number">3</span></span><br><span class="line">   <span class="string">in</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">is</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">jianagsu</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">jiangsu</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">love</span>	<span class="number">3</span></span><br><span class="line">   <span class="string">nanjing</span>	<span class="number">2</span></span><br><span class="line">   <span class="string">of</span>	<span class="number">1</span></span><br><span class="line">   <span class="string">the</span>	<span class="number">1</span></span><br><span class="line"></span><br><span class="line">   <span class="string">可以比对下我们之前在hello.txt文件中输入的,</span> <span class="string">可以清晰的看到每个单词出现的次序.</span></span><br><span class="line"></span><br><span class="line">   <span class="string">至此,</span> <span class="string">我们已经配置好hadoop的所有环境变量.</span> <span class="string">也体验了hadoop中mapreduce的wordcount程序了.</span></span><br></pre></td></tr></table></figure>
+<h1 id="免密码登录"><a href="#免密码登录" class="headerlink" title="免密码登录"></a>免密码登录</h1><figure class="highlight mercury"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 生成公钥和私钥:(在哪个用户下生成就是那个用户的秘钥对. 根据用户来区分的)</span><br><span class="line">cd ~/.ssh/</span><br><span class="line">ssh-keygen -t rsa 使用rsa加密算法, 生成一对秘钥. 然后直接回车就可.</span><br><span class="line">然后查看该目录下生成了两个文件: id_rsa, id_rsa.pub, 一个公钥, 一个私钥.</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 将公钥拷给自己</span><br><span class="line">ssh-copy-id localhost</span><br><span class="line">会生成一个文件authorized_keys</span><br><span class="line">当然, 也可以 使用 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys 即可.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 然后就可以 start-<span class="built_in">all</span>.sh 就可以直接启动hadoop, 过程中就不用输出密码了.</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">信任的配置:(使用ssh远程登录时, 可以设置成不校验key, 也可以指定私钥, 从而可以进行远程登录.)</span><br><span class="line">在 ~.ssh目录下: vim config</span><br><span class="line"></span><br><span class="line">Host localhost</span><br><span class="line">   StrictHostKeyChecking <span class="literal">no</span></span><br><span class="line"></span><br><span class="line">Host 115.159.92.156</span><br><span class="line">       <span class="built_in"> User </span>root</span><br><span class="line">        IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line">Host *hadoop*</span><br><span class="line">   StrictHostKeyChecking <span class="literal">no</span></span><br></pre></td></tr></table></figure>
+<h1 id="还有一些其余的配置"><a href="#还有一些其余的配置" class="headerlink" title="还有一些其余的配置"></a>还有一些其余的配置</h1><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">添加用户</span><br><span class="line">useradd dottie</span><br><span class="line">passwd dottie 若不设置密码, 每次可以先登录root, 然后 su - dottie 切换到dottie用户.</span><br><span class="line">提示你输入密码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">给dottie用户sudo权限即赋予用户root权限:</span><br><span class="line">vim /etc/sudoers 在root下面添加一行即可</span><br><span class="line">root    <span class="keyword">ALL</span>=(<span class="keyword">ALL</span>)     <span class="keyword">ALL</span></span><br><span class="line">dottie  <span class="keyword">ALL</span>=(<span class="keyword">ALL</span>)     <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line">修改主机名:</span><br><span class="line">hostnamectl <span class="keyword">set</span>-hostname <span class="comment">hadoop</span></span><br><span class="line">查看主机名: hostname</span><br><span class="line"></span><br><span class="line">注意点:</span><br><span class="line">若没有权限: 则在root下修改权限:</span><br><span class="line">sudo <span class="comment">chmod -R a+w</span> /root/<span class="comment">training</span>/hadoop/<span class="comment">tmp</span></span><br><span class="line">若没有sudo工具</span><br><span class="line">yum <span class="comment">install sudo</span></span><br><span class="line"></span><br><span class="line">禁止掉ipv6网络: vim /etc/<span class="comment">sysctl.conf</span></span><br><span class="line">net.ipv6.conf.all.disable_ipv6=1</span><br><span class="line">net.ipv6.conf.default.disable_ipv6=1</span><br><span class="line">然后使配置生效:</span><br><span class="line">sysctl <span class="comment">-p</span></span><br><span class="line">输出配置的信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关闭防火墙:centos7 <span class="comment">firewalld, centos6</span> 是<span class="comment">iptables</span></span><br><span class="line">systemctl <span class="comment">status firewalld</span> 查看状态</span><br><span class="line">systemctl <span class="comment">stop firewalld</span> 停止</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关闭selinux</span><br><span class="line">输入: sestatus 查看<span class="comment">selinux</span>是否是<span class="comment">enforcing</span></span><br><span class="line">然后修改配置文件 将该状态关闭 vim /etc/<span class="comment">selinux</span>/config</span><br><span class="line">把里面的内容: SELINUX=ENFORCING 修改为: SELINUX=disabled 即可.</span><br><span class="line"></span><br><span class="line">配置ip和主机名映射:</span><br><span class="line">sudo vim /<span class="comment">etc</span>/hosts文件:</span><br><span class="line">添加一条记录:</span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.239</span> master.hadoop</span><br><span class="line">然后就可以 ssh master.hadoop 登录了.</span><br></pre></td></tr></table></figure>
+<p><a href="http://blog.csdn.net/newjueqi/article/details/47293897" target="_blank" rel="noopener">百度—-ssh远程登录过程以及ssh会话管理连接</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/15/虚拟机linux配置/" rel="next" title="虚拟机linux配置">
+                <i class="fa fa-chevron-left"></i> 虚拟机linux配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/17/一起学Hadoop-2/" rel="prev" title="一起学Hadoop-2">
+                一起学Hadoop-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop"><span class="nav-number">1.</span> <span class="nav-text">Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重点组件"><span class="nav-number">1.1.</span> <span class="nav-text">重点组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop配置"><span class="nav-number">2.</span> <span class="nav-text">Hadoop配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备linux环境就不用多说了吧"><span class="nav-number">2.1.</span> <span class="nav-text">准备linux环境就不用多说了吧.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装JDK"><span class="nav-number">2.2.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hadoop"><span class="nav-number">2.3.</span> <span class="nav-text">安装Hadoop</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#免密码登录"><span class="nav-number">3.</span> <span class="nav-text">免密码登录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#还有一些其余的配置"><span class="nav-number">4.</span> <span class="nav-text">还有一些其余的配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

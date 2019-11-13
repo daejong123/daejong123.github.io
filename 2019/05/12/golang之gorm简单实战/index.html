@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="golang,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="使用golang中的gorm库来操作数据库gorm提供了非常友好的api来操作数据库直接操作go中的struct实体就可以操作数据表非常简单，方便，易用。">
+<meta name="keywords" content="golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang之gorm简单实战">
+<meta property="og:url" content="http://yoursite.com/2019/05/12/golang之gorm简单实战/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="使用golang中的gorm库来操作数据库gorm提供了非常友好的api来操作数据库直接操作go中的struct实体就可以操作数据表非常简单，方便，易用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="golang之gorm简单实战">
+<meta name="twitter:description" content="使用golang中的gorm库来操作数据库gorm提供了非常友好的api来操作数据库直接操作go中的struct实体就可以操作数据表非常简单，方便，易用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/12/golang之gorm简单实战/">
+
+
+
+
+
+  <title>golang之gorm简单实战 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/12/golang之gorm简单实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">golang之gorm简单实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T20:18:51+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>使用golang中的gorm库来操作数据库<br>gorm提供了非常友好的api来操作数据库<br>直接操作go中的struct实体就可以操作数据表<br>非常简单，方便，易用。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>这里示例数据库使用的是sqlite3<br>当前也可以使用mysql，PostgreSQL数据库。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"github.com/jinzhu/gorm"</span></span><br><span class="line">    _ <span class="string">"github.com/jinzhu/gorm/dialects/sqlite"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">type Model struct &#123;</span></span><br><span class="line"><span class="comment">	ID        uint `gorm:"primary_key"`</span></span><br><span class="line"><span class="comment">	CreatedAt time.Time</span></span><br><span class="line"><span class="comment">	UpdatedAt time.Time</span></span><br><span class="line"><span class="comment">	DeletedAt *time.Time `sql:"index"`</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个表 products</span></span><br><span class="line"><span class="keyword">type</span> Product <span class="keyword">struct</span> &#123;</span><br><span class="line">  gorm.Model <span class="comment">// 这里默认会再添加四个字段，看上面源码，该结构体model中包含ID, CreateAt, UpdateAt, DeleteAt四个字段值</span></span><br><span class="line">  Code <span class="keyword">string</span></span><br><span class="line">  Price <span class="keyword">uint</span></span><br><span class="line">  Name <span class="keyword">string</span> <span class="string">`gorm:"type:varchar(100);not null;column:product_name"`</span></span><br><span class="line">  FirstName <span class="keyword">string</span> <span class="comment">// 这里会自动将数据中该字段转换成 first_name</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">sqlite3 test.db</span></span><br><span class="line"><span class="comment">.headers on</span></span><br><span class="line"><span class="comment">.mode column</span></span><br><span class="line"><span class="comment">.table</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">select * from products</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">// 查看表结构</span></span><br><span class="line"><span class="comment">select * from sqlite_master where type = "table";</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">sqlite&gt; select * from products;</span></span><br><span class="line"><span class="comment">id          created_at                        updated_at                       deleted_at  code        price     </span></span><br><span class="line"><span class="comment">----------  --------------------------------  -------------------------------  ----------  ----------  ----------</span></span><br><span class="line"><span class="comment">1           2019-05-12 19:02:28.105122+08:00  2019-05-12 19:02:44.54523+08:00              L1212       2000      </span></span><br><span class="line"><span class="comment">2           2019-05-12 19:02:44.54346+08:00   2019-05-12 19:02:44.54346+08:00              L1212       1000      </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Sqlite *gorm.DB</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="comment">// test.db本质是一个文件夹， 会出现在当前目录下</span></span><br><span class="line">  db, err := gorm.Open(<span class="string">"sqlite3"</span>, <span class="string">"test.db"</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"连接数据库失败"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  Sqlite = db</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 自动迁移模式, 创建数据表</span></span><br><span class="line">  Sqlite.AutoMigrate(&amp;Product&#123;&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建</span></span><br><span class="line">  <span class="comment">// db.Create(&amp;Product&#123;Code: "L1212", Price: 1000&#125;)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 读取</span></span><br><span class="line">  <span class="comment">// var product Product</span></span><br><span class="line">  <span class="comment">// db.First(&amp;product, 1) // 查询id为1的product</span></span><br><span class="line">  <span class="comment">// db.First(&amp;product, "code = ?", "L1212") // 查询code为l1212的product</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// // 更新 - 更新product的price为2000</span></span><br><span class="line">  <span class="comment">// db.Model(&amp;product).Update("Price", 2000)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 删除 - 删除product</span></span><br><span class="line">  <span class="comment">// db.Delete(&amp;product)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// CreateDBData()</span></span><br><span class="line">  FindById(<span class="number">2</span>)</span><br><span class="line">  FindByLikeName(<span class="string">"d"</span>)</span><br><span class="line"></span><br><span class="line">  UpdateNameById(<span class="string">"dottie"</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  DeleteById(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">defer</span> Sqlite.Close()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据id删除</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteById</span><span class="params">(id <span class="keyword">uint</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> product Product</span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.First(&amp;product, id).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fmt.Println(<span class="string">"开始删除"</span>, product.ID, product.Name)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.Delete(&amp;product).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 删除成功后。其实就是将gorm.Model.DeleteAt字段值设置未删除的日期。记录还在的</span></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  id          created_at                        updated_at                        deleted_at  code         price       product_name  first_name</span></span><br><span class="line"><span class="comment">  ----------  --------------------------------  --------------------------------  ----------  -----------  ----------  ------------  ----------</span></span><br><span class="line"><span class="comment">  4           2019-05-12 19:26:21.845485+08:00  2019-05-12 19:26:21.845485+08:00              code-hangzh  3           hangzhou                </span></span><br><span class="line"><span class="comment">  5           2019-05-12 19:26:21.846248+08:00  2019-05-12 19:26:21.846248+08:00  2019-05-12  code-nancai  4           nancai  </span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  fmt.Println(<span class="string">"删除成功"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据id更新ProductName</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UpdateNameById</span><span class="params">(name <span class="keyword">string</span>, id <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> product Product</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.First(&amp;product, <span class="string">"id = ?"</span>, id).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fmt.Println(<span class="string">"old = "</span>, product)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.Model(&amp;product).Update(<span class="string">"Name"</span>, name).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"new = "</span>, product)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模糊查询 ProductName</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindByLikeName</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> products []Product</span><br><span class="line">  <span class="comment">// 这里Where里面的字段可以是数据库中的字段名称，也可以是ORM也就是struct中的ProductName名称。</span></span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.Where(<span class="string">"product_name LIKE ?"</span>, name+<span class="string">"%"</span>).Find(&amp;products).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(products)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据id查找</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FindById</span><span class="params">(id <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> product Product</span><br><span class="line">  <span class="keyword">if</span> dbError := Sqlite.Where(<span class="string">"id = ?"</span>, id).First(&amp;product).Error; dbError != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(dbError.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(product, product.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入5条数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateDBData</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="comment">// 插入五条数据</span></span><br><span class="line">  <span class="keyword">var</span> nameList = []<span class="keyword">string</span>&#123;<span class="string">"dottie"</span>, <span class="string">"daejong"</span>, <span class="string">"china"</span>, <span class="string">"hangzhou"</span>, <span class="string">"nancai"</span>&#125;</span><br><span class="line">  <span class="keyword">for</span> index, name := <span class="keyword">range</span> nameList &#123;</span><br><span class="line">    <span class="keyword">var</span> product Product</span><br><span class="line">    product = Product&#123;</span><br><span class="line">      Code: <span class="string">"code-"</span> + name,</span><br><span class="line">      Price: <span class="keyword">uint</span>(index),</span><br><span class="line">      Name: name,</span><br><span class="line">    &#125;</span><br><span class="line">    Sqlite.Create(&amp;product)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/10/golang之命令行参数/" rel="next" title="golang之命令行参数">
+                <i class="fa fa-chevron-left"></i> golang之命令行参数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

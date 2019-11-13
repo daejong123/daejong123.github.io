@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="最近在做java后台(ssm+maven), 设计到http中几种请求方法, 即在springMVC中使用restful风格的url, 会涉及到POST, GET, DELETE, PUT这几种请求http的请求方法. 故在一番复习之后,向大家简单的分享这个几种http请求方式. 本文主要介绍POST和GET请求方式.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GET OR POST">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/GET-OR-POST/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="最近在做java后台(ssm+maven), 设计到http中几种请求方法, 即在springMVC中使用restful风格的url, 会涉及到POST, GET, DELETE, PUT这几种请求http的请求方法. 故在一番复习之后,向大家简单的分享这个几种http请求方式. 本文主要介绍POST和GET请求方式.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GET OR POST">
+<meta name="twitter:description" content="最近在做java后台(ssm+maven), 设计到http中几种请求方法, 即在springMVC中使用restful风格的url, 会涉及到POST, GET, DELETE, PUT这几种请求http的请求方法. 故在一番复习之后,向大家简单的分享这个几种http请求方式. 本文主要介绍POST和GET请求方式.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/04/GET-OR-POST/">
+
+
+
+
+
+  <title>GET OR POST | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/04/GET-OR-POST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GET OR POST</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T23:03:46+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>  最近在做java后台(ssm+maven), 设计到http中几种请求方法, 即在springMVC中使用restful风格的url, 会涉及到POST, GET, DELETE, PUT这几种请求http的请求方法. 故在一番复习之后,向大家简单的分享这个几种http请求方式. 本文主要介绍POST和GET请求方式.</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="关于HTTP请求-主要是POST和GET"><a href="#关于HTTP请求-主要是POST和GET" class="headerlink" title="关于HTTP请求(主要是POST和GET)"></a>关于HTTP请求(主要是POST和GET)</h1><p><strong>附上HTTP请求和响应的报文结构图</strong></p>
+<pre><code>请求报文
+&lt;request-line&gt;
+&lt;request-header&gt;
+&lt;blank-line&gt;
+[&lt;request-body&gt;]
+响应报文
+&lt;response-status-line&gt;
+&lt;response-header&gt;
+&lt;blank-line&gt;
+[&lt;response-body&gt;]
+</code></pre><h2 id="一-前言-post和get最直观的区别"><a href="#一-前言-post和get最直观的区别" class="headerlink" title="一.前言(post和get最直观的区别)"></a>一.前言(post和get最直观的区别)</h2><ol>
+<li>GET请求把参数直接包含在请求的URL中</li>
+<li>POST请求是通过request body 即请求正文传递参数</li>
+<li>GET请求在url中传送的参数长度是有限制的</li>
+<li>GET比POST不安全, 所以不能传递敏感信息等等.</li>
+</ol>
+<h2 id="二-生动的比喻"><a href="#二-生动的比喻" class="headerlink" title="二.生动的比喻"></a>二.生动的比喻</h2><p>我在网上看到一段关于http请求方式的比喻.我觉得很形象生动, 故在此 引用一下</p>
+<pre><code>学过操作系统的童鞋都知道http是基于tcp/ip的一种互联网通讯协议.
+所以说http的底层是tcp/ip. 而GET和POST是http请求的两种方式. 故get和post的底层也是基于tcp的.
+其实get和post做的事情都是一样的,
+就像你要给get请求加上request body,
+给post请求加上url请求参数在技术上也是完全可行的.
+</code></pre><p><strong>比喻</strong></p>
+<blockquote>
+<p>在互联网的世界中, tcp就像是汽车, 我们用tcp进行运输数据, 类比现实生活中汽车也分好多种-货车,客车, 加急车等等, 当然有了这些车之后, 不可避免的就有交通法规, 而交通法规就类比互联网中的http协议, 该http协议(交通规则)设定了几个服务类别, 有get, post, put, delete等, 而执行每一种服务,如执行get请求的时候-给汽车贴上get的标签(设置method为get). 则规定该汽车要把传送的数据放在车顶上(url)以方便记录. 而如果是post服务的话, 就在汽车上贴上post标签, 也就是把货物放在车厢里. 当然,你可以在get的时候往车厢里偷偷放点数据, 至于接不解析(接不接受)就是要服务器的事情了. 你也可以在post的时候, 在车顶放一些数据, 虽然这样很没有意义, 但是表明http只是一个行为准则. 而tcp才是get和post实现的根本.</p>
+</blockquote>
+<h3 id="值得注意"><a href="#值得注意" class="headerlink" title="值得注意"></a>值得注意</h3><ol>
+<li><p>get请求只会产生一个TCP数据包.</p>
+<pre><code>当使用get方式提交请求的时候, 浏览器会把请求的header和数据一起发送出去,
+服务器端响应200返回数据
+</code></pre></li>
+<li><p>post请求会产生两个TCP数据包.</p>
+<pre><code>对于使用post方式提交, 浏览器会先发送header,
+服务器响应100 continue, 浏览器再次发送data, 服务器响应200返回数据.
+也就是说get只需要汽车跑一趟就把货物送到了. 但是post的话要跑两趟,
+第一趟去和服务器打个招呼说:嗨,哥们,我等一下要送一批货来,
+你打开门迎接我一下. 然后第二趟把数据送过来.
+
+有人会说post比较消耗时间. 其实不然,
+在网络好的请求下, 浏览器发一次包的时候和发两次包的时间基本可以无视,
+还有并不是所有的浏览器在post请求的时候都会发送2次包. 如火狐就只发送一次.
+</code></pre></li>
+</ol>
+<h2 id="三-请求报文详细解析"><a href="#三-请求报文详细解析" class="headerlink" title="三.请求报文详细解析"></a>三.请求报文详细解析</h2><h4 id="一-请求行-POST-index-html-HTTP-1-1"><a href="#一-请求行-POST-index-html-HTTP-1-1" class="headerlink" title="一. 请求行 - POST /index.html /HTTP/1.1"></a>一. 请求行 - POST /index.html /HTTP/1.1</h4><pre><code>组成: 请求方法字段 空格 url字段 空格 http协议版本字段 回车换行
+1. 如果是get请求的话, 还会在url后面即进行请求参数拼接
+index.html?username=daejong&amp;password=123456
+2. 如果是post请求的话, 请求参数会放在request body请求体中, 见下.
+</code></pre><h4 id="二-请求头-以key-value键值对"><a href="#二-请求头-以key-value键值对" class="headerlink" title="二. 请求头 - 以key-value键值对,"></a>二. 请求头 - 以key-value键值对,</h4><pre><code>主要通知服务器有关客户端请求的信息.
+如:
+User-Agent: 产生请求的浏览器类型
+Accpet: 客户端可以识别的内容类型列表
+Host: 请求的主机名
+Content-Type: application/json 等等
+</code></pre><h4 id="三-空行-回车-换行符"><a href="#三-空行-回车-换行符" class="headerlink" title="三. 空行 - 回车 换行符"></a>三. 空行 - 回车 换行符</h4><pre><code>用来通知服务器以下 没有请求头了. 用于请求头和请求体的分割.
+</code></pre><h4 id="四-请求体-数据"><a href="#四-请求体-数据" class="headerlink" title="四. 请求体-数据"></a>四. 请求体-数据</h4><pre><code>注意:
+1. 请求体不在GET请求中使用, 而是在POST请求的方法中使用.
+2. 通常在使用POST的请求的时候, 指定Content-Type, Content-Length.指定内容类型, 如通常我们统一请求和响应的数据格式为json.
+就要指定Content-Type为application/json
+</code></pre><h2 id="四-响应报文详细解析"><a href="#四-响应报文详细解析" class="headerlink" title="四.响应报文详细解析"></a>四.响应报文详细解析</h2><h4 id="一-响应行-状态行"><a href="#一-响应行-状态行" class="headerlink" title="一. 响应行-状态行"></a>一. 响应行-状态行</h4><p>提到状态行-不得不说一下状态码.</p>
+<pre><code>状态码由三位数字组成.
+1. 1xx 表示请求已经接收, 继续处理
+2. 2xx 表示成功接收,理解,接收
+3. 3xx 表示重定向, 要完成请求必须更进一步的操作.
+4. 4xx 表示客户端错误-请求有语法错误或者无法实现.
+5. 5xx 表示拂去其出错了-如服务器未能实现合法的请求.
+</code></pre><p>常见的状态码:</p>
+<pre><code>1. 200 ok, 客户端请求成功
+2. 400 bad request, 客户端请求有语法错误, 服务器无法解析
+3. 403 forbidden, 服务器接收到请求, 到时拒绝提供服务
+4. 404 not found, 请求资源不存在
+5. 500 internal server error, 服务器发送不可预期的错误.
+6. 503 server unavailable 服务器当前不能处理客户端请求, 一段时间后可能恢复正常.
+</code></pre><h4 id="响应头-和-响应体类似请求报文的请求头和请求体"><a href="#响应头-和-响应体类似请求报文的请求头和请求体" class="headerlink" title="响应头 和 响应体类似请求报文的请求头和请求体."></a>响应头 和 响应体类似请求报文的请求头和请求体.</h4><h2 id="五-总结"><a href="#五-总结" class="headerlink" title="五. 总结"></a>五. 总结</h2><ol>
+<li>get请求, 请求的数据会附在url之后, 也就是放在request-line中, 用?进行分割</li>
+<li>post请求, 把请求的数据放置在http包的包体request-body中,</li>
+<li>也就是get请求的数据会在地址栏显示, 而post不会.</li>
+<li><p>传输的数据的大小</p>
+<pre><code>首先声明: http协议并没有规定对传输的数据的大小进行限制, 也没有对url的长度进行限制,而实际开发中主要限制有:
+get: 特定浏览器和服务器对url长度有限制. 如IE一般限制请求url长度为2k个字节.
+post: 由于不是通过url传值, 值时放在请求体中, 所以理论上不受限制.
+</code></pre></li>
+<li>安全性: post的安全性要比get安全性高.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/04/React-Native初体验/" rel="next" title="React-Native初体验">
+                <i class="fa fa-chevron-left"></i> React-Native初体验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/25/一起学Angular/" rel="prev" title="一起学Angular">
+                一起学Angular <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于HTTP请求-主要是POST和GET"><span class="nav-number">1.</span> <span class="nav-text">关于HTTP请求(主要是POST和GET)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-前言-post和get最直观的区别"><span class="nav-number">1.1.</span> <span class="nav-text">一.前言(post和get最直观的区别)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-生动的比喻"><span class="nav-number">1.2.</span> <span class="nav-text">二.生动的比喻</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#值得注意"><span class="nav-number">1.2.1.</span> <span class="nav-text">值得注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-请求报文详细解析"><span class="nav-number">1.3.</span> <span class="nav-text">三.请求报文详细解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-请求行-POST-index-html-HTTP-1-1"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">一. 请求行 - POST /index.html /HTTP/1.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-请求头-以key-value键值对"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">二. 请求头 - 以key-value键值对,</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-空行-回车-换行符"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">三. 空行 - 回车 换行符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-请求体-数据"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">四. 请求体-数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-响应报文详细解析"><span class="nav-number">1.4.</span> <span class="nav-text">四.响应报文详细解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-响应行-状态行"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">一. 响应行-状态行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应头-和-响应体类似请求报文的请求头和请求体"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">响应头 和 响应体类似请求报文的请求头和请求体.</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#五-总结"><span class="nav-number">1.5.</span> <span class="nav-text">五. 总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

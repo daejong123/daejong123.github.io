@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Spark SQL is a Spark module for structured data processing.   Spark集群的搭建以及整合zookeeper">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学SparkSQL">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/一起学SparkSQL/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="Spark SQL is a Spark module for structured data processing.   Spark集群的搭建以及整合zookeeper">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学SparkSQL">
+<meta name="twitter:description" content="Spark SQL is a Spark module for structured data processing.   Spark集群的搭建以及整合zookeeper">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/一起学SparkSQL/">
+
+
+
+
+
+  <title>一起学SparkSQL | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/一起学SparkSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学SparkSQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T13:25:00+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Spark SQL is a Spark module for structured data processing.</p>
+</blockquote>
+<blockquote>
+<p>Spark集群的搭建以及整合zookeeper</p>
+</blockquote>
+<a id="more"></a>
+<p><strong>官网Overview</strong></p>
+<blockquote>
+<p>One use of Spark SQL is to execute SQL queries. Spark SQL can also be used to read data from an existing Hive installation. For more on how to configure this feature, please refer to the Hive Tables section. When running SQL from within another programming language the results will be returned as a Dataset/DataFrame. You can also interact with the SQL interface using the command-line or over JDBC/ODBC.</p>
+</blockquote>
+<blockquote>
+<p>Spark SQL处理结构化的数据, 与hive很好的兼容, 也支持和JDBC和ODBC.</p>
+</blockquote>
+<p><strong>spark集群的搭建:</strong><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">配置/spark-2.2.1-bin-hadoop2.7/conf下的spark-env.sh</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/java/default</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SPARK_MASTER_HOST</span>=hp001</span><br><span class="line"><span class="comment"># 指定rpc, master和worker的通信的端口号, 不指定也行, 默认就是7077</span></span><br><span class="line"><span class="comment"># export SPARK_MASTER_PORT=7077</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">配置slaves文件, 指定哪些节点作为spark中master的子节点.</span><br><span class="line"><span class="comment"># A Spark Worker will be started on each of the machines listed below.</span></span><br><span class="line"><span class="comment"># 指定master工作的子节点, 即worker</span></span><br><span class="line">hp002</span><br><span class="line">hp003</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">然后将配置过的spark分别scp到worker节点的机器上.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">最后在master机器上启动spark, 在sbin目录下, start-all.sh</span><br><span class="line">会在master机器上启动master进程</span><br><span class="line">在其他几台worker机器上启动workder进程.</span><br><span class="line">利用jps查看进程启动情况.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">通过访问master机器的ip地址配上spark管理界面服务的端口8080访问 web ui查看spark master和worker节点的一些情况.</span><br><span class="line">备注: 如果web ui访问不了, 1. jps查看下进程是否启动, 2. 查看下防火墙是否关闭等等.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">到这里, spark的集群就配置好了<span class="built_in">..</span></span><br></pre></td></tr></table></figure></p>
+<p>但是存在一个问题: 那就是Master节点存在单点故障, 这时候就需要zookeeper来协调处理, 并且启动至少两个Master节点来实现高可靠.</p>
+<p><strong>介绍下 zookeeper: 分布式协调技术</strong><br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">zookeeper的下载链接了:</span><br><span class="line">wget http:<span class="regexp">//mi</span>rror.bit.edu.cn<span class="regexp">/apache/</span>zookeeper<span class="regexp">/zookeeper-3.4.11/</span>zookeeper-<span class="number">3.4</span>.<span class="number">11</span>.tar.gz</span><br><span class="line"></span><br><span class="line">tar -zxvf解压, 配置即可.</span><br><span class="line"></span><br><span class="line">主要用来解决分布式环境当中多个进程之间的同步控制，</span><br><span class="line">让他们有序的去访问某种临界资源, 防止造成<span class="string">"脏数据"</span>的后果.</span><br><span class="line">其实说白了: 就是一个协调器.</span><br><span class="line"></span><br><span class="line">一种为分布式应用所设计的高可用、高性能且一致的开源协调服务，</span><br><span class="line">它提供了一项基本服务：分布式锁服务</span><br><span class="line"></span><br><span class="line">ZooKeeper性能上的特点决定了它能够用在大型的、分布式的系统当中。</span><br><span class="line">从可靠性方面来说，它并不会因为一个节点的错误而崩溃。</span><br><span class="line">除此之外，它严格的序列访问控制意味着复杂的控制原语可以应用在客户端上。</span><br><span class="line">ZooKeeper在一致性、可用性、容错性的保证，也是ZooKeeper的成功之处</span><br></pre></td></tr></table></figure></p>
+<p><strong>配置zookeeper集群</strong><br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">上面搭建的spark集群只有一个<span class="literal">master</span>节点和多个worker节点.</span><br><span class="line">万一<span class="literal">master</span>节点出现故障, 那么worker节点也就不可以进行工作了.</span><br><span class="line">以防<span class="literal">master</span>节点出现单点故障, 故要配置zk在<span class="literal">master</span>节点的机器上.</span><br><span class="line"><span class="number">1</span>. 在zookeeper-<span class="number">3.4</span>.<span class="number">11</span>目录下创建data和logs文件夹. 在data中vim myid写上<span class="number">0</span>.</span><br><span class="line"><span class="number">2</span>. 到zookeeper-<span class="number">3.4</span>.<span class="number">11</span>/conf目录下, 将zoo_sample.cfg改成zoo.cfg</span><br><span class="line"><span class="number">3</span>. vim zoo.cfg修改:</span><br><span class="line">    <span class="attr">dataDir=</span>/root/software/zookeeper-<span class="number">3.4</span>.<span class="number">11</span>/data</span><br><span class="line">    添加<span class="literal">master</span>节点(主机名)</span><br><span class="line">    server.<span class="number">0</span>=hp001:<span class="number">2888</span>:<span class="number">3888</span></span><br><span class="line">    server.<span class="number">1</span>=hp004:<span class="number">2888</span>:<span class="number">3888</span></span><br><span class="line"><span class="number">4</span>. 同样的, 修改其他<span class="literal">master</span>的主机, 将myid修改成与之前<span class="literal">master</span>机器不一样即可.</span><br></pre></td></tr></table></figure></p>
+<p><strong>spark整合zk</strong><br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">spark集群规划: <span class="keyword">node</span><span class="title">-1</span>, <span class="keyword">node</span><span class="title">-2</span>为<span class="literal">master</span>, <span class="keyword">node</span><span class="title">-3</span>,<span class="keyword">node</span><span class="title">-4</span>,<span class="keyword">node</span><span class="title">-5</span>为worker,</span><br><span class="line">安装配置zk集群, 最后启动.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 停止spark所有服务, 修改配置文件spark-env.sh 在该配置文件中删除</span><br><span class="line">  SPARK_MASTER_IP</span><br><span class="line"><span class="number">2</span>. 添加配置</span><br><span class="line">  export <span class="attr">SPARK_DAEMON_JAVA_OPTS=</span><span class="string">"-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=zk1,zk2,zk3 -Dspark.deploy.zookeeper.dir=/spark"</span></span><br><span class="line"></span><br><span class="line">  这里的zk1, zk2, zk3 就是有配置好的zookeeper的主机.</span><br><span class="line">  可以是<span class="literal">master</span>主机, 也可以是<span class="literal">slave</span>主机, 也可以是其他的, 只要配置好zookeeper即可. 并且识别主机名(/etc/hosts配置)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 在<span class="keyword">node</span><span class="title">-1</span>上修改slaves配置文件指定worker节点</span><br><span class="line"><span class="number">4</span>. 启动zookeeper: bin/zkServer.sh <span class="literal">start</span>  查看状态status</span><br><span class="line"><span class="number">5</span>. 在<span class="keyword">node</span><span class="title">-1</span>上执行<span class="literal">start</span>-all.sh 在<span class="keyword">node</span><span class="title">-2</span>上执行<span class="literal">start</span>-<span class="literal">master</span>.sh启动第二个<span class="literal">master</span>节点.</span><br></pre></td></tr></table></figure></p>
+<p><strong>集群中zk协调master节点例子 详细解释:</strong><br><figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">有四台机器: hp001, hp004, hp002, hp003</span><br><span class="line">1. hp001和hp004作为master, hp002, hp003作为worker</span><br><span class="line">  配置zookeeper, hp001设置data/myid中值为0,</span><br><span class="line">  myid文件中的编号是根据下面配置的server.id配置的.</span><br><span class="line">  配置zoo.cfg: dataDir=/root/software/zookeeper-3.4.11/data</span><br><span class="line">              server.0=hp001:2888:3888</span><br><span class="line">              server.1=hp004:2888:3888</span><br><span class="line">  同样的设置hp004, 区别设置myid为1</span><br><span class="line"></span><br><span class="line">2. 配置spark: 指定jdk和master主机(用逗号分割)</span><br><span class="line">  在spark-env.sh中配置</span><br><span class="line">  export JAVA_HOME=/usr/java/default</span><br><span class="line">  export SPARK_DAEMON_JAVA_OPTS=<span class="string">"-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=hp001,hp004 -Dspark.deploy.zookeeper.</span></span><br><span class="line"><span class="string">  dir=/spark"</span></span><br><span class="line"></span><br><span class="line">  在slaves中配置, 指定worker节点主机</span><br><span class="line">  <span class="comment"># 指定master工作的子节点, 即worker</span></span><br><span class="line">  hp002</span><br><span class="line">  hp003</span><br><span class="line"></span><br><span class="line">  同样的, 在hp001, hp004, hp002, hp003做同样的设置. 直接scp传过去即可.</span><br><span class="line"></span><br><span class="line">3. 然后在hp001上启动zookeeper. bin/zkServer.sh start</span><br><span class="line">   再在hp004上同样的方式启动 zookeeper</span><br><span class="line">   查看状态: status</span><br><span class="line">   Mode: leader</span><br><span class="line">   另一个是:</span><br><span class="line">   Mode: follower</span><br><span class="line"></span><br><span class="line">4. 在hp001上启动spark, 在sbin下 ./start-all.sh,</span><br><span class="line">   会启动hp001作为master, hp002, hp003作为worker</span><br><span class="line">   利用jps可以查看</span><br><span class="line">   [root@hp001 bin]<span class="comment"># jps</span></span><br><span class="line">    19380 Master</span><br><span class="line">    20581 Jps</span><br><span class="line">    19246 QuorumPeerMain</span><br><span class="line"></span><br><span class="line">   [root@hp002 sbin]<span class="comment"># jps</span></span><br><span class="line">    19017 Jps</span><br><span class="line">    17914 Worker</span><br><span class="line"></span><br><span class="line">   [root@hp003 ~]<span class="comment"># jps</span></span><br><span class="line">    8842 Worker</span><br><span class="line">    10076 Jps</span><br><span class="line"></span><br><span class="line">    然后在hp004上也启动spark, ./start-master.sh</span><br><span class="line">    利用jps查看是否有master进程.</span><br><span class="line"></span><br><span class="line">5. 利用web ui查看各master以及worker的信息</span><br><span class="line">   浏览器输入 hp001的ip地址加上8080端口访问</span><br><span class="line">   可以看到Status: ALIVE, 以及下面活着的workers的信息.</span><br><span class="line">   workers有hp002, hp003</span><br><span class="line"></span><br><span class="line">   然后在hp004的ip地址加上8080端口访问</span><br><span class="line">   也可以看到 Status: STANDBY, 区别就是下面没有worker节点. 处理待命状态</span><br><span class="line">   因为zk将会在hp001这个master发生故障时, 启用hp004这个master, 这个时候就会显示出workers节点, hp002, hp003.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">6. 模拟hp001发生故障,</span><br><span class="line">   关闭掉hp001下的master进程.</span><br><span class="line">   在spark的sbin下./start-master.sh stop</span><br><span class="line">   利用jps查看 master进程是否关闭掉.</span><br><span class="line"></span><br><span class="line">   然后在访问 web ui, hp001的8080端口关闭了, 不可访问了.</span><br><span class="line">   这个时候再访问hp004的web ui 就会发现Status: ALIVE 状态从STANDBY变成了ALIVE了.</span><br><span class="line">   还有hp004下面显示的workers信息也从没有到添加了两个hp002, hp003</span><br><span class="line"></span><br><span class="line">    web ui显示的:</span><br><span class="line">    2.2.1 Spark Master at spark://hp004:7077</span><br><span class="line">    URL: spark://hp004:7077</span><br><span class="line">    REST URL: spark://hp004:6066 (cluster mode)</span><br><span class="line">    Alive Workers: 2</span><br><span class="line">    Cores in use: 2 Total, 0 Used</span><br><span class="line">    Memory in use: 2.0 GB Total, 0.0 B Used</span><br><span class="line">    Applications: 0 Running, 0 Completed</span><br><span class="line">    Drivers: 0 Running, 0 Completed</span><br><span class="line">    Status: ALIVE</span><br><span class="line">    Workers</span><br><span class="line"></span><br><span class="line">    Worker Id	Address	State	Cores	Memory</span><br><span class="line">    worker-20180128044322-192.168.0.105-38506	192.168.0.105:38506	ALIVE	1 (0 Used)	1024.0 MB (0.0 B Used)</span><br><span class="line">    worker-20180128044416-192.168.0.104-45048	192.168.0.104:45048	ALIVE	1 (0 Used)	1024.0 MB (0.0 B Used)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/25/如何看待Spark技术-摘抄/" rel="next" title="如何看待Spark技术-摘抄">
+                <i class="fa fa-chevron-left"></i> 如何看待Spark技术-摘抄
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/07/Java基础算法复习/" rel="prev" title="基础复习">
+                基础复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

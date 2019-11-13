@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="ui,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="semantic-ui是前端view层好东西啊, 可能大家都听说过BootStrap, 觉得BootStrap这个框架已经很好用了, 那么或许你用过semantic-ui后就会发现semantic ui也挺好用的, 你会被它简单粗暴的语义化标签所吸引,(这时你会觉的BootStrap的有点繁琐, 有点冗长), github上面的star也很好, 也说明了大家对该框架的认可. 自从知道了seman">
+<meta name="keywords" content="ui">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Semantic UI">
+<meta property="og:url" content="http://yoursite.com/2017/09/28/一起学Semantic-UI/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="semantic-ui是前端view层好东西啊, 可能大家都听说过BootStrap, 觉得BootStrap这个框架已经很好用了, 那么或许你用过semantic-ui后就会发现semantic ui也挺好用的, 你会被它简单粗暴的语义化标签所吸引,(这时你会觉的BootStrap的有点繁琐, 有点冗长), github上面的star也很好, 也说明了大家对该框架的认可. 自从知道了seman">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/11.png">
+<meta property="og:image" content="http://yoursite.com/images/22.png">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Semantic UI">
+<meta name="twitter:description" content="semantic-ui是前端view层好东西啊, 可能大家都听说过BootStrap, 觉得BootStrap这个框架已经很好用了, 那么或许你用过semantic-ui后就会发现semantic ui也挺好用的, 你会被它简单粗暴的语义化标签所吸引,(这时你会觉的BootStrap的有点繁琐, 有点冗长), github上面的star也很好, 也说明了大家对该框架的认可. 自从知道了seman">
+<meta name="twitter:image" content="http://yoursite.com/images/11.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/28/一起学Semantic-UI/">
+
+
+
+
+
+  <title>一起学Semantic UI | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/一起学Semantic-UI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Semantic UI</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-28T08:27:41+08:00">
+                2017-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>semantic-ui是前端view层好东西啊, 可能大家都听说过BootStrap, 觉得BootStrap这个框架已经很好用了, 那么或许你用过semantic-ui后就会发现semantic ui也挺好用的, 你会被它简单粗暴的语义化标签所吸引,(这时你会觉的BootStrap的有点繁琐, 有点冗长), github上面的star也很好, 也说明了大家对该框架的认可. 自从知道了semantic-ui导致我写前端页面时, 再也不用BootStrap了.😜<br><a id="more"></a></p>
+</blockquote>
+<p><code>那么开始吧!</code></p>
+<blockquote>
+<p>补充下: semantic的意思也就是语义化的意思, 即semantic-ui用起来就像语义化一样</p>
+</blockquote>
+<blockquote>
+<p>创建一个按钮, (反转 蓝色 按钮)</p>
+<p>class=”ui inverted blue button”</p>
+</blockquote>
+<p><code>先看效果图, 这里就不一一贴每个组件了, 就用一张大图!</code></p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/images/11.png" alt></h2><h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/images/22.png" alt></h2><!-- ![](/images/331.png) -->
+<blockquote>
+<p>开始之前, 按照惯例当然要先引进样式表, 可以下载semantic-ui到本地, 也可以使用CDN服务.</p>
+<p><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./semantic/dist/semantic.min.css&quot;&gt;</code></p>
+</blockquote>
+<h1 id="一个容器-会将我们的内容居中等调整"><a href="#一个容器-会将我们的内容居中等调整" class="headerlink" title="一个容器(会将我们的内容居中等调整)"></a>一个容器(会将我们的内容居中等调整)</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui container"</span> style=<span class="string">"padding:50px 0px"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="带下划线的标题"><a href="#带下划线的标题" class="headerlink" title="带下划线的标题"></a>带下划线的标题</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui dividing header"</span>&gt;语义化的semantic-ui&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui primary button"</span>&gt;primary&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui positive button"</span>&gt;positive&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui negative button"</span>&gt;negative&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui massive button"</span>&gt;massive&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui small button"</span>&gt;small&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="有动画的按钮"><a href="#有动画的按钮" class="headerlink" title="有动画的按钮"></a>有动画的按钮</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui animated button"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"visible content"</span>&gt;下一步&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"hidden content"</span>&gt;</span><br><span class="line">    &lt;i <span class="built_in">class</span>=<span class="string">"right computer icon"</span>&gt;&lt;/i&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="按钮组-播放器"><a href="#按钮组-播放器" class="headerlink" title="按钮组(播放器)"></a>按钮组(播放器)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui vertical labeled icon buttons"</span>&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui button"</span>&gt;</span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"play icon"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    播放</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">  &lt;button class="ui button"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;i class="pause icon"&gt;&lt;/i</span>&gt;</span><br><span class="line">    暂停</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">  &lt;button class="ui button"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;i class="shuffle icon"&gt;&lt;/i</span>&gt;</span><br><span class="line">    随机播放</span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="分段segment"><a href="#分段segment" class="headerlink" title="分段segment"></a>分段segment</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui segments"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui segment"</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed <span class="keyword">do</span> eiusmod tempor incididunt ut labore et dolore magna aliqua. &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div class="ui segment"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. &lt;/</span>div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui segment"</span>&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed <span class="keyword">do</span> eiusmod tempor incididunt ut labore et dolore magna aliqua. &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div class="ui segment"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;</span></span><br><span class="line"><span class="regexp">      网易新闻</span></span><br><span class="line"><span class="regexp">    &lt;/</span>p&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui dividing header"</span>&gt;ui dividing header&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="ui header"&gt;今日头条&lt;/</span>div&gt;</span><br><span class="line">    &lt;h1&gt;今日头条&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/当然也可以水平分段</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;div class="ui horizontal segments"&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div class="ui red segment"&gt;</span></span><br><span class="line"><span class="regexp">		&lt;p&gt;</span></span><br><span class="line"><span class="regexp">			网页开发中，CSS控制网页样式。作为测试开发工程师，我个人不太擅长手写CSS、样式微调、兼容浏览器等工作，所以我选择使用成熟的前端框架，可以快速开发出样式美观的网站，也解决了大部分浏览器兼容问题。前端框架百花齐放，我们公司的产品使用了Bootstrap，我个人使用的是Semantic UI.</span></span><br><span class="line"><span class="regexp">		&lt;/</span>p&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div class="ui blue segment"&gt;</span></span><br><span class="line"><span class="regexp">		&lt;p&gt;</span></span><br><span class="line"><span class="regexp">			网页开发中，CSS控制网页样式。作为测试开发工程师，我个人不太擅长手写CSS、样式微调、兼容浏览器等工作，所以我选择使用成熟的前端框架，可以快速开发出样式美观的网站，也解决了大部分浏览器兼容问题。前端框架百花齐放，我们公司的产品使用了Bootstrap，我个人使用的是Semantic UI.</span></span><br><span class="line"><span class="regexp">		&lt;/</span>p&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div class="ui yellow segment"&gt;</span></span><br><span class="line"><span class="regexp">		&lt;p&gt;</span></span><br><span class="line"><span class="regexp">			网页开发中，CSS控制网页样式。作为测试开发工程师，我个人不太擅长手写CSS、样式微调、兼容浏览器等工作，所以我选择使用成熟的前端框架，可以快速开发出样式美观的网站，也解决了大部分浏览器兼容问题。前端框架百花齐放，我们公司的产品使用了Bootstrap，我个人使用的是Semantic UI.</span></span><br><span class="line"><span class="regexp">		&lt;/</span>p&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="表单示例"><a href="#表单示例" class="headerlink" title="表单示例"></a>表单示例</h1><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui form"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui field"</span>&gt;</span><br><span class="line">    &lt;label <span class="keyword">for</span>=<span class="string">"username"</span>&gt;用户名&lt;/label&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui left icon input"</span>&gt;</span><br><span class="line">      &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"text"</span> name=<span class="string">"uersname"</span> placeholder=<span class="string">"用户名"</span> /&gt;</span><br><span class="line">      &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"user icon"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui field"</span>&gt;</span><br><span class="line">    &lt;label <span class="keyword">for</span>=<span class="string">"password"</span>&gt;密码&lt;/label&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui left icon input"</span>&gt;</span><br><span class="line">      &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"password"</span> name=<span class="string">"password"</span> placeholder=<span class="string">"密码"</span> /&gt;</span><br><span class="line">      &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"lock icon"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui buttons"</span>&gt;</span><br><span class="line">    &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui blue button"</span> <span class="class"><span class="keyword">type</span></span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"blue or"</span>&gt;&lt;/div&gt;</span><br><span class="line">    &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui button"</span> <span class="class"><span class="keyword">type</span></span>=<span class="string">"reset"</span>&gt;重置&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="表格使用-各行变色-悬停高亮等"><a href="#表格使用-各行变色-悬停高亮等" class="headerlink" title="表格使用 (各行变色, 悬停高亮等)"></a>表格使用 (各行变色, 悬停高亮等)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;table <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui selectable celled striped table center aligned"</span>&gt;</span><br><span class="line">  &lt;thead&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">      &lt;th&gt;学号&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">      &lt;th&gt;姓名&lt;/</span>th&gt;</span><br><span class="line">      &lt;th&gt;成绩&lt;<span class="regexp">/th&gt;</span></span><br><span class="line"><span class="regexp">      &lt;th&gt;操作&lt;/</span>th&gt;</span><br><span class="line">    &lt;<span class="regexp">/tr&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>thead&gt;</span><br><span class="line">  &lt;tbody&gt;</span><br><span class="line">    &lt;tr&gt; <span class="xml"><span class="comment">&lt;!--class="ui positive"--&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>11111<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>daejong<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>100<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">      &lt;td&gt;</span><br><span class="line">        &lt;div class="ui blue button"&gt;修改&lt;/div&gt;</span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line">    &lt;tr&gt; <span class="xml"><span class="comment">&lt;!--class="ui negative"--&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>22222<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>dottie<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">td</span>&gt;</span>23423402<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line">      &lt;td&gt;</span><br><span class="line">        &lt;div class="ui blue button"&gt;修改&lt;/div&gt;</span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/tbody&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>table&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="搜索框的使用"><a href="#搜索框的使用" class="headerlink" title="搜索框的使用"></a>搜索框的使用</h1><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui left icon focus input"</span>&gt;</span><br><span class="line">  &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"text"</span> placeholder=<span class="string">"搜索"</span> /&gt;</span><br><span class="line">  &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"search icon"</span>&gt;&lt;/i&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui divider"</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui left icon focus action input"</span>&gt;</span><br><span class="line">  &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"search icon"</span>&gt;&lt;/i&gt;</span><br><span class="line">  &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"text"</span> placeholder=<span class="string">"搜索"</span> /&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui blue button"</span>&gt;搜索&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="网格item的书写-带分割线"><a href="#网格item的书写-带分割线" class="headerlink" title="网格item的书写(带分割线)"></a>网格item的书写(带分割线)</h1><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui divided items"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui item"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"content"</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui header"</span>&gt;我爱中国&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"meta"</span>&gt;China&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"description"</span>&gt;i love you!&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui item"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui content"</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui header"</span>&gt;网易新闻&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"meta"</span>&gt;这是meta&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"description"</span>&gt;这是desription&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line"></span><br><span class="line">放到segment中的<span class="built_in">item</span></span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui segment"</span>&gt;</span><br><span class="line">  &lt;!<span class="comment">-- link就是当鼠标移动到item上的时候, ui header会高亮--&gt;</span></span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui link divided items"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui item"</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui content"</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui header"</span>&gt;网易新闻&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"meta"</span>&gt;这是meta&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"description"</span>&gt;这是desription&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui item"</span>&gt;</span><br><span class="line">      &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"content"</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"ui header"</span>&gt;今日头条&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"meta"</span>&gt;哈哈哈哈头条&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"description"</span>&gt;哈哈哈description&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">      &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="标签label的使用"><a href="#标签label的使用" class="headerlink" title="标签label的使用"></a>标签label的使用</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui container segment"</span>&gt;</span><br><span class="line">  &lt;h1 <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui header"</span>&gt;hello&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">  &lt;h1 class="ui label"&gt;world&lt;/</span>h1&gt;</span><br><span class="line">  &lt;h1 <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui label inverted red"</span>&gt;js&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">  &lt;h1 class="ui label inverted green"&gt;Objective-C&lt;/</span>h1&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="栅格系统-16"><a href="#栅格系统-16" class="headerlink" title="栅格系统(16)"></a>栅格系统(16)</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui grid"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"eight wide column"</span>&gt;</span><br><span class="line">    &lt;!-- <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui left icon focus action input"</span>&gt;</span> --&gt;</span></span><br><span class="line">    &lt;div class="ui left icon focus input"&gt;</span><br><span class="line">      &lt;i class="ui search icon"&gt;&lt;/i&gt;</span><br><span class="line">      &lt;input type="text" placeholder="搜索" /&gt;</span><br><span class="line">      &lt;!-- &lt;div class="ui blue button"&gt;搜索&lt;/div&gt; --&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">  &lt;div class="eight wide column"&gt;</span><br><span class="line">    &lt;div class="ui fluid selection dropdown" id="select" tabindex="0"&gt;</span><br><span class="line">      &lt;i class="dropdown icon"&gt;&lt;/i&gt;</span><br><span class="line">      &lt;div class="default text"&gt;选择排序方式&lt;/div&gt;</span><br><span class="line">      &lt;div class="menu"&gt;</span><br><span class="line">          &lt;div class="item"&gt;按学号排序&lt;/div&gt;</span><br><span class="line">          &lt;div class="item"&gt;按年龄排序&lt;/div&gt;</span><br><span class="line">          &lt;div class="item"&gt;按成绩排序&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="表单验证-amp-api请求"><a href="#表单验证-amp-api请求" class="headerlink" title="表单验证&amp;api请求"></a>表单验证&amp;api请求</h1><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;form <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui form"</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"field"</span>&gt;</span><br><span class="line">    &lt;label&gt;<span class="type">First</span> <span class="type">Name</span>&lt;/label&gt;</span><br><span class="line">    &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"text"</span> name=<span class="string">"firstName"</span> placeholder=<span class="string">"First Name"</span>&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"field"</span>&gt;</span><br><span class="line">    &lt;label&gt;<span class="type">Last</span> <span class="type">Name</span>&lt;/label&gt;</span><br><span class="line">    &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"text"</span> name=<span class="string">"lastName"</span> placeholder=<span class="string">"Last Name"</span>&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"field"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui checkbox"</span>&gt;</span><br><span class="line">      &lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"checkbox"</span> tabindex=<span class="string">"0"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"hidden"</span>&gt;</span><br><span class="line">      &lt;label&gt;我同意本条款和条件&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui primary button"</span> <span class="class"><span class="keyword">type</span></span>=<span class="string">"submit"</span> id=<span class="string">"login"</span>&gt;<span class="type">Submit</span>&lt;/button&gt;</span><br><span class="line">  &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"ui inverted blue button"</span> <span class="class"><span class="keyword">type</span></span>=<span class="string">"submit"</span>&gt;<span class="type">Login</span> in&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相应的要导入jQuery, 和 semantic.js</span></span><br><span class="line"><span class="comment">// &lt;script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">// &lt;script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 前端表单验证</span></span><br><span class="line">$('.ui.form')</span><br><span class="line">  .form(</span><br><span class="line">    &#123;</span><br><span class="line">      inline: <span class="literal">true</span>,</span><br><span class="line">      on: <span class="symbol">'blu</span>r',</span><br><span class="line">      fields: &#123;</span><br><span class="line">        firstName: &#123;</span><br><span class="line">          identifier: <span class="symbol">'firstNam</span>e',</span><br><span class="line">          rules: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="class"><span class="keyword">type</span>   </span>: <span class="symbol">'empt</span>y',</span><br><span class="line">              prompt : <span class="symbol">'Please</span> enter your first name'</span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        lastName: &#123;</span><br><span class="line">          identifier: <span class="symbol">'lastNam</span>e',</span><br><span class="line">          rules: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="class"><span class="keyword">type</span>   </span>: <span class="symbol">'empt</span>y',</span><br><span class="line">              prompt : <span class="symbol">'Please</span> enter your last name'</span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置后端请求api</span></span><br><span class="line">  $.fn.api.settings.api = &#123;</span><br><span class="line">    <span class="symbol">'get</span> followers' : <span class="symbol">'https</span>:<span class="comment">//api.douban.com/v2/movie/in_theaters'</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绑定组建， 向后端发送请求， 并对请求进行响应处理</span></span><br><span class="line">  $('#login')</span><br><span class="line">    .api(&#123;</span><br><span class="line">      action: <span class="symbol">'get</span> followers',</span><br><span class="line">      dataType: <span class="symbol">'json</span>p',</span><br><span class="line">      onSuccess: function(response) &#123;</span><br><span class="line">          console.log(response);</span><br><span class="line">      &#125;,</span><br><span class="line">      onFailure: function(response)&#123;</span><br><span class="line">          console.log(response);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><blockquote>
+<p> <code>好了</code>, 大致常用的组件都简单的写了一下, 当然还有很多的还没写, 这个附上官方文档地址, <a href="http://www.semantic-ui.cn" target="_blank" rel="noopener">semantic-u官方文档</a>, 方便大家查找使用.</p>
+</blockquote>
+<blockquote>
+<p>曾经有人这样说 <code>css要品, js要磨</code>, 那么就让我们一起品味这<code>简单粗暴</code>, <code>语义化标签</code>的<code>semantic-ui</code>吧! 😁😁😁😁😁😁😁😁</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ui/" rel="tag"># ui</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/一起学Angular/" rel="next" title="一起学Angular">
+                <i class="fa fa-chevron-left"></i> 一起学Angular
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/28/python基础/" rel="prev" title="python基础">
+                python基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#一个容器-会将我们的内容居中等调整"><span class="nav-number"></span> <span class="nav-text">一个容器(会将我们的内容居中等调整)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带下划线的标题"><span class="nav-number"></span> <span class="nav-text">带下划线的标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按钮"><span class="nav-number"></span> <span class="nav-text">按钮</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有动画的按钮"><span class="nav-number"></span> <span class="nav-text">有动画的按钮</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#按钮组-播放器"><span class="nav-number"></span> <span class="nav-text">按钮组(播放器)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分段segment"><span class="nav-number"></span> <span class="nav-text">分段segment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表单示例"><span class="nav-number"></span> <span class="nav-text">表单示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格使用-各行变色-悬停高亮等"><span class="nav-number"></span> <span class="nav-text">表格使用 (各行变色, 悬停高亮等)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索框的使用"><span class="nav-number"></span> <span class="nav-text">搜索框的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网格item的书写-带分割线"><span class="nav-number"></span> <span class="nav-text">网格item的书写(带分割线)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标签label的使用"><span class="nav-number"></span> <span class="nav-text">标签label的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栅格系统-16"><span class="nav-number"></span> <span class="nav-text">栅格系统(16)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表单验证-amp-api请求"><span class="nav-number"></span> <span class="nav-text">表单验证&amp;api请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

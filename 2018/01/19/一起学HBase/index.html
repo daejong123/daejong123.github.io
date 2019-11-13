@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="HBase: 一个构建在HDFS之上的/分布式的/面向列的开源数据库.">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学HBase">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/一起学HBase/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="HBase: 一个构建在HDFS之上的/分布式的/面向列的开源数据库.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学HBase">
+<meta name="twitter:description" content="HBase: 一个构建在HDFS之上的/分布式的/面向列的开源数据库.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/19/一起学HBase/">
+
+
+
+
+
+  <title>一起学HBase | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/一起学HBase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学HBase</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T17:11:02+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>HBase: 一个构建在HDFS之上的/分布式的/面向列的开源数据库.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="HBase概念"><a href="#HBase概念" class="headerlink" title="HBase概念:"></a>HBase概念:</h2><blockquote>
+<p>一个构建在HDFS(高可靠, 有备份)之上的, 分布式的(分而治之, 提高效率), 面向列(不同于其他数据库都是以一行为一条记录)的开源数据库. 由Google BigTable的开源实现, 主要用于海量数据存储, 是hadoop生态圈中很重要的一部分.</p>
+</blockquote>
+<h3 id="HBase表的特点"><a href="#HBase表的特点" class="headerlink" title="HBase表的特点"></a>HBase表的特点</h3><ul>
+<li>大: 一个表可以有数十亿行, 上百万列.</li>
+<li>面向列: 在HBase表中数据都是按照列来存储.</li>
+<li>稀疏: 对于null值, 不占用存储空间.</li>
+<li>数据类型单一性: HBase表中数据类型都是字符串string.</li>
+<li>无模式: 每行都有一个可以排序的主键和任意多的列, 列可以根据需要动态的增加, 同一张表中不同的行可以有完全不同的列.</li>
+</ul>
+<h3 id="HBase-和-RDBMS-的区别"><a href="#HBase-和-RDBMS-的区别" class="headerlink" title="HBase 和 RDBMS 的区别"></a>HBase 和 RDBMS 的区别</h3><ul>
+<li>数据类型: HBase中的数据类型都是string字符串.</li>
+<li>数据操作: HBase只有普通的增删改查操作, 没有表之间的关联查询</li>
+<li>存储模式: HBase是基于列式存储的, 而RDBMS是基于行式存储的.</li>
+<li>应用场景: HBase适合存储大量数据, 查询效率很高.</li>
+</ul>
+<h2 id="HBase专业术语和数据模型"><a href="#HBase专业术语和数据模型" class="headerlink" title="HBase专业术语和数据模型"></a>HBase专业术语和数据模型</h2><h3 id="HBase专业术语"><a href="#HBase专业术语" class="headerlink" title="HBase专业术语"></a>HBase专业术语</h3><ol>
+<li>主键:(Row Key)<ul>
+<li>用来检索记录的主键,</li>
+<li>访问HBase表中的行, 只有三种方式:<ol>
+<li>通过单个Row key的方式查询, 只能查询一条数据</li>
+<li>通过Row key的range来查询, 可以查到一组数据</li>
+<li>全表扫描</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>列族: (Column Family)<ul>
+<li>可以理解为: 在字段前面加上一个限定符.</li>
+<li>在创建表的时候, 必须要声明列族, 一个列族可以包含多个列</li>
+<li>列族没有数据类型, 是一些列的集合.</li>
+<li>一个列族所有成员都有着相同的前缀.</li>
+</ul>
+</li>
+<li>时间戳和存储单元cell<ul>
+<li>存储单元cell:由 row 和 column 确定一个存储单元</li>
+<li>每个cell都存储这同一份数据的多个版本</li>
+<li>每个cell中, 不同版本的数据都是通过时间的倒序存储.</li>
+<li>{row, column, version}元祖就是HBase中的一个cell</li>
+</ul>
+</li>
+</ol>
+<h3 id="HBase存储细节"><a href="#HBase存储细节" class="headerlink" title="HBase存储细节"></a>HBase存储细节</h3><ol>
+<li>每个列族存储在HDFS上的一个单独的文件中.</li>
+<li>key和version会在每个列族中存储一份.</li>
+<li>空值是不会被存储的.</li>
+</ol>
+<h2 id="HBase伪分布式搭建过程-适合学习"><a href="#HBase伪分布式搭建过程-适合学习" class="headerlink" title="HBase伪分布式搭建过程.(适合学习)"></a>HBase伪分布式搭建过程.(适合学习)</h2><blockquote>
+<p>真正开发中使用的是 集群模式. 而适合学习的是伪分布式模式.</p>
+</blockquote>
+<blockquote>
+<p>Linux环境搭建. 虽然前面有些, 但是再温习下搭建过程.</p>
+</blockquote>
+<h3 id="关闭防火墙和SELinux"><a href="#关闭防火墙和SELinux" class="headerlink" title="关闭防火墙和SELinux"></a>关闭防火墙和SELinux</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">禁止掉ipv6网络: vim /etc/sysctl.conf</span><br><span class="line">net.ipv6.conf.all.<span class="attribute">disable_ipv6</span>=1</span><br><span class="line">net.ipv6.conf.default.<span class="attribute">disable_ipv6</span>=1</span><br><span class="line">然后使配置生效:</span><br><span class="line">sysctl -p</span><br><span class="line">输出配置的信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关闭防火墙:centos7 firewalld, centos6 是iptables</span><br><span class="line">systemctl status firewalld 查看状态</span><br><span class="line">systemctl stop firewalld 停止</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关闭selinux</span><br><span class="line">输入: sestatus 查看selinux是否是enforcing</span><br><span class="line">然后修改配置文件 将该状态关闭 vim /etc/selinux/config</span><br><span class="line">把里面的内容: <span class="attribute">SELINUX</span>=ENFORCING 修改为: <span class="attribute">SELINUX</span>=disabled 即可.</span><br></pre></td></tr></table></figure>
+<h3 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在centos中设置成桥接模式. 即可.</span><br><span class="line">使用ifconfig 或者<span class="built_in"> ip </span>addr查看分配的ip地址.</span><br></pre></td></tr></table></figure>
+<h3 id="配置主机名和ip映射"><a href="#配置主机名和ip映射" class="headerlink" title="配置主机名和ip映射"></a>配置主机名和ip映射</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network</span><br><span class="line">设置成: <span class="attribute">HOSTNAME</span>=hadoop</span><br><span class="line">重启下生效</span><br><span class="line"></span><br><span class="line">sudo vim /etc/hosts文件:</span><br><span class="line">添加一条记录:</span><br><span class="line">192.168.1.239 master.hadoop</span><br></pre></td></tr></table></figure>
+<h3 id="设置SSH免密码登录"><a href="#设置SSH免密码登录" class="headerlink" title="设置SSH免密码登录"></a>设置SSH免密码登录</h3><figure class="highlight mercury"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 生成公钥和私钥:(在哪个用户下生成就是那个用户的秘钥对. 根据用户来区分的)</span><br><span class="line">cd ~/.ssh/</span><br><span class="line">ssh-keygen -t rsa 使用rsa加密算法, 生成一对秘钥. 然后直接回车就可.</span><br><span class="line">然后查看该目录下生成了两个文件: id_rsa, id_rsa.pub, 一个公钥, 一个私钥.</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 将公钥拷给自己</span><br><span class="line">ssh-copy-id localhost</span><br><span class="line">会生成一个文件authorized_keys</span><br><span class="line">当然, 也可以 使用 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys 即可.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 然后就可以 start-<span class="built_in">all</span>.sh 就可以直接启动hadoop, 过程中就不用输出密码了.</span><br></pre></td></tr></table></figure>
+<h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">jdk</span>:</span><br><span class="line">[jdk1.<span class="number">8</span>.rpm](wget --no-check-certificate --no-cookies --header <span class="string">"Cookie: oraclelicense=accept-securebackup-cookie"</span> <span class="attribute">http</span>:<span class="comment">//download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm</span></span><br><span class="line">rpm -rvh xxxx.rpm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attribute">hadoop</span>:</span><br><span class="line"><span class="attribute">http</span>:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.5/hadoop-2.7.5.tar.gz</span></span><br><span class="line">tar -zxvf xxx.tar.gz</span><br><span class="line"></span><br><span class="line">最后配置相应的环境变量.</span><br></pre></td></tr></table></figure>
+<h3 id="安装HBase"><a href="#安装HBase" class="headerlink" title="安装HBase"></a>安装HBase</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">hbase1.1.13</span><br><span class="line"></span><br><span class="line">wget http://mirror.bit.edu.cn/apache/hbase/1.1.13/hbase-1.1.13-bin.tar.gz</span><br><span class="line"></span><br><span class="line">tar -zxvf ...tar.gz</span><br><span class="line"></span><br><span class="line">配置环境:</span><br><span class="line"></span><br><span class="line">1. hbase-env.sh</span><br><span class="line">  配置JAVA_HOME=xxxx</span><br><span class="line"></span><br><span class="line">2. hbase-site.xml</span><br><span class="line">  可以到官网 hbase.apache.org -&gt; getting start 拷贝</span><br><span class="line">  <span class="comment">&lt;!-- 将hbase配置到hdfs中. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://192.168.1.239:9000/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- zookeeper的数据目录, 必须实现创建好, 可以创建在hadooop目录下data文件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/hadoop/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">3. 修改regionservers</span><br><span class="line">    添加: 192.168.1.239</span><br><span class="line"></span><br><span class="line">4. 启动hbase</span><br><span class="line">   bin/hbase-daemon.sh start zookeeper</span><br><span class="line">   bin/hbase-daemon.sh start master</span><br><span class="line">   bin/hbase-daemon.sh start regionserver</span><br><span class="line"></span><br><span class="line">   jps查看这个三个进程是否启动成功.</span><br><span class="line"></span><br><span class="line">5. 通过web console查看 web ui</span><br><span class="line">   192.168.1.239:16010 访问.</span><br></pre></td></tr></table></figure>
+<h2 id="HBase在HDFS上的目录结构"><a href="#HBase在HDFS上的目录结构" class="headerlink" title="HBase在HDFS上的目录结构"></a>HBase在HDFS上的目录结构</h2><ul>
+<li>/hbase/.tmp: 临时目录,当对表做创建和删除的时候, 会将表先move到该目录下, 然后进行操作</li>
+<li>/hbase/data: 核心目录, 存储HBase表的数据.</li>
+<li>默认情况下:/hbase/data下有两个目录<ul>
+<li>/hbase/data/default: 当创建表的时候, 没有指定namespace时, 表就会创建在此目录下.</li>
+<li>/hbase/data/hbase: 系统默认创建的表, 里面包含两张表: meta表和namespace表</li>
+</ul>
+</li>
+<li>/hbase/hbase: id: 存储的是集群唯一的cluster id(uuid)</li>
+<li>/hbase/hbase.version: 集群的版本号</li>
+<li>/hbase/oldWALs: 当WALs目录的logs没有用之后, 就会将这些logs移动此目录下. HMaster会定期清理.</li>
+</ul>
+<h2 id="HBae的Shell-操作"><a href="#HBae的Shell-操作" class="headerlink" title="HBae的Shell 操作"></a>HBae的Shell 操作</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作:"></a>基本操作:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 创建表: <span class="keyword">create</span> <span class="string">'表名称'</span>,<span class="string">'列族名1'</span>,<span class="string">'列族名2'</span>,<span class="string">'列族名...'</span></span><br><span class="line"><span class="number">2.</span> 添加记录: put <span class="string">'表名称'</span>,<span class="string">'行名称(rowkey)'</span>,<span class="string">'列名称'</span>,<span class="string">'值'</span></span><br><span class="line"><span class="number">3.</span> 查看记录: <span class="keyword">get</span> <span class="string">'表名称'</span>,<span class="string">'行名称'</span></span><br><span class="line"><span class="number">4.</span> 查看表中记录数: <span class="keyword">count</span> <span class="string">'表名称'</span></span><br><span class="line"><span class="number">5.</span> 删除记录:  <span class="keyword">delete</span> <span class="string">'表名称'</span>,<span class="string">'行名称'</span>,<span class="string">'列名称;'</span></span><br><span class="line"><span class="number">6.</span> 删除一张表: <span class="number">1.</span> 先屏蔽表 <span class="keyword">disable</span> <span class="string">'表名称'</span> <span class="number">2.</span> <span class="keyword">drop</span> <span class="string">'表名称'</span></span><br><span class="line"><span class="number">7.</span> 查看所有记录: <span class="keyword">scan</span> <span class="string">'表名称'</span></span><br><span class="line"><span class="number">8.</span> 查看表中某个列中所有的数据: <span class="keyword">scan</span> <span class="string">'表名称'</span>,&#123;<span class="keyword">COLUMNS</span>=&gt;<span class="string">'列族名称:列名称'</span>&#125;</span><br><span class="line"><span class="number">9.</span> 更新记录: 重写添加一遍进行覆盖.</span><br></pre></td></tr></table></figure>
+<h3 id="组命令"><a href="#组命令" class="headerlink" title="组命令:"></a>组命令:</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">general</span><br><span class="line">  命令: status, table_<span class="keyword">help</span>, <span class="keyword">version</span>, whoami</span><br><span class="line">Namespace</span><br><span class="line">  命令: alter_namespace, create_namespce, describle_namespace, drop_namespace, list_namespce, list_namespace_tables</span><br><span class="line">visibility labels</span><br><span class="line">Replication</span><br><span class="line">ddl</span><br><span class="line">Security</span><br><span class="line">dml</span><br><span class="line">Tools</span><br><span class="line">Quotas</span><br><span class="line">等<span class="string">....</span></span><br></pre></td></tr></table></figure>
+<h3 id="hbase-Shell"><a href="#hbase-Shell" class="headerlink" title="hbase Shell"></a>hbase Shell</h3><blockquote>
+<p>命令行中输出hbase shell进入shell模式</p>
+<p>输入: help 可以查看提示.</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">1. 命令行中输出hbase shell进入shell模式(要先把hbase配置到环境变量中/etc/profile)</span><br><span class="line">2. 创建表: create <span class="string">'user'</span>, <span class="string">'info'</span></span><br><span class="line">    0 row(s) <span class="keyword">in</span> 2.8310 seconds</span><br><span class="line">    =&gt; Hbase::Table - user</span><br><span class="line">3. 查看所有表: list</span><br><span class="line">    TABLE</span><br><span class="line">    user</span><br><span class="line">    1 row(s) <span class="keyword">in</span> 0.0370 seconds</span><br><span class="line"></span><br><span class="line">    =&gt; [<span class="string">"user"</span>]</span><br><span class="line">4. 插入一条数据:</span><br><span class="line">    put <span class="string">'user'</span>,<span class="string">'rowkey001'</span>,<span class="string">'info:name'</span>, <span class="string">'dottie'</span></span><br><span class="line">    put <span class="string">'user'</span>,<span class="string">'rowkey002'</span>,<span class="string">'info:name'</span>, <span class="string">'daejong'</span></span><br><span class="line">    put <span class="string">'user'</span>,<span class="string">'rowkey002'</span>,<span class="string">'info:age'</span>, <span class="string">'23'</span></span><br><span class="line"></span><br><span class="line">5. 查看表信息:</span><br><span class="line">   scan <span class="string">'user'</span></span><br><span class="line">   输出结果:</span><br><span class="line">   ROW                             COLUMN+CELL</span><br><span class="line">   rowkey001                      <span class="attribute">column</span>=info:name, <span class="attribute">timestamp</span>=1516367389405, <span class="attribute">value</span>=dottie</span><br><span class="line">   rowkey002                      <span class="attribute">column</span>=info:age, <span class="attribute">timestamp</span>=1516367502487, <span class="attribute">value</span>=23</span><br><span class="line">   rowkey002                      <span class="attribute">column</span>=info:name, <span class="attribute">timestamp</span>=1516367464267, <span class="attribute">value</span>=daejong</span><br><span class="line">   2 row(s) <span class="keyword">in</span> 0.0360 seconds`</span><br><span class="line"></span><br><span class="line">6. 根据rowkey查看某条信息:</span><br><span class="line">    <span class="builtin-name">get</span> <span class="string">'user'</span>, <span class="string">'rowkey001'</span></span><br><span class="line">    输出:</span><br><span class="line">    COLUMN                          CELL</span><br><span class="line">    info:name                      <span class="attribute">timestamp</span>=1516367389405, <span class="attribute">value</span>=dottie</span><br><span class="line">    1 row(s) <span class="keyword">in</span> 0.0760 seconds</span><br><span class="line"></span><br><span class="line">    <span class="builtin-name">get</span> <span class="string">'user'</span>, <span class="string">'rowkey002'</span></span><br><span class="line">    输出:</span><br><span class="line">    COLUMN                          CELL</span><br><span class="line">    info:age                       <span class="attribute">timestamp</span>=1516367502487, <span class="attribute">value</span>=23</span><br><span class="line">    info:name                      <span class="attribute">timestamp</span>=1516367464267, <span class="attribute">value</span>=daejong</span><br><span class="line">    2 row(s) <span class="keyword">in</span> 0.0080 seconds</span><br><span class="line"></span><br><span class="line">7. 根据rowkey删除某条信息:</span><br><span class="line">    deleteall <span class="string">'user'</span>, <span class="string">'rowkey001'</span></span><br><span class="line">    0 row(s) <span class="keyword">in</span> 0.1750 seconds</span><br><span class="line"></span><br><span class="line">8. 删除一张表</span><br><span class="line">   <span class="builtin-name">disable</span> <span class="string">'student'</span></span><br><span class="line">   drop  <span class="string">'student'</span></span><br><span class="line"></span><br><span class="line">9. 查看所有的namespace</span><br><span class="line">    list_namespace</span><br><span class="line">    输出:</span><br><span class="line">    NAMESPACE</span><br><span class="line">    default</span><br><span class="line">    hbase</span><br><span class="line">    2 row(s) <span class="keyword">in</span> 0.0590 seconds</span><br><span class="line"></span><br><span class="line">10 .创建一个namespace</span><br><span class="line">    create_namespace <span class="string">'ns1'</span></span><br><span class="line">    查看:</span><br><span class="line">    list_namespace</span><br><span class="line">    输出:</span><br><span class="line">    NAMESPACE</span><br><span class="line">    default</span><br><span class="line">    hbase</span><br><span class="line">    ns1</span><br><span class="line">    3 row(s) <span class="keyword">in</span> 0.0400 seconds</span><br><span class="line"></span><br><span class="line">11. 删除一个namespace</span><br><span class="line">    drop_namespace <span class="string">'ns1'</span></span><br><span class="line">    0 row(s) <span class="keyword">in</span> 0.0850 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><blockquote>
+<p>关于HBase的搭建和一些表的定义和创建. 到这里算是结束了. 接下来的博客中会继续深入记录HBase的进阶知识.</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/19/Hadoop之MapReduce编程示例/" rel="next" title="Hadoop之MapReduce编程示例">
+                <i class="fa fa-chevron-left"></i> Hadoop之MapReduce编程示例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/20/HBase编程示例/" rel="prev" title="HBase编程示例">
+                HBase编程示例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase概念"><span class="nav-number">1.</span> <span class="nav-text">HBase概念:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase表的特点"><span class="nav-number">1.1.</span> <span class="nav-text">HBase表的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase-和-RDBMS-的区别"><span class="nav-number">1.2.</span> <span class="nav-text">HBase 和 RDBMS 的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase专业术语和数据模型"><span class="nav-number">2.</span> <span class="nav-text">HBase专业术语和数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase专业术语"><span class="nav-number">2.1.</span> <span class="nav-text">HBase专业术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBase存储细节"><span class="nav-number">2.2.</span> <span class="nav-text">HBase存储细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase伪分布式搭建过程-适合学习"><span class="nav-number">3.</span> <span class="nav-text">HBase伪分布式搭建过程.(适合学习)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙和SELinux"><span class="nav-number">3.1.</span> <span class="nav-text">关闭防火墙和SELinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置IP"><span class="nav-number">3.2.</span> <span class="nav-text">配置IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置主机名和ip映射"><span class="nav-number">3.3.</span> <span class="nav-text">配置主机名和ip映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置SSH免密码登录"><span class="nav-number">3.4.</span> <span class="nav-text">设置SSH免密码登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装JDK"><span class="nav-number">3.5.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装HBase"><span class="nav-number">3.6.</span> <span class="nav-text">安装HBase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase在HDFS上的目录结构"><span class="nav-number">4.</span> <span class="nav-text">HBase在HDFS上的目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBae的Shell-操作"><span class="nav-number">5.</span> <span class="nav-text">HBae的Shell 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">5.1.</span> <span class="nav-text">基本操作:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组命令"><span class="nav-number">5.2.</span> <span class="nav-text">组命令:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hbase-Shell"><span class="nav-number">5.3.</span> <span class="nav-text">hbase Shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

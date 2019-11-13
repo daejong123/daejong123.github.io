@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="学习hadoop时, linux的环境配置">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟机linux配置">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/虚拟机linux配置/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="学习hadoop时, linux的环境配置">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="虚拟机linux配置">
+<meta name="twitter:description" content="学习hadoop时, linux的环境配置">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/虚拟机linux配置/">
+
+
+
+
+
+  <title>虚拟机linux配置 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/虚拟机linux配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">虚拟机linux配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T22:47:12+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>学习hadoop时, linux的环境配置</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">启动虚拟机之前, 在virtualBox中将该虚拟机的网络配置成桥接模式, 并且允许连接全部网络.</span><br><span class="line"></span><br><span class="line">1. 用virtualBox安装好了centos7之后. 启动.</span><br><span class="line">2. centos7开机后 默认状态下是不可以访问外部网络的.</span><br><span class="line">   用 yum install vim 可以发现 cannot <span class="builtin-name">find</span> baseurl<span class="built_in">..</span><span class="built_in">..</span> 因为此时虚拟机没有网络</span><br><span class="line">   也可以尝试ping ip看是否可以ping通.</span><br><span class="line">3. 首先修改配置</span><br><span class="line">   vim /etc/sysconfig/network-scripts/ifcfg-enp0s3</span><br><span class="line">   将 <span class="attribute">ONBOOT</span>=<span class="literal">no</span> 修改为<span class="literal">yes</span></span><br><span class="line">   然后重启网络 systemctl restart network</span><br><span class="line">4. 然后通过ip addr 就可以查看该虚拟的动态ip地址.</span><br><span class="line">   inet 192.168.1.147</span><br><span class="line">   如果你是习惯用ifconfig查看ip地址信息的. centos7中默认不提供. 需要额外安装net-tools</span><br><span class="line">   yum install net-tools</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. 关闭ipv6</span><br><span class="line">   禁止掉ipv6网络: vim /etc/sysctl.conf</span><br><span class="line">   net.ipv6.conf.all.<span class="attribute">disable_ipv6</span>=1</span><br><span class="line">   net.ipv6.conf.default.<span class="attribute">disable_ipv6</span>=1</span><br><span class="line">   然后使配置生效:</span><br><span class="line">   sysctl -p</span><br><span class="line">   输出配置的信息</span><br><span class="line"></span><br><span class="line">2. 关闭防火墙:centos7 firewalld, centos6 是iptables</span><br><span class="line">   systemctl status firewalld 查看状态</span><br><span class="line">   systemctl stop firewalld 停止</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3. 关闭selinux</span><br><span class="line">   输入: sestatus 查看selinux是否是enforcing</span><br><span class="line">   然后修改配置文件 将该状态关闭 vim /etc/selinux/config</span><br><span class="line">   把里面的内容: <span class="attribute">SELINUX</span>=ENFORCING 修改为: <span class="attribute">SELINUX</span>=disabled 即可.</span><br></pre></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">主机名配置:</span><br><span class="line">方式一: <span class="string">hostnamectl </span><span class="built_in">set-hostname</span> <span class="string">hadoop001</span></span><br><span class="line"><span class="string">方</span>式二: <span class="string">vi </span>/<span class="string">etc/</span><span class="string">hostname</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">reboot重</span>启下</span><br><span class="line"></span><br><span class="line"><span class="string">hostname命</span>令查看主机名</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>新建用户</span><br><span class="line">   adduser dottie</span><br><span class="line"><span class="bullet">2. </span>设置密码</span><br><span class="line">   passwd dottie</span><br><span class="line">   dottie</span><br><span class="line">   dottie</span><br><span class="line"><span class="bullet">3. </span>赋予dottie用户 root 权限</span><br><span class="line">   vim /etc/sudoers 在root  ALL=(ALL)下同样的添加一行即可.</span><br><span class="line"><span class="bullet">4. </span>切换用户</span><br><span class="line">   su - dottie</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">信任的配置: (免密码配置, su - dottie 等其他非root用户就不要密码)</span><br><span class="line">hadoop的进程之间通信使用ssh方式，需要每次都要输入密码。为了实现自动化操作，需要配置ssh免密码登陆方式</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 生成公钥和私钥:(在哪个用户下生成就是那个用户的秘钥对. 根据用户来区分的)</span><br><span class="line">cd ~/.ssh/</span><br><span class="line">ssh-keygen -t rsa 使用rsa加密算法, 生成一对秘钥. 然后直接回车就可.</span><br><span class="line">然后查看该目录下生成了两个文件: id_rsa, id_rsa.pub, 一个公钥, 一个私钥.</span><br><span class="line"><span class="number">2</span>. 将公钥拷给自己</span><br><span class="line">ssh-copy-id localhost</span><br><span class="line">会生成一个文件authorized_keys</span><br><span class="line">当然, 也可以 使用 cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys 即可.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. chmod <span class="number">600</span> authorized_keys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在配置Hadoop集群分布时，要使用SSH免密码登录，</span><br><span class="line">假设现在有两台机器hadoop@<span class="literal">Master</span>(<span class="number">192.168</span>.<span class="number">1.101</span>)，作为<span class="literal">Master</span>机，</span><br><span class="line">hadoop@<span class="literal">Slave</span>(<span class="number">192.168</span>.<span class="number">1.102</span>)，作为<span class="literal">Slave</span>机。</span><br><span class="line">现想hadoop@<span class="literal">Master</span>通过ssh免密码登录到hadoop@<span class="literal">Slave</span>。</span><br><span class="line"></span><br><span class="line">把<span class="literal">Master</span>机器下的id_rsa.pub复制到<span class="literal">Slave</span>机器下的.ssh/authorized_keys文件里。</span><br><span class="line">scp .ssh/id_rsa.pub hadoop@<span class="number">192.168</span>.<span class="number">10.102</span>:</span><br><span class="line">cat id_rsa.pub.hadoop_master &gt;&gt; .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"> authorized_keys的权限要是<span class="number">600</span>。</span><br><span class="line"></span><br><span class="line"> ssh <span class="number">192.168</span>.<span class="number">10.102</span></span><br><span class="line"></span><br><span class="line"> 现在MasterMaster机可以无密码登录<span class="literal">Slave</span>机了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> 总结: 小结：登录的机子可有私钥，被登录的机子要有登录机子的公钥。</span><br><span class="line"> 这个公钥/私钥对一般在私钥宿主机产生。</span><br><span class="line"> 上面是用rsa算法的公钥/私钥对，当然也可以用dsa(对应的文件是id_dsa，id_dsa.pub)</span><br><span class="line"> 想让<span class="literal">Master</span>，<span class="literal">Slave</span>机无密码互登录，那<span class="literal">Slave</span>机以上面同样的方式配置即可,</span><br><span class="line"> 把<span class="literal">Slave</span>的公钥复制过去添加到authorized_keys的末尾就行了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后就可以安装jdk, 以及hadoop的一些jar包了.</span><br></pre></td></tr></table></figure>
+<p>ssh远程免密码登录主机方式:<br>推荐博客:</p>
+<p><a href="https://www.jianshu.com/p/7a3da8707551" target="_blank" rel="noopener">链接1</a></p>
+<p><a href="http://blog.csdn.net/hunanchenxingyu/article/details/40544513" target="_blank" rel="noopener">链接2</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/13/一起学Shell-Script/" rel="next" title="一起学Shell Script">
+                <i class="fa fa-chevron-left"></i> 一起学Shell Script
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/一起学Hadoop/" rel="prev" title="一起学Hadoop">
+                一起学Hadoop <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

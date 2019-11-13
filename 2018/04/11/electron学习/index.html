@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="electron,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="工作需要，electron学习(跨平台的桌面应用)， 背后(chrome+node)。">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="article">
+<meta property="og:title" content="electron学习">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/electron学习/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="工作需要，electron学习(跨平台的桌面应用)， 背后(chrome+node)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="electron学习">
+<meta name="twitter:description" content="工作需要，electron学习(跨平台的桌面应用)， 背后(chrome+node)。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/electron学习/">
+
+
+
+
+
+  <title>electron学习 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/electron学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">electron学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T11:16:36+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>工作需要，electron学习(跨平台的桌面应用)， 背后(chrome+node)。</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">electron 有两个进程：主进程和渲染进程。模块可以在单个或多个进程上工作。</span><br><span class="line"></span><br><span class="line">主进程工作在幕后，而渲染进程工作在你应用程序用户可以看到的每一个窗口。</span><br><span class="line"></span><br><span class="line">模块（<span class="keyword">Modules</span>） Electron 的 API 根据他们的职责被组合到一起。</span><br><span class="line"></span><br><span class="line">例如 dialog 这个模块包含了所有本地对话框（打开文件框、提示框）的 API。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>理解了electron中主线程和渲染线程的概念，基本上就能用electron开发应用了。</p>
+<p>其他的用到的时候 去查electron的api即可。</p>
+</blockquote>
+<p><code>electron文档</code>: <a href="https://electronjs.org/#get-started" target="_blank" rel="noopener">electron Api</a></p>
+<h2 id="前期工作"><a href="#前期工作" class="headerlink" title="前期工作"></a>前期工作</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">确保电脑安装了 <span class="keyword">node</span> <span class="title">环境。 使用node</span> -v</span><br><span class="line">下载<span class="keyword">node</span><span class="title">时 npm</span>(<span class="keyword">node</span> <span class="title">package</span> manager)也会一并安装了。</span><br><span class="line">npm常用命令：</span><br><span class="line">搜索 npm search electron</span><br><span class="line">下载 npm install --save-dev -g electron, 这里-g为全局安装。</span><br><span class="line">    简写 install为 i, --save-dev为 -D， --save为 -S</span><br><span class="line">查看信息 npm <span class="literal">inf</span>o electron 也可以只看一些信息 npm <span class="literal">inf</span>o electron description</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. mkdir helloelectron</span><br><span class="line"><span class="number">2</span>. cd helloelectron</span><br><span class="line"><span class="number">3</span>. npm init</span><br><span class="line"><span class="number">4</span>. npm i -S electron</span><br><span class="line">   npm i -D electron-package</span><br><span class="line"><span class="number">5</span>. mkdir src</span><br><span class="line"><span class="number">6</span>. cd src</span><br><span class="line"><span class="number">7</span>. touch main.js 也可直接用vim编辑</span><br><span class="line"><span class="number">8</span>. touch index.html</span><br><span class="line"></span><br><span class="line"><span class="number">9</span>.编辑package.json</span><br><span class="line">设置 <span class="string">"main"</span>: <span class="string">"src/main.js"</span></span><br><span class="line">设置一系列脚本 <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"electron ."</span>,</span><br><span class="line">    <span class="string">"package"</span>: <span class="string">"electron-packager ./ helloElectron --platform=mas --arch=x64 --version=1.8.4 --out=dist/ --overwrite --ignore=node_modules/electron-* --ignore=node_modules/.bin --ignore=.git --ignore=dist --prune"</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="number">10</span>. 编辑index.html, 随便写写。</span><br><span class="line"><span class="number">11</span>. 编辑main.js 具体code看下面</span><br><span class="line"><span class="number">12</span>. 即可可以运行了 npm run <span class="literal">start</span>。</span><br></pre></td></tr></table></figure>
+<h2 id="在主线程中初始化mainWindow和管理app的生命周期"><a href="#在主线程中初始化mainWindow和管理app的生命周期" class="headerlink" title="在主线程中初始化mainWindow和管理app的生命周期"></a>在主线程中初始化mainWindow和管理app的生命周期</h2><blockquote>
+<p>编辑main.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="built_in">window</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createWindow = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span> = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">        width: <span class="number">800</span>,</span><br><span class="line">        height: <span class="number">600</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(__dirname);</span><br><span class="line">    <span class="keyword">const</span> URL = url.format(&#123;</span><br><span class="line">        pathname: path.join(__dirname, <span class="string">'index.html'</span>),</span><br><span class="line">        protocol: <span class="string">'file'</span>,</span><br><span class="line">        slashes: <span class="literal">true</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span>.loadURL(URL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开调试</span></span><br><span class="line">    <span class="built_in">window</span>.webContents.openDevTools();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span>.on(<span class="string">'closed'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">window</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'./main/menu.js'</span>);</span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'./main/index.js'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow);</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(process.platform != <span class="string">'darwin'</span>) &#123;</span><br><span class="line">        app.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'activate'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">window</span> == <span class="literal">null</span>) &#123;</span><br><span class="line">        createWindow();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="electron中主进程和渲染进程之间几种通信的方式。"><a href="#electron中主进程和渲染进程之间几种通信的方式。" class="headerlink" title="electron中主进程和渲染进程之间几种通信的方式。"></a>electron中主进程和渲染进程之间几种通信的方式。</h2><h4 id="使用ipc进行通信"><a href="#使用ipc进行通信" class="headerlink" title="使用ipc进行通信"></a>使用ipc进行通信</h4><blockquote>
+<p>不要用 ipc 传递大量的数据，会有很大的性能问题，可能会让你整个应用卡住。</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">主进程中使用ipcMain</span><br><span class="line"><span class="keyword">const</span> &#123;ipcMain&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="comment">// 主进程在channel=a-id进行监听。</span></span><br><span class="line">ipcMain.on(<span class="string">'a-id'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg);</span><br><span class="line">    <span class="comment">// 发送回复 channel=a-id-back</span></span><br><span class="line">    event.sender.send(<span class="string">'a-id-back'</span>, <span class="string">'fine. thank you!'</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ipcMain.on(<span class="string">'b-id'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg)</span><br><span class="line">    event.returnValue = <span class="string">'xixixi'</span>;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">渲染进程中使用ipcRenderer</span><br><span class="line"><span class="keyword">const</span> &#123;ipcRenderer&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="comment">// 获取页面上的button，当button点击时该渲染进程向已经在监听的主进程(channel=a-id)发送消息。</span></span><br><span class="line"><span class="keyword">const</span> sendmsg = <span class="built_in">document</span>.querySelector(<span class="string">'#sendmsg'</span>);</span><br><span class="line">sendmsg.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    ipcRenderer.send(<span class="string">'a-id'</span>, <span class="string">'how are you'</span>);</span><br><span class="line">    <span class="comment">// 在channel=a-id-back进行监听。</span></span><br><span class="line">    ipcRenderer.on(<span class="string">'a-id-back'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'收到回复'</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(arg);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sendmsgsync = <span class="built_in">document</span>.querySelector(<span class="string">'#sendmsgsync'</span>);</span><br><span class="line">sendmsgsync.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> returnMsg = ipcRenderer.sendSync(<span class="string">'b-id'</span>, <span class="string">'hihihi'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(returnMsg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用remote模块"><a href="#使用remote模块" class="headerlink" title="使用remote模块"></a>使用remote模块</h4><blockquote>
+<p>直接在渲染进程中使用remote模块，可以获取主进程中模块，从而进行通信。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;BrowserWindow, Menu, MenuItem&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote;</span><br><span class="line"><span class="keyword">const</span> &#123;dialog&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote;</span><br><span class="line"><span class="comment">//获取button对象</span></span><br><span class="line"><span class="keyword">const</span> showerrordialog = <span class="built_in">document</span>.querySelector(<span class="string">'#showerrordialog'</span>);</span><br><span class="line">showerrordialog.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    dialog.showErrorBox(<span class="string">'提示'</span>, <span class="string">'资源不存在'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="主进程向渲染进程发送消息"><a href="#主进程向渲染进程发送消息" class="headerlink" title="主进程向渲染进程发送消息"></a>主进程向渲染进程发送消息</h5><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在主进程中 使用mainWindow对象</span><br><span class="line">mainWindow.webContents.send(<span class="string">'action'</span>, <span class="string">'new'</span>); <span class="regexp">//</span>点击后向主页渲染进程发送“新建文件”的命令</span><br><span class="line"><span class="regexp">//</span>监听与主进程的通信</span><br><span class="line">ipcRenderer.<span class="literal">on</span>(<span class="string">'action'</span>, <span class="function"><span class="params">(event, arg)</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(arg == <span class="string">'new'</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'new file...'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="渲染进程之间的通信。"><a href="#渲染进程之间的通信。" class="headerlink" title="渲染进程之间的通信。"></a>渲染进程之间的通信。</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 全局属性</span><br><span class="line"><span class="comment">// In the main process.</span></span><br><span class="line">global.shareObject = &#123;</span><br><span class="line">    name: <span class="string">'dottie'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// In page 1.</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron'</span>).remote.getGlobal(<span class="string">'sharedObject'</span>).name = <span class="string">'china'</span></span><br><span class="line"><span class="comment">// In page 2.</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">require</span>(<span class="string">'electron'</span>).remote.getGlobal(<span class="string">'sharedObject'</span>).name)</span><br><span class="line">此方式不好， 实质的通信功能。</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 利用主进程做消息中转， 挺好的。</span><br><span class="line"><span class="comment">// In the main process.</span></span><br><span class="line">ipcMain.on(<span class="string">'ping-event'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">  mainWindow.webContents.send(<span class="string">'pong-event'</span>, <span class="string">'something'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In renderer process1</span></span><br><span class="line">ipcRenderer.send(<span class="string">'ping-event'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// In renderer process2</span></span><br><span class="line">ipcRenderer.on(<span class="string">'pong-event'</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 利用 remote 接口直接获取渲染进程发送消息：</span><br><span class="line">remote.BrowserWindow.fromId(winId).webContents.send(<span class="string">'ping'</span>, <span class="string">'someThing'</span>);</span><br><span class="line">渲染进程获取 ID 就有多种方法了：</span><br><span class="line"></span><br><span class="line">第一种： 通过 global 设置和获取</span><br><span class="line">第二种是： 主进程创建事件，发送信息</span><br><span class="line"><span class="comment">// main process</span></span><br><span class="line">win1.webContents.send(<span class="string">'distributeIds'</span>,&#123;</span><br><span class="line">  win2Id : win2.id</span><br><span class="line">&#125;);</span><br><span class="line">win2.webContents.send(<span class="string">'distributeIds'</span>,&#123;</span><br><span class="line">  win1Id : win1.id</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>##体外话。</p>
+<blockquote>
+<p>基本上，现在都直接写ES6的代码，但是浏览器目前只支持到es5.</p>
+<p>那么需要借助于其他工具来完成 es6 转 es5</p>
+<p>那么babel就出现了</p>
+<p>babel-cli提供的babel转换成ES5或者使用babel-node直接运行ES6的代码。</p>
+<p>npm install babel-cli -g 全局安装<br>babel-cli有两个主要的命令需要用到：</p>
+<p>babel：按照“.babelrc“文件转码js文件。</p>
+<p>babel-node：提供一个支持ES6的REPL环境，支持Node的REPL环境的所有功能，可以直接运行ES6代码。</p>
+</blockquote>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">除此之外， 光有<span class="keyword">babel是不行的(会直接原封不动的输出)。 </span>还要安装插件(es6转es5的编译规则)</span><br><span class="line"></span><br><span class="line"><span class="symbol">npm</span> install <span class="keyword">babel-preset-es2015 </span>--save-dev</span><br><span class="line"></span><br><span class="line">然后在项目根目录下新建.<span class="keyword">babelrc</span></span><br><span class="line"><span class="keyword">&#123;</span></span><br><span class="line"><span class="keyword"> </span>   <span class="string">"presets"</span>: [</span><br><span class="line">        <span class="string">"es2015"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"plugins"</span>: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">最后就可以用<span class="keyword">babel进行转换了。</span></span><br><span class="line"><span class="keyword">babel </span>index-es6.js -o index-es5.js</span><br><span class="line"><span class="keyword">babel </span>src -d app //将src目录下所有js文件 转换输出到app目录下。</span><br><span class="line"></span><br><span class="line">当然了你可以写在package.json的scripts中</span><br><span class="line"><span class="string">"make"</span>:<span class="string">"babel src -d app"</span></span><br><span class="line">然后就可以直接npm run make即可。</span><br><span class="line"></span><br><span class="line">或者：</span><br><span class="line">直接输入<span class="keyword">babel-node命令，可以在命令行中直接运行ES6代码</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/electron/" rel="tag"># electron</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/04/TypeScript基础/" rel="next" title="TypeScript基础">
+                <i class="fa fa-chevron-left"></i> TypeScript基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/15/一起学Webpack/" rel="prev" title="一起学Webpack">
+                一起学Webpack <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期工作"><span class="nav-number">1.</span> <span class="nav-text">前期工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在主线程中初始化mainWindow和管理app的生命周期"><span class="nav-number">2.</span> <span class="nav-text">在主线程中初始化mainWindow和管理app的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#electron中主进程和渲染进程之间几种通信的方式。"><span class="nav-number">3.</span> <span class="nav-text">electron中主进程和渲染进程之间几种通信的方式。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ipc进行通信"><span class="nav-number">3.0.1.</span> <span class="nav-text">使用ipc进行通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用remote模块"><span class="nav-number">3.0.2.</span> <span class="nav-text">使用remote模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主进程向渲染进程发送消息"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">主进程向渲染进程发送消息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染进程之间的通信。"><span class="nav-number">3.0.3.</span> <span class="nav-text">渲染进程之间的通信。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

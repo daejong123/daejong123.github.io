@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="你不知道的JavaScript！ 发现自己越来越喜欢js的这门神奇的语言了。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js基础-作用域和闭包">
+<meta property="og:url" content="http://yoursite.com/2018/11/25/js基础-作用域和闭包/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="你不知道的JavaScript！ 发现自己越来越喜欢js的这门神奇的语言了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.583Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js基础-作用域和闭包">
+<meta name="twitter:description" content="你不知道的JavaScript！ 发现自己越来越喜欢js的这门神奇的语言了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/25/js基础-作用域和闭包/">
+
+
+
+
+
+  <title>js基础-作用域和闭包 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/js基础-作用域和闭包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js基础-作用域和闭包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T14:08:58+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>你不知道的JavaScript！</p>
+<p>发现自己越来越喜欢js的这门神奇的语言了。</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    name: <span class="string">'dottie'</span>,</span><br><span class="line">    sayName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// console.log(this);</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'name'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'daejong'</span>;</span><br><span class="line">obj.sayName(); <span class="comment">// name dottie</span></span><br><span class="line">setTimeout(obj.sayName, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> aa = <span class="string">'ddaa'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(aa); <span class="comment">// ddaa 因为js的if不是块级作用域。 es6可以使用let</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提升</span></span><br><span class="line">a = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 20 因为var a这个声明语句会提升到该词法作用域的顶部， 故这里能正常执行</span></span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// foo hello foo  虽然函数是在他下面定义的，但是这里也可以正常执行。</span></span><br><span class="line"><span class="comment">// 函数声明和变量声明会在编译阶段提升到它自己所在词法作用域的最上面。</span></span><br><span class="line"><span class="comment">// 函数声明(函数表达式不会提升)会先提升。变量后提升。 然后赋值语句会在原地等待执行阶段被执行。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'foo'</span>, <span class="string">'hello foo'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IIFE: immediately invoked function expression立即执行函数表达式</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">timer1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'ddd'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(timer1); <span class="comment">// [Function: timer1] timer1为IIFE 立即执行函数表达式. timer1只能在timer1函数中被访问。</span></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// console.log(timer1); // timer1 is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 闭包导致的问题</span></span><br><span class="line"><span class="comment">// for(var i = 0; i &lt; 10; i++) &#123;</span></span><br><span class="line"><span class="comment">//     setTimeout(function timer() &#123;</span></span><br><span class="line"><span class="comment">//         console.log(i); // 都是输出 10</span></span><br><span class="line"><span class="comment">//     &#125;, i * 1000);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// console.log(i); // 10 因为for中var i的词法作用域是在for的外面。故这里可以访问到</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意这里的timer是函数表达式。 而不是函数声明(直接是function f() &#123;&#125; 前面没有括号)。</span></span><br><span class="line"><span class="comment">// timer访问了自己所在词法作用域的变量i，并且在自己词法作用域之外执行(在setTimeout函数内部被执行)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ？ 闭包</span></span><br><span class="line"><span class="comment">// 函数访问自己所在词法作用域内的变量，并且该函数在自己所在词法作用域之外被执行。就会产生闭包.</span></span><br><span class="line"><span class="comment">// 例子。函数Bar在自己所在词法作用域内对Foo中的i形成了一个闭包. </span></span><br><span class="line"><span class="comment">// 虽然Foo函数被执行了。但是由于Bar没被执行，还引用这i。故Foo函数的内部作用域不会被释放。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">123</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = Foo();</span><br><span class="line">bar(); <span class="comment">// 123</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决闭包</span></span><br><span class="line"><span class="comment">// for(var i = 0; i &lt; 10; i++) &#123;</span></span><br><span class="line"><span class="comment">//     setTimeout(function timer() &#123;</span></span><br><span class="line"><span class="comment">//         console.log(i); // 都是输出 10</span></span><br><span class="line"><span class="comment">//     &#125;, i * 1000);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// console.log(i); // 10 因为for中var i的词法作用域是在for的外面。故这里可以访问到</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ? 分析</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 1. 首先明确i的词法作用域。是在定义该过程的外面。可以认为是全局作用域。</span></span><br><span class="line"><span class="comment"> * 2. 每次for循环的i都是同一个共享的全局 i</span></span><br><span class="line"><span class="comment"> * 3. timer函数访问自己所在词法作用域中 i, </span></span><br><span class="line"><span class="comment"> * 4. 并且timer是在自己所在词法作用域外(setTimeout函数中)被执行</span></span><br><span class="line"><span class="comment"> * 5. 故这里产生了一个闭包. 所以在timer函数没被执行之前。由于timer函数内部引用外部的 i， 故外部的i不会被释放。</span></span><br><span class="line"><span class="comment"> * 6. 故 每次for循环都是在操作外部全局的 i，所以最终for循环执行完后，再去执行timer函数后，自然i的值就是 10了。</span></span><br><span class="line"><span class="comment"> * 7. 本质就是这10个timer函数引用的都是同一个 i, 这也是解决问题的关键。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决办法1</span></span><br><span class="line"><span class="comment">// 用es6中let。在每次for循环中产生一个块级作用域的变量。</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">for(let i = 0; i &lt; 10; i++) &#123;</span></span><br><span class="line"><span class="comment">    // for循环每次都会产生一个let i。而且这个i只在for的&#123;&#125;体内中可以使用。</span></span><br><span class="line"><span class="comment">    // 注意这里不能将 i 赋值给 j. 因为for循环&#123;&#125;不是块级作用域</span></span><br><span class="line"><span class="comment">    // 这里的 var j 会自动提升为外部全局的作用域. 那么 j 在循环结束就是 j = 9。</span></span><br><span class="line"><span class="comment">    // 这里的错误语句： var j = i; </span></span><br><span class="line"><span class="comment">    setTimeout(function timer() &#123;</span></span><br><span class="line"><span class="comment">        console.log(i); // 虽然也有闭包的存在。但是这10个timer函数引用的是10个不同的i。 故不会导致错误。</span></span><br><span class="line"><span class="comment">    &#125;, i * 1000);</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">// console.log(i); //  i is not defined</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决办法2</span></span><br><span class="line"><span class="comment">// 通过IIFE。产生一个块级作用域</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">for(var i = 0; i &lt; 10; i++) &#123;</span></span><br><span class="line"><span class="comment">    (function inner() &#123;</span></span><br><span class="line"><span class="comment">        // 每一次for循环执行。都是执行inner这个IIFE函数. 每次执行都会产生一个新的 var j. </span></span><br><span class="line"><span class="comment">        // 由于函数是有一个块级作用域, 故可以保证每次for执行时timer中的j都是不同的引用。</span></span><br><span class="line"><span class="comment">        var j = i;</span></span><br><span class="line"><span class="comment">        setTimeout(function timer() &#123;</span></span><br><span class="line"><span class="comment">            console.log(j);</span></span><br><span class="line"><span class="comment">        &#125;, j * 1000);</span></span><br><span class="line"><span class="comment">    &#125;)();</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 改进解决办法2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 每一次for循环执行。都是执行inner这个IIFE函数. 每次执行都会产生一个新的 var j. </span></span><br><span class="line">        <span class="comment">// 由于函数是有一个块级作用域, 故可以保证每次for执行时timer中的j都是不同的引用。</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(j);</span><br><span class="line">        &#125;, j * <span class="number">1000</span>);</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//总结---神奇的闭包</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 明确下： 闭包是一个好东西。闭包无处不在。至于闭包产生的问题。要理解为什么会产生该问题。</span></span><br><span class="line"><span class="comment"> * 1. 什么是闭包： 当函数可以记住并且访问所在词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。</span></span><br><span class="line"><span class="comment"> * 2. 为什么会产生闭包： 闭包是基于词法作用域书写代码时所产生的自然结果。</span></span><br><span class="line"><span class="comment"> * 3. 闭包会产生的经典问题。见上面。如何解决。本质是搞清楚词法作用域。</span></span><br><span class="line"><span class="comment"> * 4. 闭包无处不在： 如 setTimeout，setInterval中 以及jquery中事件的绑定， ajax请求的回调， </span></span><br><span class="line"><span class="comment"> *    只要使用了回调函数就是在使用闭包</span></span><br><span class="line"><span class="comment"> *      如：</span></span><br><span class="line"><span class="comment"> *      sayHello('dottie', function callback(err, data) &#123;</span></span><br><span class="line"><span class="comment"> *        console.log(data);</span></span><br><span class="line"><span class="comment"> *      &#125;)</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/16/vue注意事项/" rel="next" title="vue注意事项">
+                <i class="fa fa-chevron-left"></i> vue注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/27/前后端一点小事/" rel="prev" title="前后端一点小事">
+                前后端一点小事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

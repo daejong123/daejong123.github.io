@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="最近在做一个前后端一个人写的工作。 前端react 后端express 遇到点问题，解决了。来总结下">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端一点小事">
+<meta property="og:url" content="http://yoursite.com/2018/11/27/前后端一点小事/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="最近在做一个前后端一个人写的工作。 前端react 后端express 遇到点问题，解决了。来总结下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端一点小事">
+<meta name="twitter:description" content="最近在做一个前后端一个人写的工作。 前端react 后端express 遇到点问题，解决了。来总结下">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/27/前后端一点小事/">
+
+
+
+
+
+  <title>前后端一点小事 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/27/前后端一点小事/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端一点小事</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-27T20:47:40+08:00">
+                2018-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>最近在做一个前后端一个人写的工作。</p>
+<p>前端react 后端express</p>
+<p>遇到点问题，解决了。来总结下</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="记一次前后端跨域事件"><a href="#记一次前后端跨域事件" class="headerlink" title="记一次前后端跨域事件"></a>记一次前后端跨域事件</h2><ol>
+<li>前端是react。后端是express。</li>
+<li>由于前后端部署在不同的端口号上， 前端是localhost:3001, 后端是localhost:3000. 由于浏览器的同源策略，自然因跨域而无法访问。</li>
+<li>所以后端要做如下设置<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许跨域, 调试</span></span><br><span class="line">app.<span class="literal">all</span>(<span class="string">"*"</span>, function (req, res, next) &#123;</span><br><span class="line">  <span class="comment">// 指定允许请求的源</span></span><br><span class="line">  res.<span class="keyword">header</span>(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'http://localhost:3001'</span>);</span><br><span class="line">  <span class="comment">// 允许request请求时附带的header字段。</span></span><br><span class="line">  res.<span class="keyword">header</span>(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"Content-Type, Content-Length, Authorization, Accept, X-Requested-With"</span>);</span><br><span class="line">  <span class="comment">// 允许前端请求的方法</span></span><br><span class="line">  res.<span class="keyword">header</span>(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</span><br><span class="line">  <span class="comment">// 继续执行请求</span></span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后前端就可以正常的访问数据了。</p>
+<h2 id="记一次前后端cookie事件"><a href="#记一次前后端cookie事件" class="headerlink" title="记一次前后端cookie事件"></a>记一次前后端cookie事件</h2><p>明确一个概念：</p>
+<ol>
+<li>先cookie是和域名绑定在一起的，你在前端设置的cookie你可以在chrome的application的cookies中可以查看。但是在这里看不到后端的cookie的。</li>
+<li>还有前端的如果存在并且可以传递cookie的话，那么前端传cookie到后端的这个过程是浏览器默认执行的。不需要我们自己去添加cookie到request的header中。</li>
+</ol>
+<p>开始<br><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">首先说下默认情况下，即前后端正常请求不配置额外配置。</span><br><span class="line">如后端设置Access-Control-Allow-Credentials字段或者前端设置Credentials=<span class="literal">true</span>。</span><br><span class="line">那么前后端是无法传递cookie的。因为默认情况下，Cookie不包括在CORS请求之中。</span><br><span class="line">后端设置 res.header(<span class="string">"Access-Control-Allow-Credentials"</span>, <span class="string">"true"</span>); </span><br><span class="line">这样后端才可以把cookie作为响应<span class="built_in">response</span>中的headers中的<span class="keyword">Set</span>-Cookie的值，一起<span class="built_in">response</span>给前端。</span><br><span class="line"></span><br><span class="line">你可以通过network网络请求中可以在响应头中看到<span class="keyword">set</span>-cookie的值（就是后端<span class="keyword">set</span>-cookie的值）</span><br><span class="line">但是你以为这样前端就可以获取到<span class="keyword">Set</span>-Cookie的值了吗？</span><br><span class="line">不，</span><br><span class="line"></span><br><span class="line">你可能觉得既然在响应头中都有<span class="keyword">Set</span>-Cookie字段和他的值了。我们直接<span class="built_in">response</span>.headers.cookieKey不就可以获取到cookie的值了吗？</span><br><span class="line">不可以。</span><br><span class="line"></span><br><span class="line">你会发现<span class="built_in">response</span>.headers就没有这个<span class="keyword">Set</span>-Cookie这个key值。</span><br><span class="line">哈哈哈，很迷。</span><br><span class="line"></span><br><span class="line">那既然这样不行。我们直接到我们前端应用的域名下找找cookie吧。 document.cookie中找找看，有没有后端返回的cookie。</span><br><span class="line">答案：没有</span><br><span class="line"></span><br><span class="line">为什么没有？</span><br><span class="line">因为我们在前端请求的时候，没有设置Credentials的值为<span class="literal">true</span>，同理在axios中是设置withCredentials: <span class="literal">true</span>。</span><br><span class="line">这个值是表示前端可以接收后端的cookie。</span><br><span class="line">同时在我前端请求后端的时候，会自动把前端域名下的所有cookie都作为http的<span class="built_in">request</span>的header的cookie字段传递给后端。</span><br><span class="line">这样在后端直接用req.headers.cookie获取到前端域名下的所有cookie值了。</span><br><span class="line"></span><br><span class="line">这样你就可以把一些登录的token校验放在cookie中了。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">还有一种登录校验<span class="built_in">token</span>的办法是：</span><br><span class="line">自定义登录校验所放的位置。不放在cookie中。直接在<span class="built_in">header</span>头中定义两个字段 mfe-<span class="built_in">token</span>, user-id</span><br><span class="line">但是<span class="built_in">header</span>头中定义字段，要在后端做设置。否则后端收不到。</span><br><span class="line">后端设置如下：</span><br></pre></td></tr></table></figure>
+<p>// 允许前端请求时附带的header的字段。<br>res.header(“Access-Control-Allow-Headers”, “Content-Type, Content-Length, Authorization, Accept, X-Requested-With, mfe-token, user-id”);<br>// 向前端暴露其可以访问的响应头的字段，即前端可以访问后端响应头中的字段。<br>res.header(‘Access-Control-Expose-Headers’, ‘mfe-token, user-id’);</p>
+<p>然后前端登录请求后端。后端判断登录成功后。<br>在response头中添加这两个字段<br>res.setHeader(“mfe-token”, token);<br>res.setHeader(‘user-id’, id);</p>
+<p>前端收到响应后。可以直接resposne.headers[‘mfe-token]和response.headers[‘user-id’]获取到他们的值。<br>然后可以把值存储到前端的cookie中或者storage中。</p>
+<p>然后前端可以添加http请求拦截。每次请求时拦截该请求。从前端域名的cookie中取出mfe-token, user-id的值。<br>插入到该次请求的headers中。用于后端接口校验，即是否能够访问该接口。</p>
+<p>然后在前端也可以添加对后端的响应拦截，判断响应码(如：没有权限或者没登录就访问该接口),就在响应拦截中进行提示或者跳转到login界面。</p>
+<p>当然了。前端也可以在路由时。如果某个路由需要登录才能访问，则可以从前端域名的cookie中取出mfe-token, user-id的值。<br>进行判断是否已经登录，如未登录，则跳转到login界面。<br><code>`</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/25/js基础-作用域和闭包/" rel="next" title="js基础-作用域和闭包">
+                <i class="fa fa-chevron-left"></i> js基础-作用域和闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/10/babel简单使用/" rel="prev" title="babel简单使用">
+                babel简单使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#记一次前后端跨域事件"><span class="nav-number">1.</span> <span class="nav-text">记一次前后端跨域事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记一次前后端cookie事件"><span class="nav-number">2.</span> <span class="nav-text">记一次前后端cookie事件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

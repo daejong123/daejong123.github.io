@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="有Python基础的同学， 可以尝试着进阶使用Python了 比如使用Python进行爬虫、数据可视化分析(Numpy, Pandas等)，还有可以快速开发后台应用等等等 这里我就示例：使用Django快速开发后台应用">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Django">
+<meta property="og:url" content="http://yoursite.com/2018/02/21/一起学Django/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="有Python基础的同学， 可以尝试着进阶使用Python了 比如使用Python进行爬虫、数据可视化分析(Numpy, Pandas等)，还有可以快速开发后台应用等等等 这里我就示例：使用Django快速开发后台应用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Django">
+<meta name="twitter:description" content="有Python基础的同学， 可以尝试着进阶使用Python了 比如使用Python进行爬虫、数据可视化分析(Numpy, Pandas等)，还有可以快速开发后台应用等等等 这里我就示例：使用Django快速开发后台应用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/21/一起学Django/">
+
+
+
+
+
+  <title>一起学Django | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/21/一起学Django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Django</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T00:58:51+08:00">
+                2018-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>有Python基础的同学， 可以尝试着进阶使用Python了</p>
+<p>比如使用Python进行爬虫、数据可视化分析(Numpy, Pandas等)，还有可以快速开发后台应用等等等</p>
+<p>这里我就示例：使用Django快速开发后台应用</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>操作系统：Mac OSX 10.13.3</p>
+<p>开发工具：VSCode （当然了， 你也可以使用Atom或者其他的都行）</p>
+<p>开发语言：Python3.6+</p>
+</blockquote>
+<p>Let’s start!</p>
+<h2 id="django学习"><a href="#django学习" class="headerlink" title="django学习"></a>django学习</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> pip3 install django</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> pip3 install pymysql （这里可以暂时不做， django默认使用自带的sqlite数据库）</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 初始化项目</span><br><span class="line">    Django-admin startproject hellodjango</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> cd hellojango</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span> 创建一个模块</span><br><span class="line">    Python3 manager.py startapp firstapp</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> 添加firstapp到settings的app中， 因为settings.py里面有很多系统的apps。 为这些apps创建数据库。</span><br><span class="line">    Python3 manager.py migrate</span><br><span class="line"></span><br><span class="line"><span class="number">7.</span> 这时候就可以进行本地启动下。</span><br><span class="line">    先添加firstapp到settings.py中apps中。</span><br><span class="line">    Python3 manager.py runserver</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> 在models.py中定义model</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">People</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">        name = models.CharField(null=<span class="literal">True</span>, blank=<span class="literal">True</span>, max_length=<span class="number">200</span>)</span><br><span class="line">        job = models.CharField(null=<span class="literal">True</span>, blank=<span class="literal">True</span>, max_length=<span class="number">200</span>)</span><br><span class="line">        </span><br><span class="line"><span class="number">9.</span> 合并数据库，将改动作用于数据库文件。 </span><br><span class="line">    python3 manage.py makemigrations</span><br><span class="line"></span><br><span class="line"><span class="number">10.</span> 创建数据库</span><br><span class="line">    python3 manage.py migrate 创建数据库</span><br><span class="line"></span><br><span class="line"><span class="number">11.</span> 创建一个超级管理员</span><br><span class="line">    python3 manage.py createsuperuser</span><br><span class="line">    查看django自带的后台</span><br><span class="line">    localhost:<span class="number">8000</span>/admin</span><br><span class="line"></span><br><span class="line"><span class="number">12.</span> 在admin.py文件中，将models注册到站点的后台上，才会在后台管理界面可以查看</span><br><span class="line">    <span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line">    <span class="keyword">from</span> firstapp.models <span class="keyword">import</span> People</span><br><span class="line">    <span class="comment"># Register your models here.</span></span><br><span class="line">    <span class="comment"># 会显示在后台管理界面中</span></span><br><span class="line">    admin.site.register(People)</span><br><span class="line">    在admin后台中真正添加数据表</span><br><span class="line"></span><br><span class="line"><span class="number">13.</span> 模板目录的配置</span><br><span class="line">    在settings.py中</span><br><span class="line">     <span class="comment"># 自定义 指定模板的位置</span></span><br><span class="line">        <span class="string">'DIRS'</span>: [os.path.join(BASE_DIR, <span class="string">'templates'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)],</span><br><span class="line"></span><br><span class="line"><span class="number">14.</span> static静态文件的在模板html中使用</span><br><span class="line">    &#123;% load staticfiles %&#125;</span><br><span class="line">    &lt;link href=<span class="string">"&#123;% staticfiles 'css/semantic.css' %&#125;"</span>&gt;</span><br><span class="line">    原因是因为在settings.py中默认就是这样配置static静态文件</span><br><span class="line">    STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line"></span><br><span class="line"><span class="number">15.</span> 在urls.py中配置views.py中的资源访问路径</span><br><span class="line">    <span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line">    <span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line">    <span class="keyword">from</span> firstapp.views <span class="keyword">import</span> first_try, index</span><br><span class="line"></span><br><span class="line">    urlpatterns = [</span><br><span class="line">        path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">        path(<span class="string">'first_try/'</span>, first_try),</span><br><span class="line">        path(<span class="string">'index'</span>, index, name=<span class="string">'index'</span>)</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<h2 id="关于项目默认使用的数据库sqlite"><a href="#关于项目默认使用的数据库sqlite" class="headerlink" title="关于项目默认使用的数据库sqlite"></a>关于项目默认使用的数据库sqlite</h2><blockquote>
+<p>Mac系统中自带sqlite工具</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">django默认使用sqlite数据库， 当然了你可以在settings.py里面配置其他的数据库。</span><br><span class="line">在iterm中可以使用sqlite3 db.sqlite查看数据库</span><br><span class="line">简单使用sqlite3数据库命令</span><br><span class="line">.database</span><br><span class="line">.table</span><br><span class="line">select * <span class="keyword">from</span> firstapp_student</span><br><span class="line">.schema firstapp_student</span><br></pre></td></tr></table></figure>
+<h2 id="设置项目后台管理语言"><a href="#设置项目后台管理语言" class="headerlink" title="设置项目后台管理语言"></a>设置项目后台管理语言</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">修改后台管理语言为 中文</span><br><span class="line">在setting.py文件中修改如下：</span><br><span class="line">LANGUAGE_CODE = <span class="string">'zh-hans'</span></span><br></pre></td></tr></table></figure>
+<h2 id="自定义后台管理界面"><a href="#自定义后台管理界面" class="headerlink" title="自定义后台管理界面"></a>自定义后台管理界面</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查找django的安装目录</span><br><span class="line">python3</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.path</span><br><span class="line">找到ite-packages目录。 找到django中admin的后台管理界面cp到自己项目目录中。 修改标题后即可自定义自己的后台管理名称等。</span><br><span class="line">我的是：/usr/local/lib/python3<span class="number">.6</span>/site-packages/django/contrib/admin/templates/</span><br><span class="line"><span class="number">1.</span> 在根目录下创建templates/admin文件夹</span><br><span class="line"><span class="number">2.</span> 然后将base_site.html模板移动到该admin目录下。</span><br><span class="line"><span class="number">3.</span> 修改base_site.html文件的title为自己后台名称， 重启下应用即可。</span><br></pre></td></tr></table></figure>
+<h2 id="django后台shell（进行一些增删改查）"><a href="#django后台shell（进行一些增删改查）" class="headerlink" title="django后台shell（进行一些增删改查）"></a>django后台shell（进行一些增删改查）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py shell</span><br><span class="line"><span class="keyword">import</span> django</span><br><span class="line">django.setup()</span><br><span class="line"><span class="keyword">from</span> firstapp.models <span class="keyword">import</span> Student</span><br><span class="line">Student.obejcts.all()</span><br></pre></td></tr></table></figure>
+<h2 id="django中的models介绍"><a href="#django中的models介绍" class="headerlink" title="django中的models介绍"></a>django中的models介绍</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">        name = models.CharField(null=<span class="literal">True</span>, blank=<span class="literal">True</span>, max_length=<span class="number">200</span>)</span><br><span class="line">        job = models.CharField(null=<span class="literal">True</span>, blank=<span class="literal">True</span>, max_length=<span class="number">200</span>)</span><br><span class="line">        </span><br><span class="line">        字段类型有：</span><br><span class="line">        CharField，TextField，IntegerField， DateTimeField，BooleanField等等。</span><br><span class="line">        </span><br><span class="line">        字段参数修饰：</span><br><span class="line">        null=<span class="literal">True</span>, 默认为Flase， <span class="literal">True</span>若当前字段为空值， 则保存成null</span><br><span class="line">        blank=<span class="literal">True</span>, 默认为<span class="literal">False</span>， 设置该字段可以为空值。</span><br><span class="line">        max_length=<span class="number">200</span>， 最大长度</span><br><span class="line">        default=<span class="string">'默认值'</span>， 指定默认值</span><br><span class="line">        choices =元组或者列表</span><br><span class="line">        help_text 只对生成文档时有效</span><br><span class="line">        primary_key 如果设置成<span class="literal">True</span>， 则该字段就成为表中主键，除非你自己设置一个主键， 否则在django中默认为每张表设置一个IntegerField的主键。</span><br><span class="line"></span><br><span class="line">    数据库中关系：</span><br><span class="line">    models.ForeignKey(Student, verbose_name=<span class="string">'the related student'</span>)</span><br><span class="line">    models.ManyToManyField(Site, verbose_name=<span class="string">'list of sites)</span></span><br><span class="line"><span class="string">    models.OneToOneField(Place, verbose_name='</span>related place<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Student.objects.all() 查询所有</span></span><br><span class="line"><span class="string">    Student.objects.filter(name='</span>dottie<span class="string">') 查询指定条件的result</span></span><br><span class="line"><span class="string">    Student.objects.exclude(name='</span>dottie<span class="string">') 查询指定条件外的result</span></span><br><span class="line"><span class="string">    常用的就是这三个。 </span></span><br><span class="line"><span class="string">    可以链式调用</span></span><br><span class="line"><span class="string">    Student.objects.filter(name='</span>dottie<span class="string">').exclude(age='</span><span class="number">18</span><span class="string">').filter(nickname='</span>hh<span class="string">')等等</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    通过get获取单一对象</span></span><br><span class="line"><span class="string">    Student.get(pk=2) 或者id=2 也可以</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    也可以通过pk__in([1, 4, 5])</span></span><br><span class="line"><span class="string">    查询主键为1， 4， 7的result集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    或者查询主键大于10</span></span><br><span class="line"><span class="string">    pk__gt(10)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    限制查询集（使用切片） Student.objects.all()[:5]</span></span><br><span class="line"><span class="string">    排序并找到最大： Student.object.order_by('</span>age<span class="string">')[0]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    exact</span></span><br><span class="line"><span class="string">    Student.get(name_exact='</span>dottie<span class="string">')</span></span><br><span class="line"><span class="string">    等价于： select * from Student where name = '</span>dottie<span class="string">'</span></span><br><span class="line"><span class="string">    忽略大小写 则用 name_iexact</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    contains</span></span><br><span class="line"><span class="string">    Student.get(name_contains='</span>dot<span class="string">')</span></span><br><span class="line"><span class="string">    等价于： select * from Student where name like '</span>%dot%<span class="string">'</span></span><br><span class="line"><span class="string">    大小写不敏感用icontains</span></span><br><span class="line"><span class="string">    类似的还有startswith  endswith</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    删除一个对象</span></span><br><span class="line"><span class="string">    stu = Student.objects.get(pk = 1)</span></span><br><span class="line"><span class="string">    stu.delete() 即可</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    保存一个对象</span></span><br><span class="line"><span class="string">    stu = Student(name='</span>dottie<span class="string">', age = 24)</span></span><br><span class="line"><span class="string">    stu.save()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    修改一个对象</span></span><br><span class="line"><span class="string">    stu = Student.objects.get(pk = 1)</span></span><br><span class="line"><span class="string">    stu.update(name='</span>daejong<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   例子： </span></span><br><span class="line"><span class="string">from django.db import models</span></span><br><span class="line"><span class="string"># Create your models here.</span></span><br><span class="line"><span class="string">class Teacher(models.Model):</span></span><br><span class="line"><span class="string">    name = models.CharField('</span>名字<span class="string">', max_length=128)</span></span><br><span class="line"><span class="string">    age = models.IntegerField('</span>年龄<span class="string">', default=22)</span></span><br><span class="line"><span class="string">    salary = models.FloatField('</span>薪水<span class="string">', null=True, blank=True)</span></span><br><span class="line"><span class="string">    position = models.CharField('</span>职位<span class="string">', max_length=128)</span></span><br><span class="line"><span class="string">    birth = models.DateTimeField('</span>出生日期<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    def __str__(self):</span></span><br><span class="line"><span class="string">        return self.name</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">class Student(models.Model):</span></span><br><span class="line"><span class="string">    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)</span></span><br><span class="line"><span class="string">    name = models.CharField('</span>名字<span class="string">', max_length=128)</span></span><br><span class="line"><span class="string">    age = models.IntegerField('</span>年龄<span class="string">', default=18)</span></span><br><span class="line"><span class="string">    birth = models.DateTimeField('</span>出生日期<span class="string">')</span></span><br><span class="line"><span class="string">    hobby = models.TextField('</span>兴趣<span class="string">')</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    def __str__(self):</span></span><br><span class="line"><span class="string">        return self.name</span></span><br></pre></td></tr></table></figure>
+<h2 id="urls使用"><a href="#urls使用" class="headerlink" title="urls使用"></a>urls使用</h2><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 可以在全局的urls.py中定义自己的url（不提倡这中做法， 应用一旦多起来，urls也多了，就不好管理url了）</span><br><span class="line">    from django.contrib <span class="keyword">import</span> admin</span><br><span class="line">    from django.urls <span class="keyword">import</span> <span class="built_in">path</span></span><br><span class="line">    from firstapp.views <span class="keyword">import</span> first_try, index</span><br><span class="line"></span><br><span class="line">    urlpatterns = [</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'first_try/'</span>, first_try),</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'index'</span>, index, <span class="keyword">name</span>=<span class="string">'index'</span>)</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 不过一般的做法都是在每个应用(或者说是模块)下， 自己定义一个urls.py</span><br><span class="line">    from django.contrib <span class="keyword">import</span> admin</span><br><span class="line">    from django.urls <span class="keyword">import</span> <span class="built_in">path</span></span><br><span class="line">    from app1.views <span class="keyword">import</span> index</span><br><span class="line"></span><br><span class="line">    urlpatterns = [</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'index/'</span>, index, <span class="keyword">name</span> = <span class="string">'index'</span>),</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    然后在全局的urls.py中调用每个应用的urls， 这样即便应用很多，也不会乱。</span><br><span class="line">    from django.contrib <span class="keyword">import</span> admin</span><br><span class="line">    from django.urls <span class="keyword">import</span> <span class="built_in">path</span>, include</span><br><span class="line">    from app1 <span class="keyword">import</span> urls</span><br><span class="line"></span><br><span class="line">    urlpatterns = [</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">        <span class="built_in">path</span>(<span class="string">'app1/'</span>, include(urls))</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/13/mysql复习/" rel="next" title="mysql复习">
+                <i class="fa fa-chevron-left"></i> mysql复习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/23/SpringBoot详解/" rel="prev" title="SpringBoot详解">
+                SpringBoot详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#django学习"><span class="nav-number">1.</span> <span class="nav-text">django学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于项目默认使用的数据库sqlite"><span class="nav-number">2.</span> <span class="nav-text">关于项目默认使用的数据库sqlite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置项目后台管理语言"><span class="nav-number">3.</span> <span class="nav-text">设置项目后台管理语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义后台管理界面"><span class="nav-number">4.</span> <span class="nav-text">自定义后台管理界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#django后台shell（进行一些增删改查）"><span class="nav-number">5.</span> <span class="nav-text">django后台shell（进行一些增删改查）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#django中的models介绍"><span class="nav-number">6.</span> <span class="nav-text">django中的models介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#urls使用"><span class="nav-number">7.</span> <span class="nav-text">urls使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

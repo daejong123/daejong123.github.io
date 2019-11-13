@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="nodejs,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="nodejs自己随便写写">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs瞎比比">
+<meta property="og:url" content="http://yoursite.com/2018/05/10/nodejs瞎比比/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="nodejs自己随便写写">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs瞎比比">
+<meta name="twitter:description" content="nodejs自己随便写写">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/10/nodejs瞎比比/">
+
+
+
+
+
+  <title>nodejs瞎比比 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/nodejs瞎比比/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodejs瞎比比</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T23:55:26+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>nodejs自己随便写写</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="node全局对象"><a href="#node全局对象" class="headerlink" title="node全局对象"></a>node全局对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">process是一个global全局对象,对于 Node.js 应用程序始终是可用的，故无需使用 <span class="built_in">require</span>()</span><br><span class="line">process提供了许多方法。</span><br><span class="line">process.cwd() 返回当前工作目录。</span><br><span class="line">process.platform 返回当前电脑的平台如：<span class="string">'darwin'</span></span><br><span class="line"></span><br><span class="line">当然os模块也可以获取当前平台，os.platform(),os模块还可以获取其他信息</span><br><span class="line"></span><br><span class="line">node中还有许多全局对象如：</span><br><span class="line">__dirname: 全局变量，存储的是文件所在的文件目录</span><br><span class="line">__filename：全局变量，存储的是文件名</span><br><span class="line"></span><br><span class="line">全局对象还有setTimeout(cb, ms)：全局函数在指定的毫秒(ms)数后执行指定函数(cb)</span><br><span class="line">注意该函数可以使将同步操作改为异步操作。</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"1"</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"2"</span>)&#125;, <span class="number">2</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"3"</span>)&#125;, <span class="number">0</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"4"</span>)&#125;, <span class="number">1</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"5"</span>)&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"6"</span>)</span><br><span class="line">clearTimeout(t)全局函数用于停止一个之前通过 setTimeout() 创建的定时器。 参数 t 是通过 setTimeout() 函数创建的定时器。</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printHello</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log( <span class="string">"Hello, World!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 两秒后执行以上函数</span></span><br><span class="line"><span class="keyword">var</span> t = setTimeout(printHello, <span class="number">2000</span>);</span><br><span class="line"><span class="comment">// 清除定时器</span></span><br><span class="line">clearTimeout(t);</span><br><span class="line"></span><br><span class="line">setInterval(cb, ms)返回一个代表定时器的句柄值。可以使用 clearInterval(t) 函数来清除定时器。</span><br><span class="line">setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。	</span><br><span class="line"></span><br><span class="line">全局对象还有<span class="built_in">console</span> 方法</span><br><span class="line"><span class="built_in">console</span>.log([data][, ...])：如果有多个参数，则 以类似于C 语言 printf() 命令的格式输出。</span><br><span class="line"><span class="built_in">console</span>.info</span><br><span class="line"><span class="built_in">console</span>.error输出错误消息的。控制台在出现错误时会显示是红色的叉子。</span><br><span class="line"><span class="built_in">console</span>.warn输出警告消息。控制台出现有黄色的惊叹号。</span><br></pre></td></tr></table></figure>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">path.join()路径拼接</span><br><span class="line">path.join(<span class="string">'/a'</span>, <span class="string">'/b'</span>) <span class="comment">// 'a/b'</span></span><br><span class="line">path.join(<span class="string">'./a'</span>, <span class="string">'./b'</span>) <span class="comment">// 'a/b'</span></span><br><span class="line">path.resolve() 绝对路径 先pwd，在根据参数cd， cd后，最后pwd</span><br><span class="line">path.resolve(<span class="string">'./a'</span>, <span class="string">'./b'</span>) <span class="comment">// '/Users/Document/Projects/webpack-demo/a/b'</span></span><br></pre></td></tr></table></figure>
+<h2 id="events"><a href="#events" class="headerlink" title="events"></a>events</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">events模块只提供了一个对象： events.EventEmitter。EventEmitter 的核心就是事件触发与事件监听器功能的封装。</span><br><span class="line">可以通过<span class="built_in">require</span>(<span class="string">"events"</span>);来访问该模块。</span><br><span class="line"><span class="comment">// 引入 events 模块</span></span><br><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="comment">// 创建 eventEmitter 对象</span></span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter(); </span><br><span class="line">emitter.on(<span class="string">'someEvent'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'listener2'</span>, arg1, arg2); </span><br><span class="line">&#125;); </span><br><span class="line">emitter.emit(<span class="string">'someEvent'</span>, <span class="string">'arg1 参数'</span>, <span class="string">'arg2 参数'</span>); </span><br><span class="line">当然了addListener(event, listener)等价于on(event, listener)：为指定事件注册一个监听器</span><br><span class="line">once(event, listener)：为指定事件注册一个单次监听器，即 监听器最多只会触发一次，触发后立刻解除该监听器。</span><br><span class="line">removeListener(event, listener)：移除指定事件的某个监听器，监听器必须是该事件已经注册过的监听器。</span><br><span class="line">removeAllListeners([event])：移除所有事件的所有监听器， 如果指定事件，则移除指定事件的所有监听器。</span><br><span class="line">listeners(event)：返回指定事件的监听器数组。</span><br><span class="line">emit(event, [arg1], [arg2], [...])执行指定监听器，如果事件有注册监听返回 <span class="literal">true</span>，否则返回 <span class="literal">false</span>。</span><br></pre></td></tr></table></figure>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Node.js 异步编程的直接体现就是回调。</span><br><span class="line">用在异步当中，防止层层嵌套回调。</span><br><span class="line"><span class="keyword">const</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">PromiseDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> hello(name: string): Q.Promise&lt;string&gt; &#123;  <span class="comment">//泛型string表示resolve的参数类型为字符串</span></span><br><span class="line">        <span class="keyword">let</span> deferred = Q.defer();</span><br><span class="line">        <span class="keyword">if</span> (name === <span class="string">"dottie"</span>) &#123;</span><br><span class="line">            deferred.resolve(name + <span class="string">' nihao'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            deferred.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"输入姓名不对"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deferred.promise;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">PromiseDemo.hello(<span class="string">'dottie'</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name)</span><br><span class="line">    &#125;, error =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">PromiseDemo.hello(<span class="string">'dottie1'</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name)</span><br><span class="line">    &#125;, error =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error.message)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">PromiseDemo.hello(<span class="string">'dottie'</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value)</span><br><span class="line">    &#125;, error =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="exec和spawn"><a href="#exec和spawn" class="headerlink" title="exec和spawn"></a>exec和spawn</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如要运行 du -sh /disk1 命令， </span></span><br><span class="line"><span class="comment">// 使用spawn函数需要写成spawn(‘du‘, [‘-sh ‘, ‘/disk1’])，</span></span><br><span class="line"><span class="comment">// 而使用exec函数时，可以直接写成exec(‘du -sh /disk1’)</span></span><br><span class="line"><span class="comment">// spawn是不支持callback函数,执行后就开始不断将数据从子进程返回给主进程,实时监控CPU,内存,IO,网络等数据。</span></span><br><span class="line"><span class="keyword">let</span> ls = spawn(<span class="string">'ls'</span>, [<span class="string">'-a'</span>]);</span><br><span class="line">ls.stdout.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"stdout"</span> + data)</span><br><span class="line">&#125;)</span><br><span class="line">ls.stderr.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"stderr"</span> + data)</span><br><span class="line">&#125;)</span><br><span class="line">ls.on(<span class="string">'close'</span>, code =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"进程退出"</span> + code);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// exec在子进程输出结果将放入buffer中，在结果返回完全之后，再将输出一次性地以回调函数参数的形式返回,有回调函数。</span></span><br><span class="line">exec(<span class="string">'ls -a'</span>, (err, stdout, stderr) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"err"</span> + err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"stdout::::"</span> + stdout);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"stderr::::"</span> + stderr);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.on(<span class="string">'exit'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'This will not run'</span>);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'node main process say Bye.'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="path-1"><a href="#path-1" class="headerlink" title="path"></a>path</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path1 = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> fs1 = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(path1.sep);</span><br><span class="line"></span><br><span class="line"><span class="comment">// resolve 转换为绝对路径 先cd后pwd</span></span><br><span class="line"><span class="keyword">let</span> hellopath = path1.resolve(<span class="string">'../demo'</span>, <span class="string">'../assets'</span>, <span class="string">'hello.txt'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"resolve"</span> + hellopath); <span class="comment">//resolve/Users/daejong/Desktop/yarn-port/src/assets/hello.txt</span></span><br><span class="line"><span class="built_in">console</span>.log(fs1.existsSync(hellopath)); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(path1.extname(hellopath)); <span class="comment">//.txt</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> path2 = path1.join(<span class="string">'../assets'</span>, <span class="string">'//hello.txt'</span>);</span><br><span class="line"><span class="comment">// 用于连接路径。该方法的主要用途在于，会正确使用当前系统的路径分隔符，Unix系统是"/"，Windows系统是"\"。</span></span><br><span class="line"><span class="built_in">console</span>.log(path2); <span class="comment">//../assets/hello.txt</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+<p>typescript的ts文件中如果报找不到require关键字的话，需要安装下yarn add @types/node 即要require是在node模块中。</p>
+<h2 id="js和nodejs分析"><a href="#js和nodejs分析" class="headerlink" title="js和nodejs分析"></a>js和nodejs分析</h2><blockquote>
+<p> js(偏向于前端浏览器)： ecmascript(语法基础)+bom(操作浏览器)+dom(操作html页面元素)</p>
+</blockquote>
+<blockquote>
+<p>nodejs(偏向后端)：V8+ecmascript+os+fs+path+net+db+event等等</p>
+</blockquote>
+<p>早期javascript是只能运行在浏览器中。而nodejs使得js脱离浏览器运行在后台。然后要想js运行在后台，首先要保证js要先被解释后正确的运行，而nodejs中就包含了google chrome的v8引擎(解释和运行js代码，非常高效)，除此之外，nodejs中还提供了许多有用的模块，如os，fs,  path，event, http模块等等。因此nodejs是基于chrome v8引擎的js的运行环境。同时他也是一个库。</p>
+<p>而nodejs中一些模块的书写，当然要遵循一定的规范。如commonjs， amd，cmd规范。指定模块引用require，模块定义exports，模块标识module。而nodejs就是实现了这种规范。commonjs中一个单独的文件就是一个模块，每个模块都是一个单独的作用域，每个模块内部，都有一个<code>module</code>对象，代表当前模块。它有许多属性，常见就是exports标识模块的对外输出。还有模块的id，filename等等。</p>
+<p>nodejs的特点：异步io，事件驱动，单线程。(用到callback和eventemitter)</p>
+<p>还有nodejs默认使用npm包管理器进行管理依赖包。推荐是yarn吧(更快)。</p>
+<h2 id="typescript"><a href="#typescript" class="headerlink" title="typescript"></a>typescript</h2><p>js的超集，主要特点在js的动态语言的特性上添加type(类型)，即提供给开发者在编译时就进行类型检查，避免了很多动态类型导致的莫名其妙的错误。当然了ts也提供了其他的新特性，如解构函数，数组值遍历for of，装饰器decorator，同时也提供了相对应的编译器tsc对ts文件进行编译成js代码。 默认使用es6中模块import和export的操作。</p>
+<blockquote>
+<p>gulp自动化构建工具，利用好各种库(压缩文件，sass转css等等)，定义好task及其顺序。既可以自动化构建。</p>
+</blockquote>
+<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><ol>
+<li>fs.unlink(‘file’,callback), fs.mkdir(‘dir’,callback), fs.rmdir(‘dir’, callback)异步操作等等。</li>
+<li>管道和流： 例子: ls | grep app 将ls的输出作为grep的输入。中间的|表示管道流stream的意思。nodejs所有的流都是eventemitter的实例。stdin, stdout, stderr，以及http的req，resp都是流。nodejs有一个流对象Stream。</li>
+<li>读文件时readFile是将读到的数据一下子都放到的内存中，如何文件很大是就不适合用这种方式处理，这个时候就要用到stream。stream是把数据一边放到buffer中，一边处理。这样性能就会很高。 </li>
+</ol>
+<h2 id="expressjs"><a href="#expressjs" class="headerlink" title="expressjs"></a>expressjs</h2><p>熟悉下jade吧，express中默认的模板引擎。改名为了pug。支持模板继承extends和include语法简洁了不少。不用ejs模板引擎是是由于写ejs让我有一种之前写jsp的恶心&lt;% %&gt;,花括号满天飞。jade简直简洁的飞起。</p>
+<p>layout.jade文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br><span class="line">html</span><br><span class="line">  head</span><br><span class="line">    title= title</span><br><span class="line">    link(rel=&apos;stylesheet&apos;, href=&apos;/stylesheets/style.css&apos;)</span><br><span class="line">    block link</span><br><span class="line">  body.ui.container(style=&quot;padding: 20px&quot;)</span><br><span class="line">    block content</span><br><span class="line">  footer</span><br><span class="line">    hr</span><br><span class="line">    p @copyright dottie</span><br></pre></td></tr></table></figure>
+<p>view-&gt; user.jade文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">extends layout</span><br><span class="line">block link</span><br><span class="line">    link(rel=<span class="string">"stylesheet"</span>, href=<span class="string">"https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css"</span>)</span><br><span class="line">block content</span><br><span class="line">    div.ui.dividing.header how <span class="keyword">do</span> you <span class="keyword">do</span></span><br><span class="line">    p xi xi, learn express &amp; jade -&gt; pug</span><br><span class="line">    br</span><br><span class="line">    div.ui.primary.button 登录 </span><br><span class="line">    div.ui.button#query 查询</span><br><span class="line">    div.ui.left.search.icon.focus.input</span><br><span class="line">        input(type=<span class="string">'text'</span>, placeholder=<span class="string">"search"</span>)</span><br><span class="line">        i.search.icon</span><br><span class="line">    table.ui.selectable.celled.striped.table.center.aligned.tablesorter#myTable</span><br><span class="line">        thead </span><br><span class="line">            tr</span><br><span class="line">                th name</span><br><span class="line">                th type</span><br><span class="line">                th award</span><br><span class="line">        tbody   </span><br><span class="line">            - each row <span class="keyword">in</span> data</span><br><span class="line">                tr</span><br><span class="line">                    td #&#123;row.name&#125;</span><br><span class="line">                    td= row.type</span><br><span class="line">                    td= row.award</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将js代码嵌入到jade中， 前面加上-表示代码中的特殊字符不会被转义， 使用=赋值代码中会转义， 使用!=赋值代码中不会被转义</span></span><br><span class="line">    - name = <span class="string">'Bob'</span></span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">'Bob'</span></span><br><span class="line">        h1 hello Bob</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        h1 My name is not Bob</span><br><span class="line"></span><br><span class="line">    h1 my name is #&#123;name&#125;</span><br><span class="line">    h2= <span class="string">'hello &lt;h3&gt;world&lt;/h3&gt;'</span></span><br><span class="line">    h3!= <span class="string">'hello &lt;h3&gt;world&lt;/h3&gt;'</span></span><br><span class="line"></span><br><span class="line">    script(src=<span class="string">'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'</span>)</span><br><span class="line">  script(src=<span class="string">'https://cdn.bootcss.com/jquery.tablesorter/2.30.3/js/jquery.tablesorter.min.js'</span>)</span><br><span class="line">    script(src=<span class="string">'/javascripts/user.js'</span>)</span><br><span class="line">    script.</span><br><span class="line">        <span class="comment">//自定义多行脚本等价于&lt;script&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> createError = <span class="built_in">require</span>(<span class="string">'http-errors'</span>);</span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>); <span class="comment">//cookie操作中间件</span></span><br><span class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>); <span class="comment">//HTTP请求日志中间件</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> usersRouter = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 记录http请求的日志到文件中。</span></span><br><span class="line"><span class="keyword">var</span> accessLog = fs.createWriteStream(<span class="string">'./access.log'</span>, &#123;<span class="attr">flags</span> : <span class="string">'a'</span>&#125;);  </span><br><span class="line">app.use(logger(<span class="string">'dev'</span>)); <span class="comment">////打印到控制台</span></span><br><span class="line">app.use(logger(<span class="string">'combined'</span>, &#123;<span class="attr">stream</span> : accessLog&#125;));      <span class="comment">//打印到log日志  </span></span><br><span class="line">app.use(express.json());</span><br><span class="line">app.use(express.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</span><br><span class="line">app.use(cookieParser());</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/'</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">'/users'</span>, usersRouter);</span><br><span class="line"></span><br><span class="line"><span class="comment">// catch 404 and forward to error handler</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  next(createError(<span class="number">404</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// error handler</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// set locals, only providing error in development</span></span><br><span class="line">  res.locals.message = err.message;</span><br><span class="line">  res.locals.error = req.app.get(<span class="string">'env'</span>) === <span class="string">'development'</span> ? err : &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// render the error page</span></span><br><span class="line">  res.status(err.status || <span class="number">500</span>);</span><br><span class="line">  res.render(<span class="string">'error'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = app;</span><br></pre></td></tr></table></figure>
+<p>db.js 用的mysql</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">"mysql"</span>)</span><br><span class="line"><span class="keyword">const</span> connection = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>,</span><br><span class="line">    user: <span class="string">'root'</span>,</span><br><span class="line">    password: <span class="string">'123456'</span>,</span><br><span class="line">    database: <span class="string">'douban'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports.connection = connection;</span><br></pre></td></tr></table></figure>
+<p>userService.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Q = <span class="built_in">require</span>(<span class="string">'q'</span>)</span><br><span class="line"><span class="keyword">const</span> db = <span class="built_in">require</span>(<span class="string">'../db'</span>)</span><br><span class="line"><span class="comment">// 使用q， 来优化回调函数书写的恶心</span></span><br><span class="line">exports.queryAll = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> deferred = Q.defer();</span><br><span class="line">    db.connection.query(<span class="string">'select * from works'</span>, (err, rows, fields) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">            deferred.reject(err);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// console.log(rows);</span></span><br><span class="line">        <span class="comment">// console.log(fields);</span></span><br><span class="line">        deferred.resolve(rows);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> deferred.promise;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>route-&gt; users.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">const</span> userService = <span class="built_in">require</span>(<span class="string">'../service/userService'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> promise = userService.queryAll();</span><br><span class="line">  promise.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(data)</span><br><span class="line">     res.render(<span class="string">'user'</span>, &#123;<span class="attr">data</span>: data&#125;);</span><br><span class="line">  &#125;, (err) =&gt; &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// res.send('respond with a resource');</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>总体来说，express的web开发还是很简单的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/yarn包管理器的使用/" rel="next" title="yarn包管理器的使用">
+                <i class="fa fa-chevron-left"></i> yarn包管理器的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/27/Vue学习/" rel="prev" title="Vue学习">
+                Vue学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#node全局对象"><span class="nav-number">1.</span> <span class="nav-text">node全局对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">2.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#events"><span class="nav-number">3.</span> <span class="nav-text">events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#promise"><span class="nav-number">4.</span> <span class="nav-text">promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec和spawn"><span class="nav-number">5.</span> <span class="nav-text">exec和spawn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path-1"><span class="nav-number">6.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js和nodejs分析"><span class="nav-number">7.</span> <span class="nav-text">js和nodejs分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typescript"><span class="nav-number">8.</span> <span class="nav-text">typescript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs"><span class="nav-number">9.</span> <span class="nav-text">nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expressjs"><span class="nav-number">10.</span> <span class="nav-text">expressjs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

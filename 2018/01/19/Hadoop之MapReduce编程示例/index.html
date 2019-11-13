@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="根据前面介绍:   hdfs负责海量数据存储   而MapReduce负责海量数据计算   所以, 这篇博客 会用代码详细介绍MapReduce中典型的wordcount(单词计数)例子的过程.">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop之MapReduce编程示例">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/Hadoop之MapReduce编程示例/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="根据前面介绍:   hdfs负责海量数据存储   而MapReduce负责海量数据计算   所以, 这篇博客 会用代码详细介绍MapReduce中典型的wordcount(单词计数)例子的过程.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop之MapReduce编程示例">
+<meta name="twitter:description" content="根据前面介绍:   hdfs负责海量数据存储   而MapReduce负责海量数据计算   所以, 这篇博客 会用代码详细介绍MapReduce中典型的wordcount(单词计数)例子的过程.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/19/Hadoop之MapReduce编程示例/">
+
+
+
+
+
+  <title>Hadoop之MapReduce编程示例 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/Hadoop之MapReduce编程示例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop之MapReduce编程示例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T13:59:22+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>根据前面介绍:</p>
+</blockquote>
+<blockquote>
+<p>hdfs负责海量数据存储</p>
+</blockquote>
+<blockquote>
+<p>而MapReduce负责海量数据计算</p>
+</blockquote>
+<blockquote>
+<p>所以, 这篇博客 会用代码详细介绍MapReduce中典型的wordcount(单词计数)例子的过程.</p>
+</blockquote>
+<a id="more"></a>
+<p><strong> 新建一个java project, 这里我用maven构建. </strong></p>
+<h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">打开项目的pom.xml文件, 导入我们项目所需的依赖.</span><br><span class="line">因为mapreduce中需要依赖的jar有很多, hdfs, common, mapreduce等等.</span><br><span class="line">所以为了避免jar包之间依赖麻烦, 所以这里我推荐直接导入一个依赖即可:</span><br><span class="line">直接在maven的中央仓库中搜索 hadoop-client 即可.</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 该依赖同时依赖好多其他的jar, hdfs, common, yarn, mapreduce等等--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">* 比如有一段话: (需要进行分词操作)</span></span><br><span class="line"><span class="comment"> * i love beijing</span></span><br><span class="line"><span class="comment"> * i love china</span></span><br><span class="line"><span class="comment"> * beijing is the captial of china</span></span><br><span class="line"></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *///////////////////////////////////////</span></span><br><span class="line"><span class="comment"> * 过程一:</span></span><br><span class="line"><span class="comment"> * k1   v1</span></span><br><span class="line"><span class="comment"> * 1    i love beijing</span></span><br><span class="line"><span class="comment"> * 4    i love china</span></span><br><span class="line"><span class="comment"> * 7    beijing is the captial of china</span></span><br><span class="line"><span class="comment"> *///////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"> * 过程二:</span></span><br><span class="line"><span class="comment"> * 经过分词操作后,这里也就是mapper的主要操作.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * k2       v2</span></span><br><span class="line"><span class="comment"> * i        1</span></span><br><span class="line"><span class="comment"> * love     1</span></span><br><span class="line"><span class="comment"> * beijing  1</span></span><br><span class="line"><span class="comment"> * i        1</span></span><br><span class="line"><span class="comment"> * love     1</span></span><br><span class="line"><span class="comment"> * china    1</span></span><br><span class="line"><span class="comment"> * beijing  1</span></span><br><span class="line"><span class="comment"> * is       1</span></span><br><span class="line"><span class="comment"> * the      1</span></span><br><span class="line"><span class="comment"> * captial  1</span></span><br><span class="line"><span class="comment"> * of       1</span></span><br><span class="line"><span class="comment"> * china    1</span></span><br><span class="line"><span class="comment"> *///////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"> * 过程三:</span></span><br><span class="line"><span class="comment"> * 该结果作为reduce的输入:</span></span><br><span class="line"><span class="comment"> * k3       v3</span></span><br><span class="line"><span class="comment"> * i        (1, 1)</span></span><br><span class="line"><span class="comment"> * beijing  (1, 1, 1)</span></span><br><span class="line"><span class="comment"> * love     (1, 1)</span></span><br><span class="line"><span class="comment"> * china    (1, 1)</span></span><br><span class="line"><span class="comment"> * the      (1)</span></span><br><span class="line"><span class="comment"> * .......</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"> *///////////////////////////////////////</span></span><br><span class="line"><span class="comment"> * 过程四:</span></span><br><span class="line"><span class="comment"> * 然后在reduce阶段要做的就是 将v3集合中的值求和即可, 然后输出k4, v4</span></span><br><span class="line"><span class="comment"> * k4       v4</span></span><br><span class="line"><span class="comment"> * i        2</span></span><br><span class="line"><span class="comment"> * beijing  3</span></span><br><span class="line"><span class="comment"> * love     2</span></span><br><span class="line"><span class="comment"> * china    2</span></span><br><span class="line"><span class="comment"> * the      2</span></span><br><span class="line"><span class="comment"> * ........</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *///////////////////////////////////////</span></span><br></pre></td></tr></table></figure>
+<h2 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h2><h4 id="首先编写Map的处理过程代码"><a href="#首先编写Map的处理过程代码" class="headerlink" title="首先编写Map的处理过程代码:"></a>首先编写Map的处理过程代码:</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">新建<span class="type">Mapper</span> 继承 org.apache.hadoop.mapreduce.<span class="type">Mapper</span></span><br><span class="line">注意: <span class="type">KEYIN</span>, <span class="type">VALUEIN</span>, <span class="type">KEYOUT</span>, <span class="type">VALUEOUT</span>的类型.</span><br><span class="line">要使用hadoop中自带的数据类型, 不能使用<span class="type">Java</span>的数据类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.<span class="type">LongWritable</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.<span class="type">Text</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.<span class="type">Mapper</span>;</span><br><span class="line"><span class="keyword">import</span> java.io.<span class="type">IOException</span>;</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">WordCountMapper</span> <span class="keyword">extends</span> <span class="title">Mapper&lt;LongWritable</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">LongWritable&gt;</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void map(<span class="type">LongWritable</span> key, <span class="type">Text</span> value, <span class="type">Context</span> context) <span class="keyword">throws</span> <span class="type">IOException</span>, <span class="type">InterruptedException</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * key就是输入的key</span></span><br><span class="line"><span class="comment">         * value就是数据</span></span><br><span class="line"><span class="comment">         * context就是map的上下文, 上文就是hdfs, 下文就是reduce</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">// 得到一行数据</span></span><br><span class="line">        <span class="type">String</span> data = value.toString();</span><br><span class="line">        <span class="comment">// 进行分词</span></span><br><span class="line">        <span class="type">String</span>[] strings = data.split(<span class="string">" "</span>);</span><br><span class="line">        <span class="comment">// 输出每个单词</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">String</span> word : strings) &#123;</span><br><span class="line">            context.write(<span class="keyword">new</span> <span class="type">Text</span>(word), <span class="keyword">new</span> <span class="type">LongWritable</span>(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="再编写-Reduce-过程代码"><a href="#再编写-Reduce-过程代码" class="headerlink" title="再编写 Reduce 过程代码:"></a>再编写 Reduce 过程代码:</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.<span class="type">LongWritable</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.<span class="type">Text</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.<span class="type">Reducer</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.<span class="type">IOException</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * KEYIN, VALUEIN, KEYOUT, VALUEOUT</span></span><br><span class="line"><span class="comment"> * 这里的KEYIN 和 VALUEIN 就是Mapper的输出. 类型可以直接复制过来.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">WordCountReducer</span> <span class="keyword">extends</span> <span class="title">Reducer&lt;Text</span>, <span class="title">LongWritable</span>, <span class="title">Text</span>, <span class="title">LongWritable&gt;</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  规约函数</span></span><br><span class="line"><span class="comment">     * @param key mapper的输出key</span></span><br><span class="line"><span class="comment">     * @param values mapper的输出value</span></span><br><span class="line"><span class="comment">     * @param context context的上文是mapper的输出, 下文是hdfs</span></span><br><span class="line"><span class="comment">     * @throws IOException</span></span><br><span class="line"><span class="comment">     * @throws InterruptedException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void reduce(<span class="type">Text</span> key, <span class="type">Iterable</span>&lt;<span class="type">LongWritable</span>&gt; values, <span class="type">Context</span> context) <span class="keyword">throws</span> <span class="type">IOException</span>, <span class="type">InterruptedException</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * values是一个集合, 就是在mapper阶段的输出结果的一个集合.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        long total = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">LongWritable</span> writable : values) &#123;</span><br><span class="line">            total = total + writable.get();</span><br><span class="line">        &#125;</span><br><span class="line">        context.write(key, <span class="keyword">new</span> <span class="type">LongWritable</span>(total));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="最后编写主函数即入口函数"><a href="#最后编写主函数即入口函数" class="headerlink" title="最后编写主函数即入口函数:"></a>最后编写主函数即入口函数:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mapreduce;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCountMain</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 创建一个job = map + reduce;</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">        <span class="comment">// 创建一个job</span></span><br><span class="line">        Job job = Job.getInstance(conf);</span><br><span class="line">        <span class="comment">// 指定任务的入口</span></span><br><span class="line">        job.setJarByClass(WordCountMain<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 指定job的 mapper是谁.</span></span><br><span class="line">        job.setMapperClass(WordCountMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setMapOutputKeyClass(Text<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setMapOutputValueClass(LongWritable<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 指定job的reducer是谁.</span></span><br><span class="line">        job.setReducerClass(WordCountReducer<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setOutputKeyClass(Text<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setOutputValueClass(LongWritable<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 指定任务的输入和输出. 参数有运行时传入</span></span><br><span class="line">        FileInputFormat.setInputPaths(job, <span class="keyword">new</span> Path(args[<span class="number">0</span>]));</span><br><span class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(args[<span class="number">1</span>]));</span><br><span class="line">        <span class="comment">// 提交任务. ture表示运行过程中 把日志打印出来.</span></span><br><span class="line">        job.waitForCompletion(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="最后一步-打成jar包"><a href="#最后一步-打成jar包" class="headerlink" title="最后一步, 打成jar包."></a>最后一步, 打成jar包.</h4><blockquote>
+<p>由于是用maven构建项目的, 打包方式有很多, 这里我介绍一种最简单的方式, 在pom.xml中使用maven插件的方式打包, 只要配置下, 指定下jar的运行的主类即可. 我的主类是 mapreduce.WordCountMain(在idea中直接右键copy PATH) 即可.</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-jar-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">useUniqueVersions</span>&gt;</span>false<span class="tag">&lt;/<span class="name">useUniqueVersions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">classpathPrefix</span>&gt;</span>lib/<span class="tag">&lt;/<span class="name">classpathPrefix</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>mapreduce.WordCountMain<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>然后我是直接用的idea自带的maven projects生命周期中的packaeg点击直接打包, 当然 你也可以用命令行的方式 mvn package, 也可以先clean下,再package.</p>
+</blockquote>
+<h4 id="打包的结果-wc-jar"><a href="#打包的结果-wc-jar" class="headerlink" title="打包的结果 wc.jar"></a>打包的结果 wc.jar</h4><blockquote>
+<p>最后就是测试自己写的程序是否有问题.</p>
+</blockquote>
+<blockquote>
+<p>直接在命令行中 hadoop jar wc.jar /input/data.txt /output (注意路径是hdfs上的文件路径, 不是本机上的)</p>
+</blockquote>
+<blockquote>
+<p>这里的/input/data.txt /output 两个参数将作为wc.jar的主程序args[0], args[1] 传入.</p>
+</blockquote>
+<blockquote>
+<p>就可以得到结果了, 使用 hdfs dfs -cat /output/part-r-00000 既可以查看各单词统计的结果</p>
+</blockquote>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><blockquote>
+<p>到此, 一个mapreduce的wordcount程序就已经完成了, 相当于我们一开始写代码的时都要写一个Hello World程序.</p>
+</blockquote>
+<blockquote>
+<p>注意, 重要的是一定要理解mapreduce这个过程. map + reduce = job, map的输出就是reduce的输入. 理解了这个过程, 再写其他程序之前也这样分析下, 写程序就不是什么难事了. 加油哦. 共勉!</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/17/一起学Hadoop-2/" rel="next" title="一起学Hadoop-2">
+                <i class="fa fa-chevron-left"></i> 一起学Hadoop-2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/19/一起学HBase/" rel="prev" title="一起学HBase">
+                一起学HBase <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目构建"><span class="nav-number">1.</span> <span class="nav-text">项目构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序分析"><span class="nav-number">2.</span> <span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写代码"><span class="nav-number">3.</span> <span class="nav-text">编写代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先编写Map的处理过程代码"><span class="nav-number">3.0.1.</span> <span class="nav-text">首先编写Map的处理过程代码:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再编写-Reduce-过程代码"><span class="nav-number">3.0.2.</span> <span class="nav-text">再编写 Reduce 过程代码:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后编写主函数即入口函数"><span class="nav-number">3.0.3.</span> <span class="nav-text">最后编写主函数即入口函数:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后一步-打成jar包"><span class="nav-number">3.0.4.</span> <span class="nav-text">最后一步, 打成jar包.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打包的结果-wc-jar"><span class="nav-number">3.0.5.</span> <span class="nav-text">打包的结果 wc.jar</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#结束"><span class="nav-number">4.</span> <span class="nav-text">结束</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

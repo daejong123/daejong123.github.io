@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Spark的核心RDD(弹性分布式数据集)">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Spark-2">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/一起学Spark-2/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="Spark的核心RDD(弹性分布式数据集)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Spark-2">
+<meta name="twitter:description" content="Spark的核心RDD(弹性分布式数据集)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/23/一起学Spark-2/">
+
+
+
+
+
+  <title>一起学Spark-2 | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/一起学Spark-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Spark-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T16:54:44+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Spark的核心RDD(弹性分布式数据集)</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="先热下身😜-Hadoop"><a href="#先热下身😜-Hadoop" class="headerlink" title="先热下身😜 Hadoop"></a>先热下身😜 Hadoop</h2><blockquote>
+<p>Hadoop的核心技术都是为了把传统的单点式结构转变为分布式结构:</p>
+<ol>
+<li>把单机文件存储转变为分布式存储——HDFS；</li>
+<li>把单机计算转变为分布式计算——MapReduce；</li>
+<li>把单机数据库转换为分布式数据库——Hbase和Hive</li>
+</ol>
+</blockquote>
+<h2 id="Scala基础"><a href="#Scala基础" class="headerlink" title="Scala基础"></a>Scala基础</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">Scala和Java很像. 用过java8中lambda表达式的(我之前博客中有写), 上手会更快的.</span><br><span class="line"></span><br><span class="line">Scala中数据类型第一个字母都是大写: <span class="built_in">Int</span>, <span class="built_in">Long</span>, <span class="built_in">Char</span>, Array, String, <span class="built_in">Float</span>, <span class="built_in">Double</span>, <span class="built_in">Boolean</span>, Null, Any.....</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 创建变量用<span class="keyword">var</span>(分配以后还可指向类型相同的值)或者<span class="keyword">val</span>(变量值一经分配就不可修改).</span><br><span class="line">如:</span><br><span class="line">scala&gt; <span class="keyword">var</span> num = <span class="number">1</span></span><br><span class="line">num: <span class="built_in">Int</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">scala&gt; num = <span class="string">"hello"</span></span><br><span class="line">&lt;console&gt;:<span class="number">25</span>: error: type mismatch;</span><br><span class="line"> found   : String(<span class="string">"hello"</span>)</span><br><span class="line"> required: <span class="built_in">Int</span></span><br><span class="line">       num = <span class="string">"hello"</span></span><br><span class="line">             ^</span><br><span class="line"></span><br><span class="line">再如:</span><br><span class="line">scala&gt; <span class="keyword">val</span> num = <span class="number">1</span></span><br><span class="line">num: <span class="built_in">Int</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">scala&gt; num = <span class="number">2</span></span><br><span class="line">&lt;console&gt;:<span class="number">25</span>: error: reassignment to <span class="keyword">val</span></span><br><span class="line">       num = <span class="number">2</span></span><br><span class="line">           ^</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 匿名函数和类型推断</span><br><span class="line">  lines.filter(line =&gt; line.contains(<span class="string">"world"</span>))</span><br><span class="line">  即: filter函数里面的参数就是一个匿名函数; 箭头前面是params, 后面是body. 默认会推断出参数line是string类型. 然后调用string类的contains方法.</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 函数:</span><br><span class="line">def add(x:<span class="built_in">Int</span>, y:<span class="built_in">Int</span>): <span class="built_in">Int</span> = &#123;</span><br><span class="line"><span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">带默认参数的函数:</span><br><span class="line">def add(x:<span class="built_in">Int</span> = <span class="number">0</span>, y:<span class="built_in">Int</span> = <span class="number">0</span>):<span class="built_in">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">可以指定最后一个参数为可变参数， 从而接受数目不定的同类型实参:</span><br><span class="line">scala&gt; def echo (args: String *) &#123; <span class="keyword">for</span> (arg &lt;- args) println(arg) &#125;</span><br><span class="line"></span><br><span class="line">scala&gt; echo(<span class="string">"Hello"</span>, <span class="string">"World"</span>)</span><br><span class="line">Hello</span><br><span class="line">World</span><br><span class="line"></span><br><span class="line">命名参数允许以任意顺序传入参数:</span><br><span class="line">scala&gt; def speed(dist:<span class="built_in">Double</span>, time:<span class="built_in">Double</span>):<span class="built_in">Double</span> = &#123;<span class="keyword">return</span> dist / time&#125;</span><br><span class="line"></span><br><span class="line">scala&gt; speed(time=<span class="number">2.0</span>, dist=<span class="number">12.2</span>)</span><br><span class="line">res28: <span class="built_in">Double</span> = <span class="number">6.1</span></span><br><span class="line"></span><br><span class="line">**注意**</span><br><span class="line">还有注意: scala的参数传递采用传值的方式， 参数被当做常量<span class="keyword">val</span>而非变量<span class="keyword">var</span>传入.</span><br><span class="line">scala&gt; def swap(x:<span class="built_in">Int</span>, y:<span class="built_in">Int</span>) &#123;<span class="keyword">var</span> t = x; x = y; y = t;&#125;</span><br><span class="line">&lt;console&gt;: error: reassignment to <span class="keyword">val</span></span><br><span class="line">       def swap(x:<span class="built_in">Int</span>, y:<span class="built_in">Int</span>) &#123;<span class="keyword">var</span> t = x; x = y; y = t;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Spark核心概念–RDD-弹性分布式数据集"><a href="#Spark核心概念–RDD-弹性分布式数据集" class="headerlink" title="Spark核心概念–RDD(弹性分布式数据集)"></a>Spark核心概念–RDD(弹性分布式数据集)</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">一个RDDS是一个不可改变的分布式集合对象.</span></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">Spark中,</span> <span class="string">所有的计算都是通过RDDs的创建,</span> <span class="string">转换,</span> <span class="string">操作完成的.</span></span><br><span class="line"><span class="number">3</span><span class="string">.</span> <span class="string">一个RDD内部是由许多分片(partitions)组成.</span></span><br><span class="line"><span class="number">4</span><span class="string">.</span> <span class="string">每个分片包括一部分数据,</span> <span class="string">partitions可在集群不同节点上计算.</span></span><br><span class="line"><span class="number">5</span><span class="string">.</span> <span class="string">分片是Spark并行处理单元,</span> <span class="string">Spark中顺序,</span> <span class="string">并行的处理分片.</span></span><br><span class="line"><span class="number">6</span><span class="string">.</span> <span class="string">SparkContext对象代表和一个集群的连接.</span> <span class="string">在spark</span> <span class="string">shell中该对象已经帮我们创建好了,</span> <span class="string">之间引用即可(sc就是SparkContext对象)</span></span><br><span class="line"><span class="string">如:</span></span><br><span class="line"><span class="string">scala&gt;</span> <span class="string">var</span> <span class="string">lines</span> <span class="string">=</span> <span class="string">sc.textFile("../../hello.txt")</span></span><br><span class="line"><span class="attr">lines:</span> <span class="string">org.apache.spark.rdd.RDD[String]</span> <span class="string">=</span> <span class="string">../../hello.txt</span> <span class="string">MapPartitionsRDD[1]</span> <span class="string">at</span> <span class="string">textFile</span> <span class="string">at</span> <span class="string">&lt;console&gt;:24</span></span><br><span class="line"></span><br><span class="line"><span class="string">这里的lines就是一个RDD.</span></span><br><span class="line"></span><br><span class="line"><span class="string">RDD的创建方法:</span></span><br><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">把一个存在的集合作为参数传给SparkContext(sc)的parallelize()方法,</span> <span class="string">一般在测试的时候使用:</span></span><br><span class="line">  <span class="string">val</span> <span class="string">rdd</span> <span class="string">=</span> <span class="string">sc.parallelize(Array(1,</span> <span class="number">3</span><span class="string">,</span> <span class="number">2</span><span class="string">,</span> <span class="number">4</span><span class="string">),</span> <span class="number">4</span><span class="string">)</span></span><br><span class="line">  <span class="string">参数一:</span> <span class="string">待并行处理的集合,</span></span><br><span class="line">  <span class="string">参数二:</span> <span class="string">分区的个数</span></span><br><span class="line"></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">val</span> <span class="string">rdd</span> <span class="string">=</span> <span class="string">sc.parallelize(Array(1,</span> <span class="number">3</span><span class="string">,</span> <span class="number">2</span><span class="string">,</span> <span class="number">4</span><span class="string">),</span> <span class="number">2</span><span class="string">)</span></span><br><span class="line">  <span class="attr">rdd:</span> <span class="string">org.apache.spark.rdd.RDD[Int]</span> <span class="string">=</span> <span class="string">ParallelCollectionRDD[1]</span> <span class="string">at</span> <span class="string">parallelize</span> <span class="string">at</span> <span class="string">&lt;console&gt;:24</span></span><br><span class="line"></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.count</span></span><br><span class="line">  <span class="attr">res1:</span> <span class="string">Long</span> <span class="string">=</span> <span class="number">4</span></span><br><span class="line"></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.foreach(println)</span></span><br><span class="line">  <span class="number">2134</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">加载外部数据集</span></span><br><span class="line">   <span class="string">val</span> <span class="string">rdd</span> <span class="string">=</span> <span class="string">sc.textFile("hello.txt")</span></span><br></pre></td></tr></table></figure>
+<h2 id="RDD的基本操作"><a href="#RDD的基本操作" class="headerlink" title="RDD的基本操作"></a>RDD的基本操作</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">Transformations(转换):</span><br><span class="line">从之前的RDD构建一个新的RDD, 想map(), filter()</span><br><span class="line">感觉这里很像java8中lambda表达式中的filter(从一个<span class="keyword">list</span>中, 根据条件过滤出<span class="keyword">list</span>中需要的item, 然后在组成一个<span class="keyword">list</span>).</span><br><span class="line"></span><br><span class="line">1. map()接受函数, 把函数应用到RDD的每个元素, 返回一个新的RDD</span><br><span class="line">示例数据:</span><br><span class="line"><span class="keyword">scala</span>&gt; val rdd = <span class="keyword">sc</span>.parallelize(Array(<span class="string">"hello"</span>, <span class="string">"dottie"</span>, <span class="string">"hello"</span>, <span class="string">"daejong"</span>, <span class="string">"hello"</span>, <span class="string">"China"</span>))</span><br><span class="line">rdd: org.apache.spark.rdd.RDD[String] = ParallelCollectionRDD[6] at parallelize at &lt;console&gt;:24</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; rdd.<span class="keyword">foreach</span>(println)</span><br><span class="line">hello</span><br><span class="line">daejong</span><br><span class="line">hello</span><br><span class="line">China</span><br><span class="line">dottie</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line">产生一个新的rdd1</span><br><span class="line"><span class="keyword">scala</span>&gt; val rdd1 = rdd.map(word=&gt;(word,1))</span><br><span class="line">rdd1: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[7] at map at &lt;console&gt;:26</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; rdd1.<span class="keyword">foreach</span>(println)</span><br><span class="line">(hello,1)</span><br><span class="line">(dottie,1)</span><br><span class="line">(hello,1)</span><br><span class="line">(daejong,1)</span><br><span class="line">(hello,1)</span><br><span class="line">(China,1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. filter()函数: 返回满足条件的元素</span><br><span class="line"><span class="keyword">scala</span>&gt;  val rdd2 = rdd.filter(word=&gt;word.contains(<span class="string">"hello"</span>))</span><br><span class="line">rdd2: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[8] at filter at &lt;console&gt;:26</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; rdd2.<span class="keyword">foreach</span>(println)</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3. flatMap():</span><br><span class="line">对每个输入元素, 输出多个元素</span><br><span class="line">flat是压扁的意思, 将rdd中元素压扁后返回一个新的rdd.</span><br><span class="line">示例数据:</span><br><span class="line"><span class="keyword">scala</span>&gt; val <span class="keyword">input</span> = <span class="keyword">sc</span>.textFile(<span class="string">"hello.txt"</span>)</span><br><span class="line"><span class="keyword">input</span>: org.apache.spark.rdd.RDD[String] = hello.txt MapPartitionsRDD[10] at textFile at &lt;console&gt;:24</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; <span class="keyword">input</span>.<span class="keyword">foreach</span>(println)</span><br><span class="line">i love RDD</span><br><span class="line">hello daejong</span><br><span class="line">hello dottie</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; val lines = <span class="keyword">input</span>.flatMap(<span class="keyword">line</span>=&gt;<span class="keyword">line</span>.<span class="keyword">split</span>(<span class="string">" "</span>))</span><br><span class="line">lines: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[11] at flatMap at &lt;console&gt;:26</span><br><span class="line"></span><br><span class="line">这里会对将每一行按照空格分隔成多个元素, 最后对所有结果flat(压扁)成一行多个元素.</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; lines.<span class="keyword">foreach</span>(println)</span><br><span class="line">hello</span><br><span class="line">daejong</span><br><span class="line">hello</span><br><span class="line">dottie</span><br><span class="line">i</span><br><span class="line">love</span><br><span class="line">RDD</span><br><span class="line"></span><br><span class="line">如果我们不适用println函数:</span><br><span class="line"><span class="keyword">scala</span>&gt; lines.<span class="keyword">foreach</span>(<span class="keyword">print</span>)</span><br><span class="line">helloidaejongloveRDDhellodottie</span><br><span class="line">则会将所有单词输出到一起.</span><br><span class="line"></span><br><span class="line">这里我们可以查看一下lines的输出:</span><br><span class="line"><span class="keyword">scala</span>&gt; lines</span><br><span class="line">res23: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[11] at flatMap at &lt;console&gt;:26</span><br><span class="line"></span><br><span class="line">然后我们再对lines使用map函数产生一个新的rdd.</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt;  val maprdd = lines.map(word=&gt;(word, 1))</span><br><span class="line">maprdd: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[12] at map at &lt;console&gt;:28</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; maprdd.<span class="keyword">foreach</span>(println)</span><br><span class="line">[Stage 15:&gt;                                                         (0 + 0) / 2](i,1)</span><br><span class="line">(love,1)</span><br><span class="line">(RDD,1)</span><br><span class="line">(hello,1)</span><br><span class="line">(daejong,1)</span><br><span class="line">(hello,1)</span><br><span class="line">(dottie,1)</span><br><span class="line"></span><br><span class="line">最后我们可以实现我们之前学hadoop时的mapreduce中wordcount程序</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; val maprdddd = maprdd.reduceByKey((x, y) =&gt; x + y)</span><br><span class="line">maprdddd: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[14] at reduceByKey at &lt;console&gt;:30</span><br><span class="line"></span><br><span class="line"><span class="keyword">scala</span>&gt; maprdddd.<span class="keyword">foreach</span>(println)</span><br><span class="line">(love,1)</span><br><span class="line">(i,1)</span><br><span class="line">(dottie,1)</span><br><span class="line">(daejong,1)</span><br><span class="line">(hello,2)</span><br><span class="line">(RDD,1)</span><br><span class="line"></span><br><span class="line">这里的算子reduceByKey, 是根据一个map中的key进行判断, 如果key相同,则将对应的value相加. 这里的参数就是 value 值.</span><br></pre></td></tr></table></figure>
+<h2 id="RDDs中的集合运算"><a href="#RDDs中的集合运算" class="headerlink" title="RDDs中的集合运算"></a>RDDs中的集合运算</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">示例数据:</span><br><span class="line"><span class="keyword">scala&gt; </span>val rdd1 = <span class="keyword">sc.parallelize(Array("apple", </span><span class="string">"orange"</span>, <span class="string">"banana"</span>, <span class="string">"pear"</span>, <span class="string">"milk"</span>))</span><br><span class="line"><span class="symbol">rdd1:</span> <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= ParallelCollectionRDD[<span class="number">15</span>] <span class="built_in">at</span> parallelize <span class="built_in">at</span> &lt;console&gt;:<span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">scala&gt; </span>rdd1.foreach(println)</span><br><span class="line"><span class="keyword">banana</span></span><br><span class="line"><span class="keyword">pear</span></span><br><span class="line"><span class="keyword">milk</span></span><br><span class="line"><span class="keyword">orange</span></span><br><span class="line"><span class="keyword">apple</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">scala&gt; </span>val rdd2 = <span class="keyword">sc.parallelize(Array("apple", </span><span class="string">"black"</span>, <span class="string">"white"</span>, <span class="string">"banana"</span>, <span class="string">"yellow"</span>, <span class="string">"red"</span>, <span class="string">"apple"</span>, <span class="string">"white"</span>))</span><br><span class="line"><span class="symbol">rdd2:</span> <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= ParallelCollectionRDD[<span class="number">17</span>] <span class="built_in">at</span> parallelize <span class="built_in">at</span> &lt;console&gt;:<span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">scala&gt; </span>rdd2.foreach(println)</span><br><span class="line">yellow</span><br><span class="line">white</span><br><span class="line"><span class="keyword">banana</span></span><br><span class="line"><span class="keyword">apple</span></span><br><span class="line"><span class="keyword">black</span></span><br><span class="line"><span class="keyword">apple</span></span><br><span class="line"><span class="keyword">white</span></span><br><span class="line"><span class="keyword">red</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">1. </span>我们可以对rdd2元素进行去重.</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd_distinct = rdd2.<span class="keyword">distinct</span></span><br><span class="line"><span class="keyword"> </span> rdd_distinct: <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= MapPartitionsRDD[<span class="number">20</span>] <span class="built_in">at</span> <span class="keyword">distinct </span><span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd_distinct.foreach(println)</span><br><span class="line">  yellow</span><br><span class="line">  white</span><br><span class="line">  <span class="keyword">banana</span></span><br><span class="line"><span class="keyword"> </span> red</span><br><span class="line">  <span class="keyword">black</span></span><br><span class="line"><span class="keyword"> </span> apple</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 获取rdd1和rdd2的并集</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd_union = rdd1.union(rdd2)</span><br><span class="line"><span class="symbol">  rdd_union:</span> <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= UnionRDD[<span class="number">21</span>] <span class="built_in">at</span> union <span class="built_in">at</span> &lt;console&gt;:<span class="number">28</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd_union.foreach(println)</span><br><span class="line">  apple</span><br><span class="line">  <span class="keyword">banana</span></span><br><span class="line"><span class="keyword"> </span> <span class="keyword">orange</span></span><br><span class="line"><span class="keyword"> </span> pear</span><br><span class="line">  milk</span><br><span class="line">  apple</span><br><span class="line">  <span class="keyword">black</span></span><br><span class="line"><span class="keyword"> </span> white</span><br><span class="line">  <span class="keyword">banana</span></span><br><span class="line"><span class="keyword"> </span> yellow</span><br><span class="line">  red</span><br><span class="line">  apple</span><br><span class="line">  white</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 获取rdd1和rdd2的交集</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd_intersection = rdd1.intersection(rdd2)</span><br><span class="line"><span class="symbol">  rdd_intersection:</span> <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= MapPartitionsRDD[<span class="number">27</span>] <span class="built_in">at</span> intersection <span class="built_in">at</span> &lt;console&gt;:<span class="number">28</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd_intersection.foreach(println)</span><br><span class="line">  apple</span><br><span class="line">  <span class="keyword">banana</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">4. </span>获取rdd1与rdd2的差集</span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd_subtract = rdd1.<span class="keyword">subtract(rdd2)</span></span><br><span class="line"><span class="keyword"> </span> rdd_subtract: <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= MapPartitionsRDD[<span class="number">31</span>] <span class="built_in">at</span> <span class="keyword">subtract </span><span class="built_in">at</span> &lt;console&gt;:<span class="number">28</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd_subtract.foreach(println)</span><br><span class="line">  <span class="keyword">orange</span></span><br><span class="line"><span class="keyword"> </span> pear</span><br><span class="line">  milk</span><br></pre></td></tr></table></figure>
+<h2 id="RDD的Action操作"><a href="#RDD的Action操作" class="headerlink" title="RDD的Action操作."></a>RDD的Action操作.</h2><blockquote>
+<p>上面我们对RDD的操作都是一个转换的操作.</p>
+<p>Action:  这里我们要在RDD计算出一个结果</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">reduce()</span></span><br><span class="line"><span class="string">接收一个函数,</span> <span class="string">作用在RDD两个类型相同的元素上,</span> <span class="string">返回新元素.</span> <span class="string">可以实现累加,计数等操作.</span></span><br><span class="line"></span><br><span class="line"><span class="string">scala&gt;</span> <span class="string">val</span> <span class="string">rdd</span> <span class="string">=</span> <span class="string">sc.parallelize(Array(1,</span> <span class="number">2</span><span class="string">,</span> <span class="number">3</span><span class="string">,</span> <span class="number">4</span><span class="string">,</span> <span class="number">4</span><span class="string">))</span></span><br><span class="line"><span class="attr">rdd:</span> <span class="string">org.apache.spark.rdd.RDD[Int]</span> <span class="string">=</span> <span class="string">ParallelCollectionRDD[32]</span> <span class="string">at</span> <span class="string">parallelize</span> <span class="string">at</span> <span class="string">&lt;console&gt;:24</span></span><br><span class="line"></span><br><span class="line"><span class="string">scala&gt;</span> <span class="string">rdd.collect()</span></span><br><span class="line"><span class="attr">res36:</span> <span class="string">Array[Int]</span> <span class="string">=</span> <span class="string">Array(1,</span> <span class="number">2</span><span class="string">,</span> <span class="number">3</span><span class="string">,</span> <span class="number">4</span><span class="string">,</span> <span class="number">4</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line"><span class="string">scala&gt;</span> <span class="string">rdd.reduce((x,</span> <span class="string">y)</span> <span class="string">=&gt;</span> <span class="string">x</span> <span class="string">+</span> <span class="string">y)</span></span><br><span class="line"><span class="attr">res37:</span> <span class="string">Int</span> <span class="string">=</span> <span class="number">14</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">collect()</span> <span class="string">遍历整个rdd并返回,</span> <span class="string">一般用于测试</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span><span class="string">.</span> <span class="string">take(n)</span> <span class="string">随机在rdd中取n个元素,</span> <span class="string">结果无序的.</span></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.take(4)</span></span><br><span class="line">  <span class="attr">res41:</span> <span class="string">Array[Int]</span> <span class="string">=</span> <span class="string">Array(1,</span> <span class="number">2</span><span class="string">,</span> <span class="number">3</span><span class="string">,</span> <span class="number">4</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line"><span class="number">4</span><span class="string">.</span> <span class="string">top(n)</span> <span class="string">排序输出</span></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.top(1)</span></span><br><span class="line">  <span class="attr">res43:</span> <span class="string">Array[Int]</span> <span class="string">=</span> <span class="string">Array(4)</span></span><br><span class="line"></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.top(2)</span></span><br><span class="line">  <span class="attr">res44:</span> <span class="string">Array[Int]</span> <span class="string">=</span> <span class="string">Array(4,</span> <span class="number">4</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.top(3)</span></span><br><span class="line">  <span class="attr">res45:</span> <span class="string">Array[Int]</span> <span class="string">=</span> <span class="string">Array(4,</span> <span class="number">4</span><span class="string">,</span> <span class="number">3</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span><span class="string">.</span> <span class="string">foreach()</span> <span class="string">遍历输出,</span> <span class="string">注意:该函数不会有返回值.</span> <span class="string">即不会保存到本地.</span></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.foreach(e</span> <span class="string">=&gt;</span> <span class="string">println(e))</span></span><br><span class="line">  <span class="number">1</span></span><br><span class="line">  <span class="number">4</span></span><br><span class="line">  <span class="number">4</span></span><br><span class="line">  <span class="number">3</span></span><br><span class="line">  <span class="number">2</span></span><br><span class="line">  <span class="string">简写:</span></span><br><span class="line">  <span class="string">scala&gt;</span> <span class="string">rdd.foreach(println)</span></span><br><span class="line">  <span class="number">4</span></span><br><span class="line">  <span class="number">4</span></span><br><span class="line">  <span class="number">2</span></span><br><span class="line">  <span class="number">1</span></span><br><span class="line">  <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="RDDs的特性"><a href="#RDDs的特性" class="headerlink" title="RDDs的特性"></a>RDDs的特性</h2><blockquote>
+<p>Spark维护着RDDs之间的依赖关系和创建关系, 称之为血统关系图.</p>
+<p>Spark使用血统关系图来计算每个RDD的需求和恢复丢失的数据.</p>
+</blockquote>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">如: rdd经过filter产生了rdd1, rdd1经过map产生rdd2, rdd1和rdd2经过<span class="class"><span class="keyword">union</span>操作产生了<span class="title">rdd3</span>.</span></span><br><span class="line"></span><br><span class="line">任何一个rdd丢失都没关系, 都可以通过血统关系图 恢复丢失的rdd.</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 延迟操作</span><br><span class="line">  第一次使用action操作, spark对rdd的计算都会延迟.</span><br><span class="line">  如加载数据也是一个延迟计算, 因为只有数据在需要的时候才会被加载进去.</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 持久化 persist()</span><br><span class="line">   默认每次在rdds上进行action操作时, spark都会重新计算rdds.</span><br><span class="line">   要想重复利用一个rdd, 可以使用rdd.persist(), 可以传参(缓存的级别 )</span><br><span class="line">   unpersist()方法从缓存中移除rdd.</span><br></pre></td></tr></table></figure>
+<h2 id="RDDs的KeyValue对"><a href="#RDDs的KeyValue对" class="headerlink" title="RDDs的KeyValue对"></a>RDDs的KeyValue对</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 创建keyvalue</span><br><span class="line">   使用map函数, 返回keyValue</span><br><span class="line">   如: 将每行的第一个单词作为key, 每行的值作为value</span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd = <span class="keyword">sc.textFile("hello.txt")</span></span><br><span class="line"><span class="keyword"> </span> rdd: <span class="keyword">org.apache.spark.rdd.RDD[String] </span>= hello.txt MapPartitionsRDD[<span class="number">37</span>] <span class="built_in">at</span> textFile <span class="built_in">at</span> &lt;console&gt;:<span class="number">24</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd.foreach(println)</span><br><span class="line">  i love RDD</span><br><span class="line">  hello daejong</span><br><span class="line">  hello dottie</span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd1 = rdd.map(line =&gt; (line.split(<span class="string">" "</span>)(<span class="number">0</span>), line))</span><br><span class="line"><span class="symbol">  rdd1:</span> <span class="keyword">org.apache.spark.rdd.RDD[(String, </span>String)] = MapPartitionsRDD[<span class="number">38</span>] <span class="built_in">at</span> map <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd1.foreach(println)</span><br><span class="line">  (hello,hello daejong)</span><br><span class="line">  (i,i love RDD)</span><br><span class="line">  (hello,hello dottie)</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 手动构建一个keyvalue对, 测试</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd2 = <span class="keyword">sc.parallelize(Array((1, </span><span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">3</span>, <span class="number">6</span>)))</span><br><span class="line"><span class="symbol">  rdd2:</span> <span class="keyword">org.apache.spark.rdd.RDD[(Int, </span>Int)] = ParallelCollectionRDD[<span class="number">40</span>] <span class="built_in">at</span> parallelize <span class="built_in">at</span> &lt;console&gt;:<span class="number">24</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd2.foreach(println)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 还有spark提供的</span><br><span class="line">   reduceByKey(之前在写wordcount程序用到的)</span><br><span class="line">   rdd.reduceByKey((value1, value2) =&gt; value1 + value2)</span><br><span class="line">   将相同key的value值相加.</span><br><span class="line">   <span class="keyword">scala&gt; </span>val rdd3 = rdd2.reduceByKey((x, y) =&gt; x + y)</span><br><span class="line"><span class="symbol">   rdd3:</span> <span class="keyword">org.apache.spark.rdd.RDD[(Int, </span>Int)] = <span class="keyword">ShuffledRDD[42] </span><span class="built_in">at</span> reduceByKey <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">scala&gt; </span>rdd3.foreach(println)</span><br><span class="line">   (<span class="number">3</span>,<span class="number">10</span>)</span><br><span class="line">   (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   groupByKey() 按相同的key进行分组</span><br><span class="line">  <span class="keyword">scala&gt; </span> val rdd4 = rdd2.groupByKey()</span><br><span class="line"><span class="symbol">  rdd4:</span> <span class="keyword">org.apache.spark.rdd.RDD[(Int, </span>Iterable[Int])] = <span class="keyword">ShuffledRDD[43] </span><span class="built_in">at</span> groupByKey <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd4.foreach(println)</span><br><span class="line">  (<span class="number">1</span>,CompactBuffer(<span class="number">2</span>))</span><br><span class="line">  (<span class="number">3</span>,CompactBuffer(<span class="number">4</span>, <span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   mapValues() 对每个keyvalue对的value进行操作, key不操作</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd5 = rdd2.mapValues(x =&gt; x+<span class="number">1</span>)</span><br><span class="line"><span class="symbol">  rdd5:</span> <span class="keyword">org.apache.spark.rdd.RDD[(Int, </span>Int)] = MapPartitionsRDD[<span class="number">44</span>] <span class="built_in">at</span> mapValues <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">   keys() 返回key的集合</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd6 = rdd2.keys</span><br><span class="line"><span class="symbol">  rdd6:</span> <span class="keyword">org.apache.spark.rdd.RDD[Int] </span>= MapPartitionsRDD[<span class="number">45</span>] <span class="built_in">at</span> keys <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd6.foreach(println)</span><br><span class="line">  <span class="number">1</span></span><br><span class="line">  <span class="number">3</span></span><br><span class="line">  <span class="number">3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   values() 返回value的集合</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd7 = rdd2.values</span><br><span class="line"><span class="symbol">  rdd7:</span> <span class="keyword">org.apache.spark.rdd.RDD[Int] </span>= MapPartitionsRDD[<span class="number">46</span>] <span class="built_in">at</span> values <span class="built_in">at</span> &lt;console&gt;:<span class="number">26</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd7.foreach(println)</span><br><span class="line">  <span class="number">6</span></span><br><span class="line">  <span class="number">2</span></span><br><span class="line">  <span class="number">4</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd5.foreach(println)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">7</span>)</span><br><span class="line">  (<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">   sortByKey() 按照key来排序</span><br><span class="line">  <span class="keyword">scala&gt; </span>val rdd8 = rdd2.sortByKey().collect()</span><br><span class="line"><span class="symbol">  rdd8:</span> Array[(Int, Int)] = Array((<span class="number">1</span>,<span class="number">2</span>), (<span class="number">3</span>,<span class="number">4</span>), (<span class="number">3</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">scala&gt; </span>rdd8.foreach(println)</span><br><span class="line">  (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">  (<span class="number">3</span>,<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">combineByKey();</span><br><span class="line">(create combiner, mergeValue, merge Combiner, partitioner)</span><br><span class="line">最常用的基于key的聚合函数, 返回的类型可以与输入的类型不一致.</span><br><span class="line">许多基于key的聚合函数都用到了该函数. 如groupByKey</span><br><span class="line">该函数会遍历partition分区中的元素, 元素的key要么是见过, 要么没见过.</span><br><span class="line">如果是新元素就是使用我们传入的createCombiner函数</span><br><span class="line">如果不是新元素(则partition中已经存在key), 就会使用mergeValue函数</span><br><span class="line">合计每个partition的结果时, 使用mergeCombiner函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">示例: (求平均值)</span><br><span class="line">scala&gt; val rdd = sc.parallelize(<span class="built_in">Array</span>((<span class="string">"dottie"</span>, <span class="number">91.0</span>), (<span class="string">"dottie"</span>, <span class="number">78.0</span>), (<span class="string">"dottie"</span>, <span class="number">88.0</span>), (<span class="string">"daejong"</span>, <span class="number">89.0</span>), (<span class="string">"daejong"</span>, <span class="number">99.0</span>), (<span class="string">"daejong"</span>, <span class="number">97.0</span>)))</span><br><span class="line">rdd: org.apache.spark.rdd.RDD[(<span class="built_in">String</span>, Double)] = ParallelCollectionRDD[<span class="number">54</span>] at parallelize at &lt;<span class="built_in">console</span>&gt;:<span class="number">24</span></span><br><span class="line"></span><br><span class="line">scala&gt; rdd.foreach(println)</span><br><span class="line">(dottie,<span class="number">91.0</span>)</span><br><span class="line">(dottie,<span class="number">78.0</span>)</span><br><span class="line">(dottie,<span class="number">88.0</span>)</span><br><span class="line">(daejong,<span class="number">89.0</span>)</span><br><span class="line">(daejong,<span class="number">99.0</span>)</span><br><span class="line">(daejong,<span class="number">97.0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">还有如何获取key和value的值</span><br><span class="line">scala&gt; val r1 = (<span class="number">1</span>, <span class="number">1111</span>)</span><br><span class="line">r1: (Int, Int) = (<span class="number">1</span>,<span class="number">1111</span>)</span><br><span class="line"></span><br><span class="line">scala&gt; r1._1</span><br><span class="line">res77: Int = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">scala&gt; r1._2</span><br><span class="line">res78: Int = <span class="number">1111</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">先计算总和</span><br><span class="line">scala&gt; val score = rdd.combineByKey(<span class="function"><span class="params">score</span>=&gt;</span><span class="function">(<span class="params">1, score</span>), (<span class="params">(<span class="params">c1:(<span class="params">Int, Double</span>), newScore</span>) =&gt; (<span class="params">c1._1+1, c1._2+newScore</span>)</span>), (<span class="params">(<span class="params">c1:(<span class="params">Int, Double</span>), c2:(<span class="params">Int, Double</span>)</span>) =&gt; (<span class="params">c1._1+c2._1, c1._2+c2._2</span>)</span>))</span></span><br><span class="line"><span class="function"><span class="params">score</span>: <span class="params">org</span>.<span class="params">apache</span>.<span class="params">spark</span>.<span class="params">rdd</span>.<span class="params">RDD</span>[(<span class="params"><span class="built_in">String</span>, (<span class="params">Int, Double</span>)</span>)] = <span class="params">ShuffledRDD</span>[55] <span class="params">at</span> <span class="params">combineByKey</span> <span class="params">at</span> &lt;<span class="params">console</span>&gt;:26</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">查看结果</span></span><br><span class="line"><span class="function"><span class="params">scala</span>&gt; <span class="params">score</span>.<span class="params">foreach</span>(<span class="params">println</span>)</span></span><br><span class="line"><span class="function">(<span class="params">daejong,(<span class="params">3,285.0</span>)</span>)</span></span><br><span class="line"><span class="function">(<span class="params">dottie,(<span class="params">3,257.0</span>)</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">分析:</span></span><br><span class="line"><span class="function"><span class="params">rdd</span>.<span class="params">combineByKey</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  #分区中没有key时的处理函数, 返回一个keyvalue对(<span class="params">1, value</span>)</span></span></span><br><span class="line"><span class="function"><span class="params">  score=&gt;(<span class="params">1, score</span>),  </span></span></span><br><span class="line"><span class="function"><span class="params">  #分区存在key是的处理函数, 将分区中的keyvalue的key+1, value+newScore, 作为新的keyvalue对返回到分区</span></span></span><br><span class="line"><span class="function"><span class="params">  (<span class="params"></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    (<span class="params">c1:(<span class="params">Int, Double</span>), newScore</span>) =&gt; (<span class="params">c1._1+1, c1._2+newScore</span>)</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">  </span>),</span></span></span><br><span class="line"><span class="function"><span class="params">  #最后的收尾工作, 将各个分区中的结果, 进行累加求和操作.</span></span></span><br><span class="line"><span class="function"><span class="params">  (<span class="params"></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    (<span class="params">c1:(<span class="params">Int, Double</span>), c2:(<span class="params">Int, Double</span>)</span>) =&gt; (<span class="params">c1._1+c2._1, c1._2+c2._2</span>)</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">  </span>)</span></span></span><br><span class="line"><span class="function"><span class="params"></span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">最后一步求平均值</span></span><br><span class="line"><span class="function"><span class="params">scala</span>&gt; <span class="params">val</span> <span class="params">score2</span> = <span class="params">score</span>.<span class="params">map</span>(<span class="params">(<span class="params">name, (<span class="params">num, score</span>)</span>) =&gt; (<span class="params">name, score/num</span>)</span>)</span></span><br><span class="line"><span class="function">&lt;<span class="params">console</span>&gt;:1: <span class="params">error</span>: <span class="params">not</span> <span class="params">a</span> <span class="params">legal</span> <span class="params">formal</span> <span class="params">parameter</span>.</span></span><br><span class="line"><span class="function"><span class="params">Note</span>: <span class="params">Tuples</span> <span class="params">cannot</span> <span class="params">be</span> <span class="params">directly</span> <span class="params">destructured</span> <span class="params">in</span> <span class="params">method</span> <span class="params">or</span> <span class="params">function</span> <span class="params">parameters</span>.</span></span><br><span class="line"><span class="function">      <span class="params">Either</span> <span class="params">create</span> <span class="params">a</span> <span class="params">single</span> <span class="params">parameter</span> <span class="params">accepting</span> <span class="params">the</span> <span class="params">Tuple2</span>,</span></span><br><span class="line"><span class="function">      <span class="params">or</span> <span class="params">consider</span> <span class="params">a</span> <span class="params">pattern</span> <span class="params">matching</span> <span class="params">anonymous</span> <span class="params">function</span>: `&#123; <span class="params">case</span> (<span class="params">num, score</span>) =&gt;</span> ... &#125;</span><br><span class="line">val score2 = score.map(<span class="function">(<span class="params">name, (<span class="params">num, score</span>)</span>) =&gt;</span> (name, score/num))</span><br><span class="line">这里提示我们要用<span class="keyword">case</span>进行判断参数和接收</span><br><span class="line"></span><br><span class="line">scala&gt; val score2 = score.map&#123;<span class="keyword">case</span> <span class="function">(<span class="params">name, (<span class="params">num, score</span>)</span>) =&gt;</span> (name, score/num)&#125;</span><br><span class="line">score2: org.apache.spark.rdd.RDD[(<span class="built_in">String</span>, Double)] = MapPartitionsRDD[<span class="number">56</span>] at map at &lt;<span class="built_in">console</span>&gt;:<span class="number">30</span></span><br><span class="line"></span><br><span class="line">scala&gt; score2.foreach(println)</span><br><span class="line">(daejong,<span class="number">95.0</span>)</span><br><span class="line">(dottie,<span class="number">85.66666666666667</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">当然可以对结果格式化下</span><br><span class="line">scala&gt; <span class="string">"%.2f"</span>.format(<span class="number">1.14534</span>)</span><br><span class="line">res87: <span class="built_in">String</span> = <span class="number">1.15</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="number">1.1231</span>.toInt</span><br><span class="line">res88: Int = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">四舍五入保留两位小数:</span><br><span class="line">scala&gt; val score3 = score2.map&#123;<span class="keyword">case</span><span class="function">(<span class="params">name, score</span>)=&gt;</span>(name, <span class="string">"%.2f"</span>.format(score))&#125;</span><br><span class="line">score3: org.apache.spark.rdd.RDD[(<span class="built_in">String</span>, <span class="built_in">String</span>)] = MapPartitionsRDD[<span class="number">59</span>] at map at &lt;<span class="built_in">console</span>&gt;:<span class="number">32</span></span><br><span class="line"></span><br><span class="line">scala&gt; score3.foreach(println)</span><br><span class="line">(dottie,<span class="number">85.67</span>)</span><br><span class="line">(daejong,<span class="number">95.00</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾:"></a>结尾:</h2><p>Spark是一个基于内存的计算, 因此计算速度很快.</p>
+<p>Spark的基础知识点差不多都涵盖了.</p>
+<p>后面就要深入学习Spark. 如Spark的架构和运行原理以及部署程序等等.</p>
+<p>一起加油吧! </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/一起学Spark/" rel="next" title="一起学Spark">
+                <i class="fa fa-chevron-left"></i> 一起学Spark
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/25/如何看待Spark技术-摘抄/" rel="prev" title="如何看待Spark技术-摘抄">
+                如何看待Spark技术-摘抄 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先热下身😜-Hadoop"><span class="nav-number">1.</span> <span class="nav-text">先热下身😜 Hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala基础"><span class="nav-number">2.</span> <span class="nav-text">Scala基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark核心概念–RDD-弹性分布式数据集"><span class="nav-number">3.</span> <span class="nav-text">Spark核心概念–RDD(弹性分布式数据集)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD的基本操作"><span class="nav-number">4.</span> <span class="nav-text">RDD的基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDDs中的集合运算"><span class="nav-number">5.</span> <span class="nav-text">RDDs中的集合运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD的Action操作"><span class="nav-number">6.</span> <span class="nav-text">RDD的Action操作.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDDs的特性"><span class="nav-number">7.</span> <span class="nav-text">RDDs的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDDs的KeyValue对"><span class="nav-number">8.</span> <span class="nav-text">RDDs的KeyValue对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结尾"><span class="nav-number">9.</span> <span class="nav-text">结尾:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

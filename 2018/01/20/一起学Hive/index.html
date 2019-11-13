@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hadoop,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Hive是基于Hadoop的一个数据仓库工具.">
+<meta name="keywords" content="hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Hive">
+<meta property="og:url" content="http://yoursite.com/2018/01/20/一起学Hive/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="Hive是基于Hadoop的一个数据仓库工具.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Hive">
+<meta name="twitter:description" content="Hive是基于Hadoop的一个数据仓库工具.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/20/一起学Hive/">
+
+
+
+
+
+  <title>一起学Hive | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/20/一起学Hive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Hive</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-20T19:27:26+08:00">
+                2018-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Hive是基于Hadoop的一个数据仓库工具.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ol>
+<li>Hive是基于Hadoop的一个数据仓库工具，</li>
+</ol>
+<ul>
+<li>通过他可以实现将结构化的数据文件映射为一张数据库表，并提供简单的sql查询功能，同时将sql语句转换为MapReduce任务进行运行。</li>
+<li>数据仓库是面向主题的, 数据一般不会去更新的, 我们只需要对数据做一些查询操作.</li>
+<li>Hive是建立在Hadoop HDFS上的数据仓库基础架构.</li>
+<li>Hive定义了简单的类似sqlc查询语言, 称为HQL, 即允许熟悉sql的用户来查询数据.</li>
+<li>Hive的表就是hdfs中的目录.而Hive表中的数据就是hdfs中的文件.</li>
+</ul>
+<h2 id="Hive体系结构"><a href="#Hive体系结构" class="headerlink" title="Hive体系结构"></a>Hive体系结构</h2><h3 id="Hive中元数据"><a href="#Hive中元数据" class="headerlink" title="Hive中元数据"></a>Hive中元数据</h3><blockquote>
+<p>Hive将元数据存储在数据库中(metastore),支持mysql, derby等数据库.</p>
+</blockquote>
+<blockquote>
+<p>Hive中元数据包括表的名字, 表的列和分区及其属性, 表的属性, 表的数据所在目录等.</p>
+</blockquote>
+<h3 id="HQL的执行过程"><a href="#HQL的执行过程" class="headerlink" title="HQL的执行过程"></a>HQL的执行过程</h3><blockquote>
+<p>解释器, 编译器, 优化器完成了HQL查询语句从词法分析 语法分析 编译 优化 以及查询计划的生成. 生成的查询计划存储在hdfs中, 并在随后有mapreduce调用执行.</p>
+</blockquote>
+<h2 id="Hive的安装"><a href="#Hive的安装" class="headerlink" title="Hive的安装"></a>Hive的安装</h2><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">hive 1.2.2</span><br><span class="line">wget http://mirrors.hust.edu.cn/apache/hive/stable/apache-hive-1.2.2-bin.tar.gz</span><br><span class="line"></span><br><span class="line">tar -zxvf xxx.tar.gz解压即可.</span><br><span class="line"></span><br><span class="line">1. 在本地mysql数据库中创建一个hive数据库, 保存hive的元数据.</span><br><span class="line">2. 将mysql的jar包放到hive的lib目录下.</span><br><span class="line">3. 然后在hive目录下conf目录中创建一个hive-site.xml文件</span><br><span class="line">   <span class="variable">&lt;configuration&gt;</span></span><br><span class="line">     <span class="variable">&lt;property&gt;</span></span><br><span class="line">         <span class="variable">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="variable">&lt;/name&gt;</span></span><br><span class="line">         <span class="variable">&lt;value&gt;</span>jdbc:mysql://127.0.0.1:3306/hive?useSSL=false<span class="variable">&lt;/value&gt;</span></span><br><span class="line">     <span class="variable">&lt;/property&gt;</span></span><br><span class="line">     <span class="variable">&lt;property&gt;</span></span><br><span class="line">         <span class="variable">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="variable">&lt;/name&gt;</span></span><br><span class="line">         <span class="variable">&lt;value&gt;</span>com.mysql.jdbc.Driver<span class="variable">&lt;/value&gt;</span></span><br><span class="line">     <span class="variable">&lt;/property&gt;</span></span><br><span class="line">     <span class="variable">&lt;property&gt;</span></span><br><span class="line">         <span class="variable">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="variable">&lt;/name&gt;</span></span><br><span class="line">         <span class="variable">&lt;value&gt;</span>root<span class="variable">&lt;/value&gt;</span></span><br><span class="line">     <span class="variable">&lt;/property&gt;</span></span><br><span class="line">     <span class="variable">&lt;property&gt;</span></span><br><span class="line">         <span class="variable">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="variable">&lt;/name&gt;</span></span><br><span class="line">         <span class="variable">&lt;value&gt;</span>daejong<span class="variable">&lt;/value&gt;</span></span><br><span class="line">     <span class="variable">&lt;/property&gt;</span></span><br><span class="line">   <span class="variable">&lt;/configuration&gt;</span></span><br><span class="line">4. 然后输入hive启动, 这样它就会在mysql数据库hive中创建一些必要的元信息.</span><br><span class="line">5. 在hive控制台创建一张表:</span><br><span class="line">   hive&gt; create table test1(tid int, tname string);</span><br><span class="line">   OK</span><br><span class="line">   Time taken: 2.939 seconds</span><br><span class="line">6. 这样再到mysql控制台查看就可以发现</span><br><span class="line">   TBLS表下多了一条记录</span><br><span class="line">   mysql&gt; select <span class="symbol">*</span> from TBLS;</span><br><span class="line">   +--------+-------------+-------+------------------+---------+-----------+-------+----------+---------------+--------------------+--------------------+</span><br><span class="line">   |<span class="string"> TBL_ID </span>|<span class="string"> CREATE_TIME </span>|<span class="string"> DB_ID </span>|<span class="string"> LAST_ACCESS_TIME </span>|<span class="string"> OWNER   </span>|<span class="string"> RETENTION </span>|<span class="string"> SD_ID </span>|<span class="string"> TBL_NAME </span>|<span class="string"> TBL_TYPE      </span>|<span class="string"> VIEW_EXPANDED_TEXT </span>|<span class="string"> VIEW_ORIGINAL_TEXT </span>|</span><br><span class="line">   +--------+-------------+-------+------------------+---------+-----------+-------+----------+---------------+--------------------+--------------------+</span><br><span class="line">   |<span class="string">      1 </span>|<span class="string">  1516453023 </span>|<span class="string">     1 </span>|<span class="string">                0 </span>|<span class="string"> Daejong </span>|<span class="string">         0 </span>|<span class="string">     1 </span>|<span class="string"> test1    </span>|<span class="string"> MANAGED_TABLE </span>|<span class="string"> NULL               </span>|<span class="string"> NULL               </span>|</span><br><span class="line">   +--------+-------------+-------+------------------+---------+-----------+-------+----------+---------------+--------------------+--------------------+</span><br><span class="line">   1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">   COLUMNS_V2表也存储这字段的元信息</span><br><span class="line">   mysql&gt; select <span class="symbol">*</span> from COLUMNS_V2;</span><br><span class="line">   +-------+---------+-------------+-----------+-------------+</span><br><span class="line">   |<span class="string"> CD_ID </span>|<span class="string"> COMMENT </span>|<span class="string"> COLUMN_NAME </span>|<span class="string"> TYPE_NAME </span>|<span class="string"> INTEGER_IDX </span>|</span><br><span class="line">   +-------+---------+-------------+-----------+-------------+</span><br><span class="line">   |<span class="string">     1 </span>|<span class="string"> NULL    </span>|<span class="string"> tid         </span>|<span class="string"> int       </span>|<span class="string">           0 </span>|</span><br><span class="line">   |<span class="string">     1 </span>|<span class="string"> NULL    </span>|<span class="string"> tname       </span>|<span class="string"> string    </span>|<span class="string">           1 </span>|</span><br><span class="line">   +-------+---------+-------------+-----------+-------------+</span><br><span class="line">   2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">   至此hive的安装配置就已经成功了.</span><br></pre></td></tr></table></figure>
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/AdminManual+MetastoreAdmin#AdminManualMetastoreAdmin-RemoteMetastoreDatabase" target="_blank" rel="noopener">官网配置链接</a></p>
+<h2 id="Hive的管理"><a href="#Hive的管理" class="headerlink" title="Hive的管理"></a>Hive的管理</h2><h3 id="Hive的启动方式"><a href="#Hive的启动方式" class="headerlink" title="Hive的启动方式"></a>Hive的启动方式</h3><h2 id="CLI-命令行方式"><a href="#CLI-命令行方式" class="headerlink" title="CLI(命令行方式)"></a>CLI(命令行方式)</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">直接输入hive进入hive命令行模式,</span> <span class="string">也可以</span> <span class="string">hive</span> <span class="string">--service</span> <span class="string">cli</span></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">ctrl</span> <span class="string">+</span> <span class="string">l</span> <span class="string">清屏</span> <span class="string">或者!clear</span></span><br><span class="line"><span class="number">3</span><span class="string">.</span> <span class="string">show</span> <span class="string">tables;</span> <span class="string">查看所有表</span></span><br><span class="line"><span class="number">4</span><span class="string">.</span> <span class="string">show</span> <span class="string">functions;</span> <span class="string">查看内置函数</span></span><br><span class="line"><span class="number">5</span><span class="string">.</span> <span class="string">命令后面使用</span> <span class="string">--注释</span> <span class="string">表示注释</span></span><br><span class="line"><span class="number">6</span><span class="string">.</span> <span class="string">desc</span> <span class="string">test1;</span> <span class="string">查看表的结构:</span></span><br><span class="line">   <span class="string">OK</span></span><br><span class="line">   <span class="string">tid</span>                 	<span class="string">int</span></span><br><span class="line">   <span class="string">tname</span>               	<span class="string">string</span></span><br><span class="line">   <span class="attr">Time taken:</span> <span class="number">0.34</span> <span class="string">seconds,</span> <span class="attr">Fetched:</span> <span class="number">2</span> <span class="string">row(s)</span></span><br><span class="line"><span class="number">7</span><span class="string">.</span> <span class="string">查看hdfs上的文件</span> <span class="string">dfs</span> <span class="string">-ls</span> <span class="string">目录</span></span><br><span class="line">   <span class="string">dfs</span> <span class="string">-ls</span> <span class="string">-R</span> <span class="string">/user/hive</span> <span class="string">保存着hive仓库所有数据.</span></span><br><span class="line"><span class="number">8</span><span class="string">.</span> <span class="string">执行linux操作命令:</span> <span class="string">-命令</span> <span class="string">如:</span> <span class="string">-ls</span> <span class="string">-pwd</span></span><br><span class="line"><span class="number">9</span><span class="string">.</span> <span class="string">执行HQL语句</span> <span class="string">select</span> <span class="string">*****</span> <span class="string">from</span> <span class="string">****</span></span><br><span class="line">   <span class="string">hive&gt;</span> <span class="string">select</span> <span class="string">*</span> <span class="string">from</span> <span class="string">test1;</span></span><br><span class="line">   <span class="string">OK</span></span><br><span class="line">   <span class="number">22</span>	<span class="string">daejong</span></span><br><span class="line">   <span class="number">23</span>	<span class="string">dottie</span></span><br><span class="line">   <span class="attr">Time taken:</span> <span class="number">0.16</span> <span class="string">seconds,</span> <span class="attr">Fetched:</span> <span class="number">2</span> <span class="string">row(s)</span></span><br><span class="line"><span class="number">10</span><span class="string">.</span> <span class="string">也可以source</span> <span class="string">执行sql脚本</span> <span class="string">source</span> <span class="string">/my.sql</span></span><br><span class="line"><span class="number">11</span><span class="string">.</span> <span class="string">插入一条数据:</span> <span class="string">insert</span> <span class="string">into</span> <span class="string">test1</span> <span class="string">values(23,</span> <span class="string">'dottie'</span><span class="string">);</span></span><br><span class="line">    <span class="string">看打印信息</span> <span class="string">可以hive是将hql转化成mapreduce中的job提交到hadoop上执行.</span></span><br><span class="line">      <span class="string">Query</span> <span class="string">ID</span> <span class="string">=</span> <span class="string">Daejong_20180120211903_02751ead-9870-4e23-96b2-be70b5d1eba1</span></span><br><span class="line">      <span class="string">Total</span> <span class="string">jobs</span> <span class="string">=</span> <span class="number">3</span></span><br><span class="line">      <span class="string">Launching</span> <span class="string">Job</span> <span class="number">1</span> <span class="string">out</span> <span class="string">of</span> <span class="number">3</span></span><br><span class="line">      <span class="string">Number</span> <span class="string">of</span> <span class="string">reduce</span> <span class="string">tasks</span> <span class="string">is</span> <span class="string">set</span> <span class="string">to</span> <span class="number">0</span> <span class="string">since</span> <span class="string">there's</span> <span class="literal">no</span> <span class="string">reduce</span> <span class="string">operator</span></span><br><span class="line">      <span class="string">Job</span> <span class="string">running</span> <span class="string">in-process</span> <span class="string">(local</span> <span class="string">Hadoop)</span></span><br><span class="line">      <span class="number">2018</span><span class="number">-01</span><span class="number">-20</span> <span class="number">21</span><span class="string">:19:05,919</span> <span class="string">Stage-1</span> <span class="string">map</span> <span class="string">=</span> <span class="number">100</span><span class="string">%,</span>  <span class="string">reduce</span> <span class="string">=</span> <span class="number">0</span><span class="string">%</span></span><br><span class="line">      <span class="string">Ended</span> <span class="string">Job</span> <span class="string">=</span> <span class="string">job_local1179435079_0002</span></span><br><span class="line">      <span class="string">Stage-4</span> <span class="string">is</span> <span class="string">selected</span> <span class="string">by</span> <span class="string">condition</span> <span class="string">resolver.</span></span><br><span class="line">      <span class="string">Stage-3</span> <span class="string">is</span> <span class="string">filtered</span> <span class="string">out</span> <span class="string">by</span> <span class="string">condition</span> <span class="string">resolver.</span></span><br><span class="line">      <span class="string">Stage-5</span> <span class="string">is</span> <span class="string">filtered</span> <span class="string">out</span> <span class="string">by</span> <span class="string">condition</span> <span class="string">resolver.</span></span><br><span class="line">      <span class="attr">Moving data to:</span> <span class="string">hdfs://0.0.0.0:9000/user/hive/warehouse/test1/.hive-staging_hive_2018-01-20_21-19-03_714_8751382881311020303-1/-ext-10000</span></span><br><span class="line">      <span class="string">Loading</span> <span class="string">data</span> <span class="string">to</span> <span class="string">table</span> <span class="string">default.test1</span></span><br><span class="line">      <span class="attr">Table default.test1 stats:</span> <span class="string">[numFiles=2,</span> <span class="string">numRows=2,</span> <span class="string">totalSize=21,</span> <span class="string">rawDataSize=19]</span></span><br><span class="line">      <span class="attr">MapReduce Jobs Launched:</span></span><br><span class="line">      <span class="attr">Stage-Stage-1:  HDFS Read: 90 HDFS Write:</span> <span class="number">180</span> <span class="string">SUCCESS</span></span><br><span class="line">      <span class="attr">Total MapReduce CPU Time Spent:</span> <span class="number">0</span> <span class="string">msec</span></span><br><span class="line">      <span class="string">OK</span></span><br><span class="line">      <span class="attr">Time taken:</span> <span class="number">2.561</span> <span class="string">seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">12</span><span class="string">.</span> <span class="string">也可以直接在终端中中(而不需要进入hive的命令行),</span> <span class="string">输入</span></span><br><span class="line">    <span class="string">hive</span> <span class="string">-e</span> <span class="string">'show tables'</span></span><br><span class="line"><span class="number">13</span><span class="string">.</span> <span class="string">进入hive命令行时:</span> <span class="string">输入hive</span> <span class="string">-S</span> <span class="string">参数表示静默模式(执行查询时,</span> <span class="string">查询过程不输出),</span> <span class="string">这样我们就可以清楚的看到输出的结果.</span></span><br></pre></td></tr></table></figure>
+<h2 id="Web界面方式"><a href="#Web界面方式" class="headerlink" title="Web界面方式"></a>Web界面方式</h2><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">命令行中输入: hive --service hwi</span><br><span class="line">提示: apache-hive-<span class="number">1.2</span>.<span class="number">2</span>-bin/<span class="class"><span class="keyword">lib</span>/<span class="title">hive</span>-<span class="title">hwi</span>-*.<span class="title">war</span>: <span class="title">No</span> <span class="title">such</span> <span class="title">file</span> <span class="title">or</span> <span class="title">directory</span></span></span><br><span class="line">因为该war包不存在, 所以我们要去找该war包.</span><br><span class="line"></span><br><span class="line">下载hive的源码包. src.tar.gz</span><br><span class="line">hive <span class="number">1.2</span>.<span class="number">2</span>src.tar.gz</span><br><span class="line">wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.hust.edu.cn/apache</span><span class="regexp">/hive/stable</span><span class="regexp">/apache-hive-1.2.2-src.tar.gz</span></span><br><span class="line"><span class="regexp">解压:</span></span><br><span class="line"><span class="regexp">tar -zxvf apache-hive-1.2.2-src.tar.gz</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">进入apache-hive-1.2.2-src/hwi</span><span class="regexp">/web</span></span><br><span class="line"><span class="regexp">该web目录就是web管理界面jsp的文件夹.</span></span><br><span class="line"><span class="regexp">使用jar命令为web目录打包成war包</span></span><br><span class="line"><span class="regexp">jar cvfM0 hive-hwi-1.2.2.war -C web/</span> .</span><br><span class="line">然后web目录下就会多了个war包: hive-hwi-<span class="number">1.2</span>.<span class="number">2</span>.war</span><br><span class="line">将该war包拷贝到hive的<span class="class"><span class="keyword">lib</span>目录下 <span class="title">cp</span> 拷贝命令</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">配置hive的conf下的hive-site.xml文件.</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.hwi.listen.host&lt;<span class="regexp">/name&gt;</span></span><br><span class="line"><span class="regexp">  &lt;value&gt;0.0.0.0&lt;/value</span>&gt;</span><br><span class="line">  &lt;description&gt;This is the host address the Hive Web Interface will listen on&lt;<span class="regexp">/description&gt;</span></span><br><span class="line"><span class="regexp">&lt;/property</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.hwi.listen.port&lt;<span class="regexp">/name&gt;</span></span><br><span class="line"><span class="regexp">  &lt;value&gt;9999&lt;/value</span>&gt;</span><br><span class="line">  &lt;description&gt;This is the port the Hive Web Interface will listen on&lt;<span class="regexp">/description&gt;</span></span><br><span class="line"><span class="regexp">&lt;/property</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hive.hwi.war.file&lt;<span class="regexp">/name&gt;</span></span><br><span class="line"><span class="regexp">  &lt;value&gt;lib/hive</span>-hwi-<span class="number">1.2</span>.<span class="number">2</span>.war&lt;<span class="regexp">/value&gt;</span></span><br><span class="line"><span class="regexp">  &lt;description&gt;This is the WAR file with the jsp content for Hive Web Interface&lt;/description</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/property&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">最后一步拷贝jdk/lib</span>下的tools.jar 到 hive/<span class="class"><span class="keyword">lib</span>下</span></span><br><span class="line">还有jasper-compiler-<span class="number">5.1</span>.<span class="number">12</span>.jar和 jasper-runtime-<span class="number">5.5</span>.<span class="number">12</span>.jar以及commons-el-<span class="number">1.0</span>.jar拷贝到hive/<span class="class"><span class="keyword">lib</span>下.</span></span><br><span class="line"></span><br><span class="line">最后启动web ui管理工具</span><br><span class="line">hive --service hwi</span><br><span class="line"></span><br><span class="line">访问 <span class="symbol">ip:</span><span class="number">9999</span>/hwi访问web ui</span><br><span class="line"></span><br><span class="line">然后点击左侧create session开启一个会话, 执行查询操作(只能进行查询操作)</span><br><span class="line">输入hql和查询后结果放到文件的名称.</span><br><span class="line">结果如下:</span><br><span class="line"><span class="number">22</span>	daejong</span><br><span class="line"><span class="number">23</span>	dottie</span><br><span class="line"></span><br><span class="line">也可以点击左侧的 Browse Schema查看数据库,</span><br><span class="line">开始我们有一个default数据库, 里面有一张我们创建的test1表.</span><br></pre></td></tr></table></figure>
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/HiveWebInterface" target="_blank" rel="noopener">官网配置链接</a></p>
+<h2 id="远程服务启动方式"><a href="#远程服务启动方式" class="headerlink" title="远程服务启动方式"></a>远程服务启动方式</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启动远程服务: 端口是<span class="number">10000</span></span><br><span class="line">hive <span class="comment">--service hiveserver</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/HBase编程示例/" rel="next" title="HBase编程示例">
+                <i class="fa fa-chevron-left"></i> HBase编程示例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/20/一起学Hive-2/" rel="prev" title="一起学Hive-2">
+                一起学Hive-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive体系结构"><span class="nav-number">2.</span> <span class="nav-text">Hive体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive中元数据"><span class="nav-number">2.1.</span> <span class="nav-text">Hive中元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQL的执行过程"><span class="nav-number">2.2.</span> <span class="nav-text">HQL的执行过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive的安装"><span class="nav-number">3.</span> <span class="nav-text">Hive的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive的管理"><span class="nav-number">4.</span> <span class="nav-text">Hive的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive的启动方式"><span class="nav-number">4.1.</span> <span class="nav-text">Hive的启动方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CLI-命令行方式"><span class="nav-number">5.</span> <span class="nav-text">CLI(命令行方式)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web界面方式"><span class="nav-number">6.</span> <span class="nav-text">Web界面方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程服务启动方式"><span class="nav-number">7.</span> <span class="nav-text">远程服务启动方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

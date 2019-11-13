@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Angular,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="以前用过React, 觉得Facebook出的这玩意确实不错,也涉及到一些 其他模块也相应的使用过.  react-router, react-reduex, whatwg-fetch, es6-promise等,  然后由于react的主要思想就是组件化, 单向数据流等等. 所有突然想体验下双向数据流, 而且之前有后台(Java)开发经验,所以上手Angular很快, Spring可是个好东西">
+<meta name="keywords" content="Angular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一起学Angular">
+<meta property="og:url" content="http://yoursite.com/2017/09/25/一起学Angular/index.html">
+<meta property="og:site_name" content="Dottieworks">
+<meta property="og:description" content="以前用过React, 觉得Facebook出的这玩意确实不错,也涉及到一些 其他模块也相应的使用过.  react-router, react-reduex, whatwg-fetch, es6-promise等,  然后由于react的主要思想就是组件化, 单向数据流等等. 所有突然想体验下双向数据流, 而且之前有后台(Java)开发经验,所以上手Angular很快, Spring可是个好东西">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/1.png">
+<meta property="og:image" content="http://yoursite.com/images/2.png">
+<meta property="og:image" content="http://yoursite.com/images/3.png">
+<meta property="og:image" content="http://yoursite.com/images/4.png">
+<meta property="og:updated_time" content="2019-11-13T04:53:42.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一起学Angular">
+<meta name="twitter:description" content="以前用过React, 觉得Facebook出的这玩意确实不错,也涉及到一些 其他模块也相应的使用过.  react-router, react-reduex, whatwg-fetch, es6-promise等,  然后由于react的主要思想就是组件化, 单向数据流等等. 所有突然想体验下双向数据流, 而且之前有后台(Java)开发经验,所以上手Angular很快, Spring可是个好东西">
+<meta name="twitter:image" content="http://yoursite.com/images/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/25/一起学Angular/">
+
+
+
+
+
+  <title>一起学Angular | Dottieworks</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dottieworks</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱折腾 会写一点代码 极简主义 = =</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/一起学Angular/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Daejong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dottieworks">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一起学Angular</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T22:44:12+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>以前用过React, 觉得Facebook出的这玩意确实不错,<br>也涉及到一些 其他模块也相应的使用过.</p>
+</blockquote>
+<p><code>react-router</code>, <code>react-reduex</code>, <code>whatwg-fetch</code>, <code>es6-promise</code><br>等,</p>
+<blockquote>
+<p>然后由于react的主要思想就是组件化, 单向数据流等等. 所有突然想体验下双向数据流, 而且之前有后台(Java)开发经验,所以上手Angular很快, Spring可是个好东西, AOP, IoC, DI等等, 更引起我注意的是Spring中的好多思想居然也在Angular中出现, 所以才想去玩玩Angular的.<br><a id="more"></a></p>
+</blockquote>
+<h1 id="设计到的技术点"><a href="#设计到的技术点" class="headerlink" title="设计到的技术点"></a>设计到的技术点</h1><blockquote>
+<ol>
+<li>Angular1.x版本</li>
+<li>Semantic-ui</li>
+<li>jQuery</li>
+<li>Mockjs</li>
+</ol>
+</blockquote>
+<h1 id="先看效果图"><a href="#先看效果图" class="headerlink" title="先看效果图"></a>先看效果图</h1><h3 id="也可访问我的网站index-html"><a href="#也可访问我的网站index-html" class="headerlink" title="也可访问我的网站index.html"></a>也可访问我的网站<a href="http://115.159.92.156/ListProduct/index.html" target="_blank" rel="noopener">index.html</a></h3><h2 id><a href="#" class="headerlink" title></a><img src="/images/1.png" alt></h2><hr>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/images/2.png" alt></h2><hr>
+<h2 id="-2"><a href="#-2" class="headerlink" title></a><img src="/images/3.png" alt></h2><hr>
+<h1 id="文件结构很简单"><a href="#文件结构很简单" class="headerlink" title="文件结构很简单"></a>文件结构很简单</h1><p><img src="/images/4.png" alt></p>
+<h1 id="代码很简单"><a href="#代码很简单" class="headerlink" title="代码很简单."></a>代码很简单.</h1><ol>
+<li><p><code>app.js</code> 就一行代码:</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var app</span> = angular.module(<span class="string">"myApp"</span>, []);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>index.js</code></p>
+</li>
+</ol>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Angular学习<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-controller</span>=<span class="string">"indexController"</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui container"</span> <span class="attr">style</span>=<span class="string">"padding:50px"</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui dividing header"</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui grid"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"eight wide column"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="comment">&lt;!-- &lt;div class="ui left icon focus action input"&gt; --&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui left icon focus input"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"ui search icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"搜索"</span> <span class="attr">ng-model</span>=<span class="string">"searchKey"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="comment">&lt;!-- &lt;div class="ui blue button"&gt;搜索&lt;/div&gt; --&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"eight wide column"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui fluid selection dropdown"</span> <span class="attr">id</span>=<span class="string">"select"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"dropdown icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"default text"</span>&gt;</span>选择排序方式<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">ng-click</span>=<span class="string">"chageSortType('stuIndex')"</span>&gt;</span>按学号排序<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">ng-click</span>=<span class="string">"chageSortType('age')"</span>&gt;</span>按年龄排序<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">ng-click</span>=<span class="string">"chageSortType('grade')"</span>&gt;</span>按成绩排序<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui segments"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui segment"</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items | orderBy:sortType | filter:results"</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui item"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui padded content"</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui header"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                学号:</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"background:</span></span></span><span class="template-variable">&#123;&#123; item.color &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> <span class="attr">ng-bind</span>=<span class="string">"item.stuIndex"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui meta"</span>&gt;</span>姓名: <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>= <span class="string">"item.name"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui meta"</span>&gt;</span>年龄: <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>= <span class="string">"item.age"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui meta"</span>&gt;</span>成绩: <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>= <span class="string">"item.grade"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui description"</span>&gt;</span>城市: <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>= <span class="string">"item.city"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/angular.js/1.5.7/angular.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://mockjs.com/dist/mock.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./app.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./indexController.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>indexController.js</code></li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//利用Mock截获ajax请求所返回的数据.</span></span><br><span class="line"><span class="keyword">var</span> data = Mock.mock(<span class="string">"http://daejong.com/getItems"</span>, &#123;</span><br><span class="line">  <span class="string">'items|100'</span>: [&#123;</span><br><span class="line">    <span class="string">'stuIndex|+1'</span>: <span class="number">2120142000</span>, <span class="comment">//从2120142000开始</span></span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'@cname'</span>, <span class="comment">//中文名字</span></span><br><span class="line">    <span class="string">'age|18-28'</span>: <span class="number">0</span>,   <span class="comment">// 18至28以内随机整数, 0只是用来确定类型</span></span><br><span class="line">    <span class="string">'city'</span>: <span class="string">'@city(true)'</span>,   <span class="comment">// 中国城市</span></span><br><span class="line">    <span class="string">'color'</span>: <span class="string">'@color'</span>,  <span class="comment">// 16进制颜色</span></span><br><span class="line">    <span class="string">'grade|60-100'</span>: <span class="number">0</span>,   <span class="comment">// 18至28以内随机整数, 0只是用来确定类型</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 激活下拉菜单</span></span><br><span class="line">$(<span class="string">'#select'</span>).dropdown();</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置控制器</span></span><br><span class="line">app.controller(<span class="string">"indexController"</span>, [<span class="string">"$scope"</span>, <span class="string">"$http"</span>, <span class="function"><span class="keyword">function</span><span class="params">($scope, $http)</span> </span>&#123;</span><br><span class="line">  $scope.color = <span class="string">""</span>;</span><br><span class="line">  $scope.items = [];</span><br><span class="line">  $scope.searchKey = <span class="string">""</span>;</span><br><span class="line">  $scope.sortType = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  $http.get(<span class="string">"http://daejong.com/getItems"</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>&#123;</span><br><span class="line">    $scope.items = res.items;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  $scope.chageSortType = <span class="function"><span class="keyword">function</span><span class="params">(type)</span> </span>&#123;</span><br><span class="line">    $scope.sortType = type;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  $scope.results = <span class="function"><span class="keyword">function</span><span class="params">(val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> val.name.indexOf($scope.searchKey) != <span class="number">-1</span> || val.city.indexOf($scope.searchKey) != <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结."></a>小结.</h1><ul>
+<li>该例子中我用到的<a href="mockjs.com">mockjs</a>工具, 这是我第一次使用该工具, 简直是好用到爆, 前端必备啊, 自定义数据的格式, 就可以帮我们生成想要的数据, 生成随机数据，拦截 Ajax 请求.</li>
+<li>还有就是view层框架-Semantic-ui, 可能有的同学习惯于用BootStrap, 但是我还是要推荐下Semantic-ui这个框架, 主要被它的语义化标签所吸引, 使用起来很爽哦, 如<code>&lt;div class=&quot;ui inverted blue button&quot;&gt;登录&lt;/div&gt;</code>就参加一个镂空颜色反转的按钮, 具体的可以去它的官方文档看看,</li>
+<li>还有就是Angular的, 数据的双向绑定, 以及类似Spring中DI(依赖注入)的思想确实不错, 比如注入$scope, $http等等, 还有就是该例子中的搜索框和下面的数据列表的双向绑定, 很好用哦! 以及Angular提供的过滤器, 自定义过滤器, 标签等等, 蛮好用的.</li>
+</ul>
+<blockquote>
+<p>好了, 懂得不是很多, 期待大牛指导学习, 嘿嘿😜</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular/" rel="tag"># Angular</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/04/GET-OR-POST/" rel="next" title="GET OR POST">
+                <i class="fa fa-chevron-left"></i> GET OR POST
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/28/一起学Semantic-UI/" rel="prev" title="一起学Semantic UI">
+                一起学Semantic UI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Daejong">
+          <p class="site-author-name" itemprop="name">Daejong</p>
+           
+              <p class="site-description motion-element" itemprop="description">人生苦短...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              好友链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" title="好友" target="_blank">好友</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://betterlxc.com" title="刘炎炎的博客" target="_blank">刘炎炎的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计到的技术点"><span class="nav-number">1.</span> <span class="nav-text">设计到的技术点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#先看效果图"><span class="nav-number">2.</span> <span class="nav-text">先看效果图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#也可访问我的网站index-html"><span class="nav-number">2.0.1.</span> <span class="nav-text">也可访问我的网站index.html</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">2.3.</span> <span class="nav-text"></span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#文件结构很简单"><span class="nav-number">3.</span> <span class="nav-text">文件结构很简单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码很简单"><span class="nav-number">4.</span> <span class="nav-text">代码很简单.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结.</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+	
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <footer id="footer" class="footer">
+     	 <div class="footer-inner">
+		<div class="powered-by">
+		<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+ 		 本站访客数:<span id="busuanzi_value_site_uv"></span>
+			    </span>
+	</div>
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Daejong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
